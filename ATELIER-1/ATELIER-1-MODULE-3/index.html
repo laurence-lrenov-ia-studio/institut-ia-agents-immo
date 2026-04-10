@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module #03 — Créer une bio agent qui donne envie d'appeler · Institut IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; }
+:root {
+  --dark:       #222b32;
+  --dark2:      #2a3540;
+  --dark3:      #303e4a;
+  --panel:      #222b32;
+  --gold:       #cc914b;
+  --gold-light: #d9a660;
+  --gold-dim:   #9a6e35;
+  --gold-glow:  rgba(204,145,75,0.18);
+  --teal:       #1E3D4A;
+  --teal-light: #2A5466;
+  --text:       #E8E2D8;
+  --text-dim:   #9A9490;
+  --text-muted: #5A5650;
+  --white:      #FFFFFF;
+  --nav-w:      260px;
+  --radius:     10px;
+  --atelier:    #7A9AEA;
+  --atelier-glow: rgba(42,58,106,0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ─── SIDEBAR ─── */
+.sidenav {
+  width: var(--nav-w);
+  background: var(--dark2);
+  border-right: 1px solid rgba(204,145,75,0.15);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidenav-logo {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid rgba(204,145,75,0.12);
+}
+.sidenav-logo .brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--gold);
+}
+.sidenav-logo .sub {
+  font-size: 11px; color: var(--text-dim); margin-top: 2px;
+}
+
+.module-badge {
+  margin: 14px 16px;
+  background: var(--atelier-glow);
+  border: 1px solid var(--atelier);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+}
+.module-badge .atelier-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 1px;
+  color: var(--atelier); text-transform: uppercase;
+}
+.module-badge .module-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 800; color: var(--white);
+  margin-top: 2px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 8px 12px;
+  flex: 1;
+}
+.nav-list li { margin-bottom: 4px; }
+.nav-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 8px;
+  color: var(--text-dim); font-size: 13px;
+  cursor: pointer; transition: all 0.2s;
+  text-decoration: none;
+}
+.nav-link:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+.nav-link.active { background: var(--gold-glow); color: var(--gold); }
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--dark3); border: 1px solid var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; flex-shrink: 0;
+}
+.nav-link.active .step-num {
+  background: var(--gold); border-color: var(--gold); color: var(--dark);
+}
+
+.sidenav-footer {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(204,145,75,0.12);
+  font-size: 11px; color: var(--text-muted);
+}
+
+/* ─── MAIN ─── */
+.main {
+  margin-left: var(--nav-w);
+  flex: 1;
+  padding: 0 40px 80px;
+  max-width: 900px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  padding: 48px 0 36px;
+  border-bottom: 1px solid rgba(204,145,75,0.12);
+  margin-bottom: 40px;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--atelier-glow);
+  border: 1px solid var(--atelier);
+  border-radius: 20px; padding: 4px 14px;
+  font-size: 12px; font-weight: 600; color: var(--atelier);
+  margin-bottom: 18px;
+}
+.hero-tag .pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--atelier);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 42px; font-weight: 800; line-height: 1.1;
+  color: var(--white); margin-bottom: 14px;
+}
+.hero h1 span { color: var(--gold); }
+.meta-pills {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
+}
+.pill {
+  background: var(--dark3); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 12px; color: var(--text-dim);
+}
+
+/* ─── SECTION CARD ─── */
+.section-card {
+  background: var(--dark2);
+  border: 1px solid rgba(204,145,75,0.12);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--white); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title .icon { font-size: 20px; }
+
+/* ─── TABS ─── */
+.tab-bar {
+  display: flex; gap: 6px; margin-bottom: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0;
+}
+.tab-btn {
+  background: none; border: none;
+  padding: 8px 16px; font-size: 13px; font-weight: 500;
+  color: var(--text-dim); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s; margin-bottom: -1px;
+  font-family: 'DM Sans', sans-serif;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ─── ACCORDION ─── */
+.accordion { margin-bottom: 10px; }
+.acc-header {
+  background: var(--dark3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 12px 16px;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; font-weight: 500; color: var(--text);
+  transition: background 0.2s;
+}
+.acc-header:hover { background: rgba(255,255,255,0.05); }
+.acc-header.open { border-radius: 8px 8px 0 0; }
+.acc-chevron { transition: transform 0.25s; font-size: 12px; }
+.acc-header.open .acc-chevron { transform: rotate(180deg); }
+.acc-body {
+  display: none;
+  background: var(--dark3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 16px;
+}
+.acc-body.open { display: block; }
+
+/* ─── PROMPT BOX ─── */
+.prompt-box {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+  border: 1px solid var(--gold-dim);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 12px;
+}
+.prompt-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--gold-light); margin-bottom: 12px;
+}
+.prompt-box pre {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px; line-height: 1.7;
+  color: var(--text); white-space: pre-wrap; word-break: break-word;
+}
+.copy-btn {
+  margin-top: 14px;
+  background: var(--gold-glow); border: 1px solid var(--gold-dim);
+  border-radius: 6px; padding: 7px 16px;
+  font-size: 12px; font-weight: 600; color: var(--gold);
+  cursor: pointer; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.copy-btn:hover { background: rgba(204,145,75,0.3); }
+
+/* ─── STYLED TABLE ─── */
+.styled-table {
+  width: 100%; border-collapse: collapse; margin-top: 14px;
+  font-size: 13.5px;
+}
+.styled-table th {
+  background: var(--dark3); padding: 10px 14px;
+  text-align: left; color: var(--gold);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(204,145,75,0.2);
+}
+.styled-table td {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--text); vertical-align: top; line-height: 1.5;
+}
+.styled-table tr:last-child td { border-bottom: none; }
+
+/* ─── AVANT / APRÈS ─── */
+.av-ap-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px;
+}
+.avant-box {
+  background: rgba(180,50,50,0.1); border: 1px solid rgba(200,80,80,0.3);
+  border-radius: var(--radius); padding: 16px;
+}
+.apres-box {
+  background: rgba(50,160,90,0.1); border: 1px solid rgba(50,180,100,0.3);
+  border-radius: var(--radius); padding: 16px;
+}
+.av-ap-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.avant-box .av-ap-label { color: #e07070; }
+.apres-box .av-ap-label { color: #60d090; }
+.av-ap-text { font-size: 13.5px; line-height: 1.65; color: var(--text); font-style: italic; }
+
+/* ─── CHECKLIST ─── */
+.checklist { list-style: none; margin-top: 14px; }
+.checklist li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13.5px; line-height: 1.5;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-icon { color: #60d090; flex-shrink: 0; margin-top: 2px; }
+
+/* ─── RETAIN BOX ─── */
+.retain-box {
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius);
+  padding: 22px 26px; margin-top: 14px;
+}
+.retain-header {
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+}
+.retain-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--white); line-height: 1.3;
+}
+
+/* ─── EXERCISE BOX ─── */
+.exercise-box {
+  background: var(--dark3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 24px 28px; margin-top: 14px;
+}
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.08); border-radius: 20px;
+  height: 8px; margin-bottom: 18px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 20px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  width: 0%; transition: width 0.5s ease;
+}
+.steps-list { list-style: none; }
+.step-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer; transition: all 0.2s;
+}
+.step-item:last-child { border-bottom: none; }
+.step-item:hover { padding-left: 4px; }
+.step-check {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0; transition: all 0.3s;
+  background: transparent;
+}
+.step-check.done {
+  background: #50c878; border-color: #50c878; color: white;
+}
+.step-text { font-size: 14px; line-height: 1.5; color: var(--text); padding-top: 2px; }
+.step-text.done { color: var(--text-dim); text-decoration: line-through; }
+
+.finish-msg {
+  display: none;
+  background: rgba(80,200,120,0.1); border: 1px solid rgba(80,200,120,0.3);
+  border-radius: 8px; padding: 16px 20px; margin-top: 18px;
+  font-size: 14px; line-height: 1.6;
+}
+.finish-msg.visible { display: block; }
+
+/* ─── RETAIN BULLETS (À retenir) ─── */
+.retain-bullets {
+  list-style: none;
+  margin-bottom: 16px;
+}
+.retain-bullets li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(204,145,75,0.1);
+  font-size: 13.5px; line-height: 1.5; color: var(--text);
+}
+.retain-bullets li:last-child { border-bottom: none; }
+.retain-bullet-icon {
+  color: var(--gold-light);
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 13px;
+}
+
+/* ─── AUTOCHECK BOX ─── */
+.autocheck-box {
+  display: none;
+  background: rgba(204,145,75,0.07);
+  border: 1px solid rgba(204,145,75,0.25);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-top: 12px;
+}
+.autocheck-box.visible { display: block; }
+.autocheck-box .autocheck-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px;
+}
+.autocheck-box ul {
+  list-style: none;
+  padding: 0;
+}
+.autocheck-box ul li {
+  font-size: 13.5px; line-height: 1.8;
+  color: var(--text-dim);
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.autocheck-box ul li:last-child { border-bottom: none; }
+
+p { line-height: 1.65; font-size: 14px; color: var(--text); }
+p + p { margin-top: 10px; }
+strong { color: var(--white); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .sidenav { width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid rgba(204,145,75,0.15); }
+  .main { margin-left: 0; padding: 0 20px 60px; }
+  .nav-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .nav-link { font-size: 12px; padding: 6px 8px; }
+  .hero h1 { font-size: 28px; }
+  .av-ap-grid { grid-template-columns: 1fr; }
+  body { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── SIDEBAR ─── -->
+<nav class="sidenav">
+  <div class="sidenav-logo">
+    <div class="brand">L'RÉNOV IA STUDIO</div>
+    <div class="sub">Institut IA · Experts Immo</div>
+  </div>
+  <div class="module-badge">
+    <div class="atelier-label">Atelier 1 · Écrire &amp; Prospecter</div>
+    <div class="module-num">Module #03</div>
+  </div>
+  <ul class="nav-list">
+    <li><a class="nav-link active" href="#contexte"><span class="step-num">1</span> Contexte</a></li>
+    <li><a class="nav-link" href="#prompts"><span class="step-num">2</span> Les prompts</a></li>
+    <li><a class="nav-link" href="#exemple"><span class="step-num">3</span> Exemple de résultat</a></li>
+    <li><a class="nav-link" href="#ajustements"><span class="step-num">4</span> Ce qu'on ajuste</a></li>
+    <li><a class="nav-link" href="#variantes"><span class="step-num">5</span> Variantes métier</a></li>
+    <li><a class="nav-link" href="#avantapres"><span class="step-num">6</span> Avant / Après</a></li>
+    <li><a class="nav-link" href="#retenir"><span class="step-num">7</span> À retenir</a></li>
+    <li><a class="nav-link" href="#exercice"><span class="step-num">8</span> Exercice</a></li>
+  </ul>
+  <div class="sidenav-footer">Laurence Borras / L'Rénov IA Studio</div>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-tag"><span class="pulse"></span> Atelier 1 · Écrire &amp; Prospecter</div>
+    <h1>Créer une bio agent<br><span>qui donne envie d'appeler</span></h1>
+    <div class="meta-pills">
+      <span class="pill">⏱ 30 min + exercice</span>
+      <span class="pill">🎬 Vidéo à venir</span>
+      <span class="pill">🤖 ChatGPT, Claude, Gemini...</span>
+      <span class="pill">👤 Agents immo · Indépendants</span>
+      <span class="pill">📄 Bio prête à publier</span>
+    </div>
+  </section>
+
+  <!-- ─── 1. CONTEXTE ─── -->
+  <section class="section-card" id="contexte">
+    <div class="section-title"><span class="icon">🎯</span> Contexte</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this, 'ctx-probleme')">Le problème</button>
+      <button class="tab-btn" onclick="switchTab(this, 'ctx-solution')">La solution IA</button>
+      <button class="tab-btn" onclick="switchTab(this, 'ctx-infos')">Infos module</button>
+    </div>
+    <div id="ctx-probleme" class="tab-pane active">
+      <p>La bio d'un agent, c'est souvent la première chose qu'un prospect lit — et la première raison de ne pas rappeler.</p>
+      <p>"Passionné par l'immobilier depuis 10 ans" ne dit rien. "Disponible, dynamique et à votre écoute" encore moins.</p>
+      <p>Résultat : une page de présentation qui ressemble à toutes les autres, qui ne donne aucune raison de choisir cet agent plutôt qu'un autre.</p>
+      <p>Le problème n'est pas le manque de matière — c'est de ne pas savoir comment la structurer pour convaincre.</p>
+    </div>
+    <div id="ctx-solution" class="tab-pane">
+      <p>L'IA structure votre parcours, vos spécialités et votre zone géographique en une bio claire, différenciante et orientée client.</p>
+      <p><strong>Impact terrain direct :</strong> une bio bien construite améliore votre <strong>crédibilité perçue</strong>, augmente le <strong>taux de contact entrant</strong> depuis votre profil et aide à décrocher davantage de <strong>mandats exclusifs</strong> — les prospects vous choisissent avant même de vous appeler.</p>
+      <p>Ce module vous donne deux niveaux de prompt : un pour démarrer en 5 minutes, un pour produire une bio réellement professionnelle.</p>
+    </div>
+    <div id="ctx-infos" class="tab-pane">
+      <p><strong>Module #03</strong> — Atelier 1 : Écrire &amp; Prospecter</p>
+      <p><strong>Durée :</strong> 30 min + exercice</p>
+      <p><strong>Outils :</strong> ChatGPT, Claude, Gemini ou tout outil IA générative</p>
+      <p><strong>Livrable :</strong> une bio prête à publier (LinkedIn, site agence, carte de visite numérique)</p>
+      <p><strong>Niveau :</strong> débutant à intermédiaire</p>
+    </div>
+  </section>
+
+  <!-- ─── 2. PROMPTS ─── -->
+  <section class="section-card" id="prompts">
+    <div class="section-title"><span class="icon">💬</span> Les prompts</div>
+
+    <div class="accordion">
+      <div class="acc-header open" onclick="toggleAcc(this)">
+        🟢 Prompt socle — démarrez en 5 minutes <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body open">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(this, 'p1-socle')">🟢 Prompt socle</button>
+          <button class="tab-btn" onclick="switchTab(this, 'p1-renforce')">🔵 Prompt renforcé (pro)</button>
+        </div>
+        <div id="p1-socle" class="tab-pane active">
+          <div class="prompt-box">
+            <div class="prompt-label">💬 Prompt — Bio agent (version socle)</div>
+            <pre id="prompt-socle">Tu es un expert en communication immobilière.
+
+Rédige une bio professionnelle pour un agent immobilier à partir des informations suivantes :
+
+- Prénom et nom : [prénom nom]
+- Années d'expérience : [X ans]
+- Zone géographique principale : [ville / secteur]
+- Spécialités : [ex. appartements anciens, maisons familiales, investissement locatif...]
+- Un fait marquant ou différenciateur : [ex. ancienne architecte, né dans le quartier, record de vente en 48h...]
+
+La bio doit :
+— Faire entre 80 et 120 mots
+— Parler au client, pas à l'agent
+— Montrer une expertise concrète, pas des qualités génériques
+— Terminer par une phrase d'appel à l'action directe et concrète, sans formule passive ("contactez-moi", pas "n'hésitez pas à me solliciter")</pre>
+            <button class="copy-btn" onclick="copyById(this,'prompt-socle')">📋 Copier ce prompt</button>
+          </div>
+        </div>
+        <div id="p1-renforce" class="tab-pane">
+          <div class="prompt-box">
+            <div class="prompt-label">💬 Prompt — Bio agent (version renforcée pro)</div>
+            <pre id="prompt-renforce">Tu es un expert en personal branding immobilier. Ta mission : rédiger une bio agent qui se lit en 30 secondes et donne envie de rappeler.
+
+PROFIL AGENT :
+- Prénom et nom : [prénom nom]
+- Ancienneté : [X ans dans l'immo]
+- Zone d'intervention : [secteur précis]
+- Spécialités : [types de biens ou situations : primo-accédants, investisseurs, successions...]
+- Réseau / agence : [nom agence ou indépendant]
+- Chiffre ou fait concret : [ex. 47 ventes en 2023, délai moyen 21 jours, taux de mandats exclusifs 80%...]
+- Différenciateur humain : [ce qui le rend unique : parcours atypique, méthode, engagement...]
+
+RÈGLES STRICTES :
+— N'invente aucune information non fournie
+— Si un élément manque, saute-le sans le compenser
+— Ne déduis aucun chiffre ou performance d'une autre donnée
+— Pas de superlatifs vides : "passionné", "dynamique", "à votre écoute"
+
+FORMAT DE SORTIE :
+— Version courte (60–80 mots) : pour LinkedIn et fiche agence
+— Version longue (130–160 mots) : pour site personnel ou présentation mandat
+— 1 accroche alternative (1 phrase) : pour stories Instagram ou signature mail
+
+Ton : direct, orienté résultat, humain sans être familier. Phrases courtes. Pas de ton institutionnel ni de style "plaquette".</pre>
+            <button class="copy-btn" onclick="copyById(this,'prompt-renforce')">📋 Copier ce prompt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 3. EXEMPLE DE RÉSULTAT ─── -->
+  <section class="section-card" id="exemple">
+    <div class="section-title"><span class="icon">📄</span> Exemple de résultat</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this, 'ex-donnees')">Données saisies</button>
+      <button class="tab-btn" onclick="switchTab(this, 'ex-resultat')">Résultat IA</button>
+    </div>
+    <div id="ex-donnees" class="tab-pane active">
+      <p><strong>Prénom et nom :</strong> Camille Fontaine</p>
+      <p><strong>Ancienneté :</strong> 8 ans</p>
+      <p><strong>Zone :</strong> Bordeaux rive droite (Cenon, Lormont, Floirac)</p>
+      <p><strong>Spécialités :</strong> maisons avec jardin, primo-accédants, successions</p>
+      <p><strong>Réseau :</strong> Indépendante, mandataire IAD</p>
+      <p><strong>Chiffre concret :</strong> 34 transactions en 2024, délai moyen de vente 27 jours</p>
+      <p><strong>Différenciateur :</strong> Ancienne notariale reconvertie — maîtrise parfaite du juridique et des successions complexes</p>
+    </div>
+    <div id="ex-resultat" class="tab-pane">
+      <p><strong>Version courte (LinkedIn / fiche agence) :</strong></p>
+      <br>
+      <p style="font-style:italic;color:var(--text);">Camille Fontaine accompagne les particuliers sur la rive droite bordelaise depuis 8 ans. Ancienne collaboratrice en étude notariale, elle sécurise chaque transaction — y compris les successions et situations complexes. 34 biens vendus en 2024, délai moyen : 27 jours. Vous avez un projet ? Parlons-en.</p>
+      <br>
+      <p><strong>Version longue (site personnel) :</strong></p>
+      <br>
+      <p style="font-style:italic;color:var(--text);">Camille Fontaine est mandataire IAD, spécialisée dans les maisons avec jardin, les primo-accédants et les successions sur la rive droite de Bordeaux — Cenon, Lormont, Floirac. Avant l'immobilier, elle a passé cinq ans en étude notariale : une expertise juridique qu'elle met aujourd'hui au service de ses clients pour sécuriser chaque compromis et anticiper les blocages. En 2024, elle a conclu 34 transactions avec un délai moyen de 27 jours. Si vous cherchez à vendre vite et bien, ou à acheter dans un secteur qu'elle connaît maison par maison, contactez-la directement.</p>
+      <br>
+      <p><strong>Accroche Instagram / signature mail :</strong></p>
+      <br>
+      <p style="font-style:italic;color:var(--text);">8 ans sur la rive droite bordelaise. La connaissance d'une notariale, la réactivité d'une indépendante.</p>
+    </div>
+  </section>
+
+  <!-- ─── 4. CE QU'ON AJUSTE ─── -->
+  <section class="section-card" id="ajustements">
+    <div class="section-title"><span class="icon">⚙️</span> Ce qu'on ajuste et pourquoi</div>
+    <div class="accordion">
+      <div class="acc-header open" onclick="toggleAcc(this)">
+        Voir les ajustements clés <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body open">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Élément</th>
+              <th>Pourquoi c'est important</th>
+              <th>Ce qu'on change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Chiffre concret</strong></td>
+              <td>C'est la seule preuve vérifiable. Sans chiffre, tout le monde dit la même chose.</td>
+              <td>Remplacer par votre propre chiffre. Pas de chiffre ? Utilisez le délai moyen, le taux de satisfaction, ou une anecdote mémorable.</td>
+            </tr>
+            <tr>
+              <td><strong>Zone géographique</strong></td>
+              <td>Un prospect cherche un expert de son quartier, pas de toute une région.</td>
+              <td>Préciser : rue, quartier, commune. Plus c'est précis, plus c'est rassurant.</td>
+            </tr>
+            <tr>
+              <td><strong>Différenciateur humain</strong></td>
+              <td>C'est ce que l'IA ne peut pas inventer. C'est votre seule vraie différence.</td>
+              <td>Parcours atypique, méthode, engagement particulier — une phrase suffit, mais elle doit être vraie.</td>
+            </tr>
+            <tr>
+              <td><strong>Ton de la conclusion</strong></td>
+              <td>Une invitation directe double le taux de contact comparé à une formule passive.</td>
+              <td>Préférez "Contactez-moi directement" à "N'hésitez pas à me solliciter".</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5. VARIANTES MÉTIER ─── -->
+  <section class="section-card" id="variantes">
+    <div class="section-title"><span class="icon">🔀</span> Variantes métier</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this, 'var-linkedin')">LinkedIn</button>
+      <button class="tab-btn" onclick="switchTab(this, 'var-mandat')">Présentation mandat</button>
+      <button class="tab-btn" onclick="switchTab(this, 'var-email')">Signature email</button>
+    </div>
+    <div id="var-linkedin" class="tab-pane active">
+      <p><strong>Profil LinkedIn :</strong> 80 mots max, à la 3e personne ou à la 1ère selon votre positionnement. Commencez par votre zone + spécialité. Terminez par un appel à l'action clair. Évitez les hashtags dans la bio elle-même.</p>
+      <div class="prompt-box" style="margin-top:14px">
+        <div class="prompt-label">💬 Variante — Bio LinkedIn</div>
+        <pre id="prompt-linkedin">Adapte cette bio pour un profil LinkedIn.
+
+Contraintes :
+— 80 mots maximum
+— Commence par la zone géographique et la spécialité
+— Utilise la 1ère personne
+— Pas de hashtags
+— Termine par : une phrase d'invitation au contact + un lien ou une action simple
+
+Bio de base à adapter : [coller la bio générée précédemment]</pre>
+        <button class="copy-btn" onclick="copyById(this,'prompt-linkedin')">📋 Copier</button>
+      </div>
+    </div>
+    <div id="var-mandat" class="tab-pane">
+      <p><strong>Présentation RDV mandat :</strong> utilisée en page de garde de votre dossier de présentation. Ton plus structuré. Mettre en avant les chiffres de vente, le délai moyen et votre méthode d'accompagnement.</p>
+      <div class="prompt-box" style="margin-top:14px">
+        <div class="prompt-label">💬 Variante — Présentation mandat</div>
+        <pre id="prompt-mandat">Rédige une présentation agent au format "fiche de présentation mandat".
+
+Structure attendue :
+1. Accroche (1 phrase) — chiffre ou fait marquant
+2. Parcours et expertise (2–3 phrases) — zone, spécialité, background
+3. Ma méthode (2–3 phrases) — comment je travaille, ce qui me différencie
+4. Pourquoi me choisir (1–2 phrases) — bénéfice direct pour le vendeur
+
+Profil agent : [coller vos informations]
+
+Règles :
+— N'invente aucun chiffre ou fait non fourni
+— Ton professionnel, direct, sans superlatif vide
+— 150 mots maximum</pre>
+        <button class="copy-btn" onclick="copyById(this,'prompt-mandat')">📋 Copier</button>
+      </div>
+    </div>
+    <div id="var-email" class="tab-pane">
+      <p><strong>Signature email :</strong> 2 lignes max. Une accroche + une spécialité + un contact. Pas de bio complète — juste le différenciateur en une phrase.</p>
+      <div class="prompt-box" style="margin-top:14px">
+        <div class="prompt-label">💬 Variante — Accroche signature email</div>
+        <pre id="prompt-email">Génère 3 variantes d'accroche courte pour signature d'email professionnel.
+
+Format : 1 phrase de 15 mots maximum
+Ton : direct, expert, mémorable
+
+Informations agent :
+- Spécialité : [votre spécialité]
+- Zone : [votre zone]
+- Différenciateur : [votre point unique]
+
+Règle : n'invente rien. Si un élément manque, génère uniquement avec ce qui est fourni.</pre>
+        <button class="copy-btn" onclick="copyById(this,'prompt-email')">📋 Copier</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 6. AVANT / APRÈS ─── -->
+  <section class="section-card" id="avantapres">
+    <div class="section-title"><span class="icon">🔄</span> Avant / Après (bonus)</div>
+    <div class="accordion">
+      <div class="acc-header open" onclick="toggleAcc(this)">
+        Voir la comparaison Avant / Après <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body open">
+        <div class="av-ap-grid">
+          <div class="avant-box">
+            <div class="av-ap-label">❌ Avant</div>
+            <div class="av-ap-text">"Agent immobilier passionné depuis plus de 8 ans, je suis dynamique, à l'écoute et disponible pour vous accompagner dans votre projet immobilier. Que vous souhaitiez acheter ou vendre, je mets tout en œuvre pour vous satisfaire. N'hésitez pas à me contacter !"</div>
+          </div>
+          <div class="apres-box">
+            <div class="av-ap-label">✅ Après</div>
+            <div class="av-ap-text">"Camille Fontaine accompagne les particuliers sur la rive droite bordelaise depuis 8 ans. Ancienne collaboratrice en étude notariale, elle sécurise chaque transaction — y compris les successions complexes. 34 biens vendus en 2024, délai moyen : 27 jours. Vous avez un projet ? Parlons-en."</div>
+          </div>
+        </div>
+        <ul class="checklist" style="margin-top:20px">
+          <li><span class="check-icon">✓</span> Remplacer "passionné" par un chiffre ou un fait vérifiable</li>
+          <li><span class="check-icon">✓</span> Citer la zone géographique précise dès la 1ère phrase</li>
+          <li><span class="check-icon">✓</span> Supprimer "dynamique", "à l'écoute", "disponible" — ils ne signifient rien</li>
+          <li><span class="check-icon">✓</span> Remplacer "n'hésitez pas" par une invitation directe et concrète</li>
+          <li><span class="check-icon">✓</span> Mentionner au moins un différenciateur réel (parcours, méthode, chiffre)</li>
+        </ul>
+        <div class="retain-box" style="margin-top:20px">
+          <div class="retain-header">💡 Note pédagogique</div>
+          <p style="font-size:13.5px;margin-top:0">La version "avant" est rassurante à écrire — elle ne prend pas de risque. La version "après" est convaincante à lire — elle donne une raison de choisir. L'IA vous aide à passer de l'une à l'autre en 5 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 7. À RETENIR ─── -->
+  <section class="section-card" id="retenir">
+    <div class="section-title"><span class="icon">⭐</span> À retenir</div>
+    <div class="retain-box">
+      <div class="retain-header">⭐ À retenir</div>
+      <ul class="retain-bullets">
+        <li><span class="retain-bullet-icon">→</span> Une bio doit contenir au moins un fait concret ou un chiffre vérifiable</li>
+        <li><span class="retain-bullet-icon">→</span> Une zone géographique précise rassure — une région vague ne dit rien</li>
+        <li><span class="retain-bullet-icon">→</span> Un vrai différenciateur vaut mieux que cinq adjectifs positifs</li>
+        <li><span class="retain-bullet-icon">→</span> Une conclusion directe déclenche le contact — une formule passive l'inhibe</li>
+      </ul>
+      <div class="retain-text">Une bio ne parle pas de vous — elle donne une raison à votre prospect de vous appeler plutôt qu'un autre.</div>
+    </div>
+  </section>
+
+  <!-- ─── 8. EXERCICE ─── -->
+  <section class="section-card" id="exercice">
+    <div class="section-title"><span class="icon">✏️</span> Exercice</div>
+    <div class="exercise-box">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <ul class="steps-list">
+        <li class="step-item" onclick="checkStep(1)">
+          <div class="step-check" id="check-1"></div>
+          <div class="step-text" id="text-1">Notez 5 informations sur vous : zone, spécialités, ancienneté, chiffre concret, 1 fait marquant.</div>
+        </li>
+        <li class="step-item" onclick="checkStep(2)">
+          <div class="step-check" id="check-2"></div>
+          <div class="step-text" id="text-2">Lancez le prompt socle dans votre outil IA préféré avec vos vraies informations.</div>
+        </li>
+        <li class="step-item" onclick="checkStep(3)">
+          <div class="step-check" id="check-3"></div>
+          <div class="step-text" id="text-3">Identifiez dans le résultat les mots génériques — supprimez-les ou remplacez-les par un fait réel.</div>
+        </li>
+        <li class="step-item" onclick="checkStep(4)">
+          <div class="step-check" id="check-4"></div>
+          <div class="step-text" id="text-4">Relancez avec le prompt renforcé pour obtenir les 3 versions (courte, longue, accroche).</div>
+        </li>
+        <li class="step-item" onclick="checkStep(5)">
+          <div class="step-check" id="check-5"></div>
+          <div class="step-text" id="text-5">Publiez ou intégrez la version courte sur votre profil LinkedIn ou fiche agence.</div>
+        </li>
+      </ul>
+      <div class="finish-msg" id="finish-msg">
+        🎉 <strong>Exercice complété !</strong> Votre bio est prête à travailler pour vous — avant même que vous décrochiez le téléphone.<br><br>
+        ➡️ <strong>Module suivant :</strong> #04 — 5 accroches pour flyer de secteur
+      </div>
+      <div class="autocheck-box" id="autocheck-msg">
+        <div class="autocheck-title">✅ Auto-vérification finale — relisez votre bio</div>
+        <ul>
+          <li>☐ &nbsp;Ma bio contient un chiffre ou un fait concret vérifiable</li>
+          <li>☐ &nbsp;Ma zone géographique est précise (quartier / commune)</li>
+          <li>☐ &nbsp;J'ai supprimé les adjectifs génériques (passionné, dynamique, disponible...)</li>
+          <li>☐ &nbsp;Ma conclusion est une invitation directe, pas une formule passive</li>
+          <li>☐ &nbsp;Je peux la relire entièrement en moins de 30 secondes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ─── TABS ───
+function switchTab(btn, targetId) {
+  const container = btn.closest('.section-card') || btn.closest('.acc-body');
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  container.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const pane = container.querySelector('#' + targetId);
+  if (pane) pane.classList.add('active');
+}
+
+// ─── ACCORDION ───
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// ─── COPY BY ID ───
+function copyById(btn, id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copié !';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+// ─── EXERCISE ───
+const done = {};
+function checkStep(n) {
+  if (done[n]) return;
+  done[n] = true;
+  document.getElementById('check-' + n).classList.add('done');
+  document.getElementById('check-' + n).textContent = '✓';
+  document.getElementById('text-' + n).classList.add('done');
+  const count = Object.keys(done).length;
+  document.getElementById('progress-fill').style.width = (count * 20) + '%';
+  if (count === 5) {
+    document.getElementById('finish-msg').classList.add('visible');
+    const ac = document.getElementById('autocheck-msg');
+    ac.classList.add('visible');
+  }
+}
+
+// ─── SCROLL NAV ───
+const sections = ['contexte','prompts','exemple','ajustements','variantes','avantapres','retenir','exercice'];
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      const link = document.querySelector('.nav-link[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>

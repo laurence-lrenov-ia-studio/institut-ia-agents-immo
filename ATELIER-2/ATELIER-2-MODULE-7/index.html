@@ -3,200 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module #02 — Emails de suivi client · Institut IA</title>
+<title>Module #07 — Préparer un RDV mandat avec l'IA · Institut IA</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-:root{
-  --dark:#222b32;--dark2:#2a3540;--dark3:#303e4a;--panel:#222b32;
-  --gold:#cc914b;--gold-light:#d9a660;--gold-dim:#9a6e35;
-  --gold-glow:rgba(204,145,75,0.18);
-  --atelier:#7A9AEA;--atelier-glow:rgba(42,58,122,0.18);
-  --teal:#1E3D4A;--teal-light:#2A5466;
-  --text:#E8E2D8;--text-dim:#9A9490;--text-muted:#5A5650;
-  --white:#fff;--nav-w:260px;--radius:10px;
-}
+:root{--dark:#222b32;--dark2:#2a3540;--dark3:#303e4a;--panel:#222b32;--gold:#cc914b;--gold-light:#d9a660;--gold-dim:#9a6e35;--gold-glow:rgba(204,145,75,0.18);--atelier:#E8A838;--atelier-glow:rgba(180,120,20,0.2);--teal:#1E3D4A;--teal-light:#2A5466;--text:#E8E2D8;--text-dim:#9A9490;--text-muted:#5A5650;--white:#FFFFFF;--nav-w:260px;--radius:10px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;display:flex;overflow-x:hidden;}
-
-/* SIDEBAR */
-.sidenav{width:var(--nav-w);min-height:100vh;background:var(--panel);border-right:1px solid rgba(122,154,234,0.15);position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;padding-bottom:24px;overflow-y:auto;}
-.sidenav-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(122,154,234,0.12);}
+.sidenav{width:var(--nav-w);min-height:100vh;background:var(--panel);border-right:1px solid rgba(180,120,20,0.15);position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;padding-bottom:24px;}
+.sidenav-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(180,120,20,0.12);}
 .sidenav-logo img{width:52px;height:52px;object-fit:contain;border-radius:8px;background:#222b32;}
 .sidenav-logo .studio{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-top:8px;}
 .sidenav-logo .subtitle{font-size:11px;color:var(--text-muted);margin-top:2px;letter-spacing:0.05em;}
-.course-badge{margin:14px 16px;background:var(--atelier-glow);border:1px solid rgba(122,154,234,0.3);border-radius:var(--radius);padding:10px 14px;}
-.course-badge .atelier-label{font-size:10px;font-weight:600;letter-spacing:0.1em;color:var(--atelier);text-transform:uppercase;margin-bottom:3px;}
+.course-badge{margin:14px 16px;background:var(--atelier-glow);border:1px solid rgba(180,120,20,0.3);border-radius:var(--radius);padding:10px 14px;}
+.course-badge .bloc-label{font-size:10px;font-weight:600;letter-spacing:0.1em;color:var(--atelier);text-transform:uppercase;margin-bottom:4px;}
 .course-badge .course-num{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--white);line-height:1;}
 .course-badge .course-num span{color:var(--atelier);}
 .nav-list{list-style:none;padding:8px 0;flex:1;}
 .nav-list li{margin:2px 0;}
 .nav-list a{display:flex;align-items:center;gap:12px;padding:10px 20px;text-decoration:none;color:var(--text-dim);font-size:13px;font-weight:400;border-left:3px solid transparent;transition:all 0.2s ease;cursor:pointer;}
 .nav-list a .step-num{width:22px;height:22px;border-radius:50%;background:var(--dark3);border:1px solid var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Barlow Condensed',sans-serif;flex-shrink:0;transition:all 0.2s;}
-.nav-list a:hover,.nav-list a.active{color:var(--atelier);border-left-color:var(--atelier);background:rgba(122,154,234,0.06);}
+.nav-list a:hover,.nav-list a.active{color:var(--atelier);border-left-color:var(--atelier);background:rgba(180,120,20,0.06);}
 .nav-list a.active .step-num,.nav-list a:hover .step-num{background:var(--atelier);border-color:var(--atelier);color:var(--dark);}
-.nav-footer{padding:16px 20px;border-top:1px solid rgba(122,154,234,0.12);}
+.nav-footer{padding:16px 20px;border-top:1px solid rgba(180,120,20,0.12);}
 .nav-footer .author{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--gold-light);}
 .nav-footer .role{font-size:11px;color:var(--text-muted);margin-top:2px;}
-
-/* MAIN */
 .main{margin-left:var(--nav-w);flex:1;display:flex;flex-direction:column;min-height:100vh;}
-
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--panel) 0%,#1a2535 60%,#1e2d35 100%);border-bottom:1px solid rgba(122,154,234,0.2);padding:44px 56px 36px;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(122,154,234,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero{background:linear-gradient(135deg,var(--panel) 0%,#1a2535 60%,#1e2d35 100%);border-bottom:1px solid rgba(180,120,20,0.2);padding:44px 56px 36px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(180,120,20,0.07) 0%,transparent 70%);pointer-events:none;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--atelier),transparent);}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--atelier-glow);border:1px solid rgba(122,154,234,0.35);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--atelier);text-transform:uppercase;margin-bottom:18px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--atelier-glow);border:1px solid rgba(180,120,20,0.35);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--atelier);text-transform:uppercase;margin-bottom:18px;}
 .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--atelier);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 .hero h1{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:800;color:var(--white);line-height:1.1;max-width:680px;margin-bottom:8px;}
 .hero h1 span{color:var(--gold);}
 .hero-meta{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap;}
 .meta-pill{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-dim);}
-.meta-pill .icon{width:28px;height:28px;background:var(--dark3);border:1px solid rgba(122,154,234,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;}
-
-/* CONTENT */
+.meta-pill .icon{width:28px;height:28px;background:var(--dark3);border:1px solid rgba(180,120,20,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;}
 .content{padding:36px 56px 60px;display:flex;flex-direction:column;gap:28px;}
-
-/* SECTION CARD */
-.section-card{background:var(--dark2);border:1px solid rgba(122,154,234,0.1);border-radius:14px;overflow:hidden;transition:border-color 0.3s;}
-.section-card:hover{border-color:rgba(122,154,234,0.25);}
-
-/* TABS */
-.tabs-header{display:flex;border-bottom:1px solid rgba(122,154,234,0.15);padding:0 24px;flex-wrap:wrap;}
-.tab-btn{padding:13px 18px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--text-muted);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;text-transform:uppercase;transition:all 0.2s;white-space:nowrap;}
+.section-card{background:var(--dark2);border:1px solid rgba(180,120,20,0.1);border-radius:14px;overflow:hidden;transition:border-color 0.3s;}
+.section-card:hover{border-color:rgba(180,120,20,0.25);}
+.accordion-header{display:flex;align-items:center;gap:14px;padding:18px 24px;cursor:pointer;user-select:none;transition:background 0.2s;}
+.accordion-header:hover{background:rgba(180,120,20,0.04);}
+.acc-num{width:36px;height:36px;border-radius:8px;background:var(--gold-glow);border:1px solid rgba(204,145,75,0.4);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:var(--gold);flex-shrink:0;}
+.acc-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--white);flex:1;}
+.acc-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+.acc-chevron{font-size:18px;color:var(--gold);transition:transform 0.3s ease;flex-shrink:0;}
+.accordion-header.open .acc-chevron{transform:rotate(180deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.accordion-body.open{max-height:3000px;}
+.accordion-inner{padding:20px 24px 24px;border-top:1px solid rgba(180,120,20,0.08);}
+.tabs-header{display:flex;gap:0;border-bottom:1px solid rgba(180,120,20,0.15);padding:0 24px;}
+.tab-btn{padding:13px 18px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--text-muted);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;text-transform:uppercase;transition:all 0.2s;}
 .tab-btn:hover{color:var(--text-dim);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
 .tab-content{display:none;padding:24px;}
 .tab-content.active{display:block;}
-
-/* ACCORDION */
-.accordion-header{display:flex;align-items:center;gap:14px;padding:18px 24px;cursor:pointer;user-select:none;transition:background 0.2s;}
-.accordion-header:hover{background:rgba(122,154,234,0.04);}
-.acc-num{width:36px;height:36px;border-radius:8px;background:var(--gold-glow);border:1px solid rgba(204,145,75,0.4);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:var(--gold);flex-shrink:0;}
-.acc-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--white);flex:1;}
-.acc-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
-.acc-chevron{font-size:18px;color:var(--gold);transition:transform 0.3s;flex-shrink:0;}
-.accordion-header.open .acc-chevron{transform:rotate(180deg);}
-.accordion-body{max-height:0;overflow:hidden;transition:max-height 0.45s ease;}
-.accordion-body.open{max-height:8000px;}
-.accordion-inner{padding:20px 24px 24px;border-top:1px solid rgba(122,154,234,0.08);}
-
-/* PROMPT BOX */
 .prompt-box{background:linear-gradient(135deg,rgba(30,61,74,0.5) 0%,rgba(26,32,48,0.8) 100%);border:1px solid rgba(204,145,75,0.35);border-left:4px solid var(--gold);border-radius:var(--radius);padding:20px 22px;margin:6px 0;position:relative;}
-.prompt-box-label{font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.prompt-box-label{font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .prompt-box pre{font-family:'Courier New',monospace;font-size:12.5px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word;}
 .copy-btn{position:absolute;top:14px;right:14px;background:var(--dark3);border:1px solid rgba(204,145,75,0.3);border-radius:6px;color:var(--gold-light);font-size:11px;font-weight:600;font-family:'DM Sans',sans-serif;padding:5px 12px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;}
 .copy-btn:hover{background:var(--gold);color:var(--dark);border-color:var(--gold);}
 .copy-btn.copied{background:#2A5A2A;border-color:#4A8A4A;color:#8FD48F;}
-.copy-btn-static{position:static;margin-left:10px;font-size:10px;padding:3px 10px;background:var(--dark3);border:1px solid rgba(204,145,75,0.3);border-radius:6px;color:var(--gold-light);font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
-.copy-btn-static:hover{background:var(--gold);color:var(--dark);}
-.copy-btn-static.copied{background:#2A5A2A;border-color:#4A8A4A;color:#8FD48F;}
-
-/* NIVEAU BADGES */
 .niveau-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin-bottom:12px;}
 .niveau-socle{background:rgba(42,160,42,0.15);border:1px solid rgba(42,160,42,0.4);color:#8FD48F;}
 .niveau-pro{background:rgba(42,100,200,0.15);border:1px solid rgba(42,100,200,0.4);color:#7AB4EA;}
-.niveau-expert{background:rgba(140,60,180,0.15);border:1px solid rgba(140,60,180,0.4);color:#C88FD4;}
-
-/* RETAIN BOX */
 .retain-box{background:linear-gradient(135deg,rgba(204,145,75,0.1) 0%,rgba(204,145,75,0.04) 100%);border:1px solid rgba(204,145,75,0.4);border-radius:var(--radius);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
 .retain-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
 .retain-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
 .retain-text{font-size:15px;font-weight:500;color:var(--white);line-height:1.6;}
-
-/* INFO GRID */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.info-card{background:var(--dark3);border:1px solid rgba(122,154,234,0.12);border-radius:var(--radius);padding:16px 18px;transition:border-color 0.2s;}
-.info-card:hover{border-color:rgba(122,154,234,0.3);}
+.info-card{background:var(--dark3);border:1px solid rgba(180,120,20,0.12);border-radius:var(--radius);padding:16px 18px;transition:border-color 0.2s;}
+.info-card:hover{border-color:rgba(180,120,20,0.3);}
 .info-card .label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;}
 .info-card .value{font-size:13.5px;color:var(--text);line-height:1.5;}
-
-/* TABLE */
 .styled-table{width:100%;border-collapse:collapse;font-size:13px;}
-.styled-table th{background:rgba(122,154,234,0.12);color:var(--atelier);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(122,154,234,0.2);}
+.styled-table th{background:rgba(180,120,20,0.12);color:var(--atelier);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(180,120,20,0.2);}
 .styled-table td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);vertical-align:top;line-height:1.5;}
 .styled-table tr:last-child td{border-bottom:none;}
-.styled-table tr:hover td{background:rgba(122,154,234,0.03);}
+.styled-table tr:hover td{background:rgba(180,120,20,0.03);}
 .styled-table td:first-child{color:var(--gold-light);font-weight:500;}
-
-/* BULLET LIST */
 .bullet-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .bullet-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.55;color:var(--text);}
 .bullet-list li::before{content:'▸';color:var(--atelier);flex-shrink:0;margin-top:1px;font-size:12px;}
-
-/* METHOD STEPS */
-.method-steps{display:flex;flex-direction:column;gap:10px;}
-.method-step{display:flex;gap:14px;align-items:flex-start;background:var(--dark3);border:1px solid rgba(122,154,234,0.1);border-radius:8px;padding:14px 16px;transition:border-color 0.2s;}
-.method-step:hover{border-color:rgba(122,154,234,0.25);}
-.method-step-num{width:26px;height:26px;border-radius:6px;background:var(--gold-glow);border:1px solid rgba(204,145,75,0.4);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--gold);flex-shrink:0;}
-.method-step-title{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--white);margin-bottom:3px;}
-.method-step-desc{font-size:12.5px;color:var(--text-dim);line-height:1.5;}
-
-/* STEP LIST */
 .step-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
 .step-list li{display:flex;gap:14px;align-items:flex-start;}
 .step-num-badge{width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--dark);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .step-text{font-size:13.5px;color:var(--text);line-height:1.55;}
-
-/* EXERCISE */
-.exercise-box{background:linear-gradient(135deg,rgba(30,45,61,0.8),rgba(26,32,48,0.9));border:1px solid rgba(122,154,234,0.2);border-radius:12px;padding:24px;}
+.exercise-box{background:linear-gradient(135deg,rgba(30,45,61,0.8),rgba(26,32,48,0.9));border:1px solid rgba(180,120,20,0.2);border-radius:12px;padding:24px;}
 .exercise-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
 .exercise-header .title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--white);}
-.exercise-header .timer-badge{background:var(--atelier-glow);border:1px solid rgba(122,154,234,0.3);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;color:var(--atelier);}
-.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.exercise-header .timer-badge{background:var(--atelier-glow);border:1px solid rgba(180,120,20,0.3);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;color:var(--atelier);}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:12px;color:var(--text-dim);}
 .progress-bar-bg{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
 .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width 0.6s ease;}
-
-/* EMAIL PREVIEW */
-.email-preview{background:var(--dark3);border:1px solid rgba(204,145,75,0.15);border-radius:var(--radius);overflow:hidden;margin:8px 0;}
-.email-header{background:rgba(204,145,75,0.08);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(204,145,75,0.12);}
-.email-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:0.7;}
-.email-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--gold-light);text-transform:uppercase;}
-.email-body{padding:16px 18px;font-size:13px;line-height:1.8;color:var(--text-dim);}
-.email-body strong{color:var(--text);}
-
-/* AVANT/APRÈS */
-.avant-apres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
-.avant-box{background:rgba(220,53,69,0.07);border:1px solid rgba(220,53,69,0.2);border-radius:var(--radius);padding:16px;}
-.apres-box{background:rgba(40,167,69,0.07);border:1px solid rgba(40,167,69,0.22);border-radius:var(--radius);padding:16px;}
-.avant-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;color:#E07070;text-transform:uppercase;margin-bottom:10px;}
-.apres-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;color:#70C070;text-transform:uppercase;margin-bottom:10px;}
-.email-text{font-size:12.5px;color:var(--text-dim);line-height:1.65;font-style:italic;margin-bottom:12px;}
-.problem-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
-.problem-list li{font-size:12px;color:var(--text-dim);display:flex;gap:7px;line-height:1.4;}
-.problem-list.bad li::before{content:'✗';color:#E07070;flex-shrink:0;}
-.problem-list.good li::before{content:'✓';color:#70C070;flex-shrink:0;}
-
-/* RETENIR LIST */
-.retenir-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.retenir-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text);line-height:1.5;}
-.retenir-list li::before{content:'→';color:var(--gold);flex-shrink:0;font-weight:700;}
-
-/* SCENARIO BOX */
-.scenario-box{background:var(--dark3);border:1px solid rgba(122,154,234,0.2);border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;}
-.scenario-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#b8956a;text-transform:uppercase;margin-bottom:10px;}
-
-/* NEXT STEP BOX */
-.next-box{background:var(--dark3);border-left:4px solid var(--teal-light);border-radius:var(--radius);padding:18px 20px;margin-top:16px;}
-.next-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--teal-light);text-transform:uppercase;margin-bottom:8px;}
-.next-box p{font-size:13px;line-height:1.65;color:var(--text-dim);}
-
-/* PROSE */
 .prose{font-size:14px;line-height:1.7;color:var(--text-dim);}
 .prose strong{color:var(--text);font-weight:500;}
 .gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(204,145,75,0.3),transparent);margin:14px 0;}
+.result-box{background:var(--dark3);border-left:4px solid var(--teal-light);border-radius:var(--radius);padding:18px 20px;}
+.result-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--teal-light);text-transform:uppercase;margin-bottom:10px;}
+.result-box p{font-size:13px;line-height:1.65;color:var(--text-dim);margin-bottom:8px;}
+.result-box p:last-child{margin-bottom:0;}
+.result-box p strong{color:var(--text);}
+.avant-apres-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+.avant-box{background:rgba(200,60,60,0.08);border:1px solid rgba(200,60,60,0.25);border-radius:var(--radius);padding:16px;}
+.apres-box{background:rgba(60,160,80,0.08);border:1px solid rgba(60,160,80,0.25);border-radius:var(--radius);padding:16px;}
+.avant-box .box-label{color:#E88080;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.apres-box .box-label{color:#70C880;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.tag-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(180,120,20,0.08);border:1px solid rgba(180,120,20,0.2);border-radius:20px;padding:3px 10px;font-size:11px;color:#b8956a;margin:2px;}
+@media(max-width:900px){.sidenav{transform:translateX(-100%)}.main{margin-left:0}.content,.hero{padding-left:24px;padding-right:24px}.info-grid,.avant-apres-grid{grid-template-columns:1fr}}
 
-@media(max-width:900px){
-  .sidenav{transform:translateX(-100%)}
-  .main{margin-left:0}
-  .content,.hero{padding-left:24px;padding-right:24px}
-  .info-grid,.avant-apres-grid{grid-template-columns:1fr}
-}
+.niveau-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin-bottom:12px;}
+.niveau-socle{background:rgba(42,160,42,0.15);border:1px solid rgba(42,160,42,0.4);color:#8FD48F;}
+.niveau-pro{background:rgba(42,100,200,0.15);border:1px solid rgba(42,100,200,0.4);color:#7AB4EA;}
+.niveau-expert{background:rgba(140,60,180,0.15);border:1px solid rgba(140,60,180,0.4);color:#C88FD4;}
+.result-box{background:var(--dark3);border-left:4px solid var(--teal-light);border-radius:var(--radius);padding:18px 20px;}
+.result-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--teal-light);text-transform:uppercase;margin-bottom:10px;}
+.result-box p{font-size:13px;line-height:1.65;color:var(--text-dim);margin-bottom:8px;}
+.result-box p:last-child{margin-bottom:0;}
+.result-box p strong{color:var(--text);}
+@media(max-width:900px){.info-grid{grid-template-columns:1fr!important}}
 html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
 </style>
 </head>
 <body>
-
 <nav class="sidenav">
   <div class="sidenav-logo">
     <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAREBEQDACIAAREBAhEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMAAAERAhEAPwDyiiiitDMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiimIKKKKQwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigQUUVbsdMutQfbbxkju3YUNpbjSb2KlaWn6JeaiwKJsj7yNwK6PT/DdpZkSXH7+Udv4RWwT8uOijoBwBXHUxaWkDsp4RvWZyuraHZ6bpHnI8kk24AseB+Vc7iuz8Uc6If+ui/zrja0w0nOF5GWKioTshtFOwD7UhBHWuk57iUUUUhhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFPjieZwkaFmPQAUbC8hlTW1rPdyiOCJpHPYCt/TvCkjlZdQcxJ/zyT77f4V00EEFrF5VtEsSeg6n6muarioQdlqzqpYWctZaIwdP8LRRBZL597/88l6D6mugRUjjEcaKijoqjApe9Ga8+dWU/iO+FOMPhQUlGaSoRbMfxP8A8gRv+ui/zrja7LxN/wAgVv8Arov8642vSwf8M83G/wAQO1AzRRXWcQhAPTj60mCOtLijP4igaYlFLgHofwpKCrhRRRSAKKKKBhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRR7d6AClALEADJPpWppugXmoEPt8qHu7j+VdZYaRZadgxJ5ko/wCWjjP5VhVxEKfqb0sPOp6HOad4YuLoLJcnyIevI+Y/hXU2dhaaem21iCt3kYZY/wCFWSSeSc02vOqYidT0PQp4eFP1FpKO9JWJsBooJpM0xBSUuaSmIx/Ev/IFb/rov8646ux8S/8AIFb/AK6L/OuOr0sH8B5uN/iBRRRXWcQUUUUAJg0Z9eaWkphcCPSkoopWGpBRRiigoKKKKQwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKntLK5vphFbRNIx9BwPrXV6d4Vgt8SXzCaTr5an5R9T3rOpWhTXvM0p0Z1H7qOc0/SLzUX/AHMZCZ5duFFdXp/h6ysQGk/0iYd2Hyj6CtYcIEUBUXgKowBRXmVcXOekdD0qWEhDWWoZ4A7DtQaKK5rnVYTtSZpabTuJoU9aSkoNUSFJR3pCaYmGaM0lFBJk+Jf+QK3/AF0X+dcdXYeJf+QM3/XRf51x9elg/wCGebjfjCiiius4wooooAKKKKACkxS0UwE6UcGlpMUAJjFFA46UUrFJhRRRSGFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigQUUqqzsFQFmPAAroNO8LTzlZLxvIjP8P8RqJ1IwV5MuFOU3aKMKGCW4kEcMbOx6ACum07wqBiTUHx3EKdfxretLO2sI9lrEE9X6samzXn1ca5aQPQpYNR1mxIY4raIRQRLEn91R1+tPzTaB1ribb3O5JLRDs0ZptOAqW7DSuKBQVNX9K02TUrnykO1VGXY9hWhqPh8WsDSQzFyvUEVhKsouzNuS+hzx4FMJqRyB14+tRmt4yuZSVhKSlI5ptaoyYtFJRTJCiikoBmR4l/5Azf9dF/nXIV1/iT/kDN/wBdF/nXIV6WD/hnmY34wooorrOMKKKKACiiigAooooAKKKKACkNLSUwDp9KMelJmg0BcKKKPpSsUmFFFFIoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK0dO0S91JgYo9sfeR+FFKUlFXY4xcnZGdWzpvhu8vgJJB5EB/iccn6Cul0/QbLTsNjz5x/G44B9hWixJPJzXBWxyWlM76WBe9Qp2GlWemr+4jDSdDI/J/D0q2SSeTzS9qSvPlOU3eTO+MIwVo7BRRSd6kbFpO9FFMELSim1NGihfNk+7/Cv941Ei4mjpOonS5WkZcxyjBA6/WrOpa350GIc/PxuNYbSM7Et/8Aqp0f7yKSH+IfMn9a5J0VJ3ZveNxBOwGGCuv+0KaTbv3aI/mKj6jNNNdaguhjKfclNvLjcmJF9UP9KhPXB4PoeKBlTlSVPqDUv2l8YkVJR/tcH86tOS8zN8r8iKipsWsnId4W9GG5aRrWYDKgOv8AeQ5qlNdSXBkNFIeDg0GrRDMnxJ/yBm/66L/OuQrr/En/ACBm/wCui/zrkK9LB/AebjfjDvRRRXWcYUUUuKAsJRS0UXCwlFLSUBYKSlooEJRS0UANopaKAEoxRS96AEo/lRSdKB3FooooKTCiiikMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo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EplkPzE8DsPasZ+++RbdTph7i538v8xxYsSWJZicknqTQTUeaM0+QTqNkufOXBP7wdD61Cc5wetGTmnn96vH3x196aXKxN8yIzSUtJWhiwpM0UUEi0lFFABRRRQAUUUUAFFFFABRRRmgBKDS0hoAWm96XNJQAUZopTTC4oopnTpShvWkVcdRRRQMKKKKQwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooopiLFnY3N/MIraJpG74HA+tdfpvg+G3Ikv381xz5an5R+NdBo9rDHolmtvtR3hVnBGNx+tTMrI2GBU+hrwsRmM23CGn5ntYbAQSU563I0CxoI41CIOAqjAoNOpCK85tt3Z6KVtEJmkpcUlABSUtJTAKKKSgQUlLSUwCkpaSmISlFJUkMXmkkttjX77+n0o2CwRReaSSdsa/eakll8wBEXbEv3R6+5pZZvMCog2xL91fX3NRUkuZ3YMTNIaWkrS5IhpKXFFMVhKDS02mJgaSlpKoQlJilpM0CsOjkMMiyDnHX3pZkEcpC/cb5k+lR5qRcy25T+OP5l9x3FD0fMNaqxHRSDkUVZAlIaUnmjaxOAp/KnewnqY/iT/kDN/10X+dch2ruNdsLu70po4IGdy4OBXN/8I5q3/Pm/wCJFejg6kFB3aPNxlObqaJmVU9rb+e5LnZDH80jnoB6VeHhvVmYL9kcAnG4kYFSXmkaiqC2ispRbx85OMyH1NdEq8dotXZzwoS+KSdkZtzcm4lGBtiQYjT0FR1I9pcxHDwSL9VNREY4PBrWKilZGc5ScrsWjNJRmqIuLQCcgjqOlNzRQF3uSn96Cyj5x94etRjmgEqdynBHensBIC6jDD7y/wBanYt+8iOiiiqMgooooAKKKKACiiigAooooAKSjNLQACikooAKDRRQAlFFFABRRRQAgJFOBzSUlMdx9FRPOsXXk/3RT438xAwGM0irjqKKKQwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACg9KKD0oEes6YM6PY/9e6fyq55h27XAdfQ9R+NU9M/5BFj/ANe6fyq1Xx1b+JL1Z9ZR/hx9BDAHGYW3eqHqKgIwccg+hqYjJz39acXDjEy7h/eH3hUqTRbRWxSECpzASCYiHX07ioe+O9aKSJsNIpKeRSVQhtJTsUmKLgJSU7FJimmKwhpKXFPiiMrYHAHLMewovbcLCRRGVzztReWY9BRNKHwiDES/dHr7mnTShlEUY2xL/wCPe5qE0l72rASjNBpK0JCkooNAgpKKKdwEpKWmmqQhabS0lMkKSl5JwASaJjDaRGW7nSFBz8x5NNySFa43IqSFJPMV0U8HqemK5y88Z2tuSthbmVv+eknSudv/ABFqd/kSXLLGf4E4H6VvTw1WpsrLzMKmJpU93dnfXFzY2jFri9ij5zsByayrjxZpEAIiSW4PY9BXAk5680V2Qy5fblf8DknmDfwxOvl8dSHiHT4lx3LZqnL411WQ4XyUHbalc5RW0cDQX2TB42u/tGy3ivWW6XZX6KKiPiPWG638v6f4Vl0VosLRX2UZvE1n9pmuvifWV/5fpD9QP8KmTxdrCH/j4VvZlrCooeFov7KBYmsvtM6iPxxf4Ant7eQdxtxUy+LdPuPlu9Ij29ynWuRoqHgqPRW9GWsXV6u/yR2QHhfUD+7mktJD2Y8CmyeFGkQvYXkVyvpnmuPqSG4mt5BJDK8bjoVOKPY1ofBP79Q9tSl8cPu0NS6027smxcQOnvjiqla9n4yv4VEd0qXMfQ7xz+fetCKTw7rfAH2K5PboM/yo+szh/Fj80H1eE9aUvkzmKVSVYEdRWzqHhq9slMkaieHqHj5rGIwcEYIrohVhUV4u5zzpzpu0lYeyhl8xPxX0qOnKxVsj8aVgMb0+6eo9Kq/LoJ+9qhlFFFUQJS0UUhBRRRQAUhpaKAEoopKAFpM0UUAFLSUUAFFFFABRSEgDJOB61XkugOIxk+ppgTOyoMsQBVaS5ZuE4Hr3qEku25iSaSkMU9ck81ethiAVQrQt/wDULQNEtFFFIoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoPSig9KBHrOm/8AIIsf+vdP5VZqtpo/4lFj/wBcE/lVqvjq38SXqz6yj/Dj6CZo60GkrNGgmCG3A4PqKeZEk4mXn++v+FMNJTAV4GUblIkT1Xt9aixUqsyHKMQafmOU/vB5b/3l6fjT5mtwsVsUYqd4WQZIyp6MORT4baS5kCQoXY9hRzoaiVcUmK1JtGvYU3NFkexqmkDSvtHGPvMei0KaFYgjheZ9i8dyx6AU6V12+VFxEOp/vVJM6hPJgyIh1bu59fpVc00+bcloYabTzTTWqZI2kNLSVRInOaQ0tIaYgpDQKDVIQlFBpVVpGwozRsA00kzw2kJmu5VhjHr1NZOr+JrXSg0Nrtnuu56qtcPe6jdajMZbqZpD2B6D8K6qGFqVtVojlr4qFLTdnS6l40YFotMiEadPNfkmuXubue7k8y4leRvVjUFFevSw1Ol8K1PJq4mpV3egUUUV0HOFFFFIYUUUUAFFFFABRRRQAUUUUAFFFFAgooopjNTTvEGoaaQIpi0f/PN+RXQw3+jeIl8u6jFneHo46E/WuKorlnhoyfNHR90bwxEo+7LVeZ0Wp6FeaaS5XzIO0icj8azFYqc/mPWr2keKLvTsQz/6RbHgo/JH0raudIstatze6O6h/wCOH3/pUqvKm+Wvt3LdCNRc1HddP63OYdRjen3D+lMqVlktZmjkjIYcOjCmuoUBl5Q9D6e1dSfQ5Wr6r5jM0lLRVkWEpRRRQIKQ0tJQAUlLRSASiig0AGaM0lMklSMfMefQUAPqKS4VMgfM3pVeSd36fKvoKix6UDHvI0h+Y59qZRRQMWikooAK0Lf/AFC1n1oW/wDqFoGiWiiikMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoPSiigR6zpn/IIsf+uCfyq1VXTP+QRY/wDXun8qtc18bW/iS9WfWUf4cfQQ0lLSVCNBDSUtJTAKKSloBEkTNGfl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UUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABQelFB6UAer6d/yCLH/rgn8qsZqvp3/IIsf+vdP5VYr46t/El6s+qo/wAOPoIaKDSVmahmik60U0AhpDS0lMBM0lL3pDTQhppKcTTaYia1w0xjPSRCv41X9j16U5X8t1cfwsDTrkbbhwOh+YfjR9ofQjppIApaTG4hR3IqyTmPG12YrO2sh1kJkbHcVxFb3i+68/XpFH3YgEA9Kwa+jwNPkoLz1PnsdU56z8tAooorrOQKKKKACiiigAqxY/8AH7D/ALwqvViyP+mw/wC8KAOjPWig9aKzNAooooAKVfvD60lKv3h9aAPS7L/jyh/3BU9QWX/HlD/uCp6+bqfGz3YfCgoooqCgooooAKKKKACiiigAooooAK4rx/qwhslsEb55TlsHtXUapqUOlWMlzMwGB8o9TXjeqajLql/JdSnljwPQV24Kg6lTmeyOTF1lCPKt2UqKKK948YKKKKBhRRRQAUUUUCHwytDMkqnDIwYV03jSJbm30/U0X/WxhXP6iuWrrB/xMvADr1ktHOP5/wBa5MSuWUKi6P8ABnXhveUqfdHGgkEEHBHepJQHUTKODww9DUPapInCMQ33GGGrrfdHNF9GR0ZpzoY32nn0PqKZTvoS1Z2FopKKBBRRRQAUUUUAFFFFABWnD/qV+lZlacX+qT6UDQ+iiikMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoPSijtQB6vpx/4lFl/wBe6fyqeq+nf8giy/690/lVivjq38SXqz6qj/Dj6BSYpaSoNQpDQaSgANIaDSGmISk7mlpCaYCGkooNUhDSMgipZjuigl9VKn6io6kB32Ui90YOKT0swRBTo2VZNzfwqWpDVe8lEOnXsh4Kwtg/UGrSvoS3ZXPL72Yz308rdXck/nUFBOTn1or6yEeWKR8tN802woooqiQooooAKKKKACp7P/j8i/3hUFT2f/H3F/vCgDpD1ooPWiszQKKKKAClX7w+tJSr94fWgD0uy/48of8AcFT1BZf8eUP+4Knr5up8bPdh8KCiiioKCiiigAooooAKKa7iNC5DEDsozWFfeK7exBzaXLEf9MyKqMJS0iiZSjHc36zdV1uz0iBnnkG7HCA8muH1P4g3kyslnCIQf4jya5G5up7yYyzytI55yxruo5fOWs9Dkq42KVo6mjr2v3Ot3RdyViB+RB0FZFFFexCnGnHlitDy5zlOXNIKKKKsgKKKKBhRRRQAUUUUAFdX4OYzQajZHkSRZA/DFcpXReC5vL19Vz/rEK1z4pXoyN8M7VYnLOux2X+6SKSrurQfZtXu4emyVh+tUq2py5oJmNRcs2iZcyx7D99Pu+49KgpwYqQwOCOlSSgMPNUcHr7Gq2YfEiGiiimyAoooouACijpRQAYoozRQAVpxf6pfpWZWnD/ql+lA0PooopDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKO1FB6UCPVtO/5BNl/17p/KrFVtP8A+QTY/wDXun8qs18dW/iS9WfV0f4cfQQmjNFJUGoho70UhoAO9IaKQ1SEJSGl4pKYhM0hpT0ptMAzUtscz7D0cEVD3pQ211b0OaGroExvTg9RWb4ifZ4ZvSODgD9RWtcDbcP6HkVh+J2x4buR6uB+orWguacfVGVbSEvQ8570UUV9WfLBRRRQMKKKKACiiigAqa0/4+4v94VDU1r/AMfUf+9QB0p60UUVmaBRRRQAUq/eH1pKVfvD60Ael2X/AB5Q/wC4KnqCy/48of8AcFT183U+Nnuw+FBRRRUFBRRRQAUUUUAFNeKNwQyKfqKdRQm1sFk9zE1HwppeoKd0Cxuf4lGK4HXPB95pWZYgZoB3HUV6zSModSrAEHjBrro4ypTfdHNVwsJrszwIjBwaK7vxh4SWENf2CYTrJGO3uK4Svbo1o1Y80TyatKVOXKwooorUzCiiigAooooAKKKKACtXw45j8QWjA4+fFZVX9EbbrVof+mgqKqvBryLpu00yTxagTxLeYGMtn86xK6Hxqu3xNP7qp/SuerPCu9GP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075AwlgPWN+R+HpXk18t+1S+49ShmPSr9521IaqWGq2epACFwkveJzg/h61bPBweteXKEoPlkrM9SMoyXNF3QnekNGaKQxKSg0lMQU00ppDTEJSUtNpgFJS02mAGkpTTTQJgaQ9KM0UxCdqQ0tJQAUlKaaaAFVtrcjKngikddpxnIPINIacpDL5Z+qn0phvuR0UvQkHtQaYrDaSlpKaEzM8Qf8ghv98fzrlDXVa//wAghv8AfX+dcoa9fAfw2eRj/wCIhKfFgbnPRR+tRk4FPf5I0Tufmau2WxxR3uMzmikozQTfqFFITRQAUlFFFwCg0UUwCkoooASlozSUAFFFFABRRRRYAooooAKKKKAEpaKSi4BSgc1JHC8nQYHrV2KBI+2T60h2KsVqzctwKuJEsYwop9FABRRRQMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKBCglSCCQR3HatvT/Ek8AWK6Xzo/X+IVh0VlVowqq0ka0q06TvFnoNvdW97F5ltIHHXH8Q/Cn15/DPLbyCSKRkYdwa6Kx8Sq+2O+XB/56r/AFryK+AnDWGqPWoY+E9J6M3qShHSSPzI2V0P8SnIpM1w2tod176gaaaU0lMBKQ0pppoAKSikzTEFIaKDQJiUUlGaYBSUE0lAAaSlpKYCUlLSUCHt867x94dfeoyaUMVbI+lK6gHK/dPSjYp6jKSlNJVIloy/EH/IIb/fX+dcma6zxB/yCG/3x/OuUNevgf4b9TyMf/EXoLEnmSqp+71P0psj+ZKz+p4qVMx2zN/FIdq/SoK7Fq7nG9I27hSE0GimZhSUtFACUUdqKACjNFJimgFpKWkoASilpKACiiigAooooAKKKKAFpKUKWOAMmrMVoScuce1ICBI2c8DNWorZVALcmrCqqDCjFLTGAAAwKKKKQBRRRQMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoo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RQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUCCpoLma2fdE5X+VQ0UnFS0epSk47aGhfagl/p/kSR7ZNwJK9DWYkaoMAU+iop0o01aJVSrKo05dAooorQgKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/2Q==" alt="L'Rénov IA Studio" onerror="this.style.display='none'">
@@ -204,19 +133,21 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
     <div class="subtitle">Institut IA · Experts Immo</div>
   </div>
   <div class="course-badge">
-    <div class="atelier-label">Atelier 1 · Rédiger &amp; Publier</div>
-    <div class="course-num">Module <span>#02</span></div>
+    <div class="bloc-label">Atelier 2 · Relation client</div>
+    <div class="course-num">Module <span>#07</span></div>
   </div>
   <ul class="nav-list" id="navList">
     <li><a href="#contexte" class="nav-link active" data-section="contexte"><span class="step-num">1</span>Le contexte</a></li>
-    <li><a href="#methode" class="nav-link" data-section="methode"><span class="step-num">2</span>La méthode</a></li>
-    <li><a href="#prompt" class="nav-link" data-section="prompt"><span class="step-num">3</span>Les prompts</a></li>
-    <li><a href="#exemples" class="nav-link" data-section="exemples"><span class="step-num">4</span>4 emails prêts</a></li>
-    <li><a href="#ajustements" class="nav-link" data-section="ajustements"><span class="step-num">5</span>Ce qu'on ajuste</a></li>
-    <li><a href="#variantes" class="nav-link" data-section="variantes"><span class="step-num">6</span>Variantes métier</a></li>
-    <li><a href="#avantapres" class="nav-link" data-section="avantapres"><span class="step-num">7</span>Avant / Après</a></li>
-    <li><a href="#retenir" class="nav-link" data-section="retenir"><span class="step-num">8</span>À retenir</a></li>
-    <li><a href="#exercice" class="nav-link" data-section="exercice"><span class="step-num">9</span>Exercice</a></li>
+    <li><a href="#methode" class="nav-link" data-section="methode"><span class="step-num">⚡</span>Méthode 10 min</a></li>
+    <li><a href="#prompts" class="nav-link" data-section="prompts"><span class="step-num">2</span>Les prompts</a></li>
+    <li><a href="#simulation" class="nav-link" data-section="simulation"><span class="step-num">🎭</span>Simulation</a></li>
+    <li><a href="#exemple" class="nav-link" data-section="exemple"><span class="step-num">3</span>Exemple</a></li>
+    <li><a href="#ajustements" class="nav-link" data-section="ajustements"><span class="step-num">4</span>Ce qu'on ajuste</a></li>
+    <li><a href="#variantes" class="nav-link" data-section="variantes"><span class="step-num">5</span>Variantes</a></li>
+    <li><a href="#avantapres" class="nav-link" data-section="avantapres"><span class="step-num">6</span>Avant / Après</a></li>
+    <li><a href="#roi" class="nav-link" data-section="roi"><span class="step-num">💰</span>ROI</a></li>
+    <li><a href="#retenir" class="nav-link" data-section="retenir"><span class="step-num">7</span>À retenir</a></li>
+    <li><a href="#exercice" class="nav-link" data-section="exercice"><span class="step-num">8</span>Exercice</a></li>
   </ul>
   <div class="nav-footer">
     <div class="author">Laurence Borras</div>
@@ -225,14 +156,23 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
 </nav>
 
 <main class="main">
+<div style="background:var(--dark2);border-bottom:1px solid rgba(204,145,75,0.1);padding:10px 52px;">
+  <a href="https://www.skool.com/institut-ia-8547/classroom/102b581c?md=4f814b307127434493929a38e28916a4" style="display:inline-flex;align-items:center;gap:8px;background:rgba(204,145,75,0.08);border:1px solid rgba(204,145,75,0.25);border-radius:20px;padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;color:#b8956a;text-decoration:none;text-transform:uppercase;">
+    ← Retour à la formation
+  </a>
+
   <header class="hero">
-    <div class="hero-tag">Module · Atelier 1 · Rédiger &amp; Publier</div>
-    <h1>Envoyer le bon email de suivi <span>au bon moment</span></h1>
+    <div class="hero-tag">Module · Atelier 2 · Relation client</div>
+    <h1>Préparer un RDV mandat avec l'IA<br><span>comme un pro qui ne laisse rien au hasard</span></h1>
+    <p style="font-size:14px;color:var(--text-dim);margin-top:12px;max-width:600px;line-height:1.6;">Ne plus arriver en rendez-vous avec une préparation floue. En quelques minutes, l'IA vous aide à structurer vos arguments, anticiper les objections, adapter votre posture au profil vendeur et construire un rendez-vous plus crédible, plus rassurant et plus rentable.</p>
     <div class="hero-meta">
-      <div class="meta-pill"><span class="icon">⏱</span> 30 min + exercice · 🎬 Vidéo à venir</div>
-      <div class="meta-pill"><span class="icon">🛠</span> ChatGPT, Claude, Gemini...</div>
-      <div class="meta-pill"><span class="icon">👤</span> Agents &amp; mandataires</div>
-      <div class="meta-pill"><span class="icon">📦</span> 4 situations · 1 structure relançable</div>
+      <div class="meta-pill"><span class="icon">⏱</span> 10 min de préparation utile</div>
+      <div class="meta-pill"><span class="icon">🛡</span> Objections anticipées</div>
+      <div class="meta-pill"><span class="icon">🎯</span> Crédibilité renforcée</div>
+      <div class="meta-pill"><span class="icon">✍</span> Signature facilitée</div>
+    </div>
+    <div style="margin-top:18px;background:rgba(204,145,75,0.08);border:1px solid rgba(204,145,75,0.2);border-radius:var(--radius);padding:12px 18px;max-width:560px;">
+      <p style="font-size:13px;color:var(--gold-light);font-style:italic;line-height:1.5;">Vous n'improvisez plus votre rendez-vous : vous arrivez avec une stratégie, un angle et un vrai plan de conduite.</p>
     </div>
   </header>
 
@@ -247,78 +187,108 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
           <button class="tab-btn" onclick="switchTab(this,'ctx-info')">Infos module</button>
         </div>
         <div id="ctx-prob" class="tab-content active">
-          <p class="prose">Vous relancez… et aucune réponse. Pourtant ce client était intéressé. Le problème n'est pas la relance — c'est ce que vous dites dedans.</p>
+          <p class="prose">Arriver à un rendez-vous mandat sans préparation structurée, ce n'est pas "faire au feeling". C'est prendre le risque de perdre la confiance du vendeur dans les toutes premières minutes.</p>
+          <p class="prose" style="margin-top:10px;">La plupart des mandats ne se perdent pas parce que l'agent est mauvais. Ils se perdent parce que :</p>
           <div class="gold-divider"></div>
           <ul class="bullet-list">
-            <li>Messages trop génériques — le client ne se sent pas reconnu</li>
-            <li>Relances perçues comme insistantes — effet repoussoir garanti</li>
-            <li>Aucune vraie valeur dans l'email — rien qui donne envie de répondre</li>
-            <li>Le client "disparaît" sans que vous compreniez pourquoi</li>
+            <li>Le discours est trop générique — il ne parle pas au vendeur en face de vous</li>
+            <li>Les objections arrivent trop tôt et prennent l'agent par surprise</li>
+            <li>Les arguments ne sont pas hiérarchisés selon les priorités du vendeur</li>
+            <li>La posture manque d'ancrage et donne une impression de routine</li>
+            <li>Le vendeur ne perçoit pas clairement la différence entre cet agent et les autres</li>
+          </ul>
+          <div class="gold-divider"></div>
+          <ul class="bullet-list">
+            <li>Le vendeur vous évalue dès les 5 à 10 premières minutes</li>
+            <li>Une préparation floue donne une impression de rendez-vous standard</li>
+            <li>Un argument mal formulé peut fragiliser toute la suite du RDV</li>
+            <li>Une objection mal gérée fait perdre de la crédibilité</li>
+            <li>Sans structure, vous savez des choses… mais vous les utilisez mal</li>
           </ul>
         </div>
         <div id="ctx-sol" class="tab-content">
-          <p class="prose">1 email propre en 3 minutes au lieu de 15. 1 seule question finale, jamais de relance lourde. Un message relançable sans harceler.</p>
+          <p class="prose">L'IA vous permet de préparer un rendez-vous mandat comme un <strong>briefing stratégique</strong>. En quelques minutes, vous pouvez générer :</p>
           <div class="gold-divider"></div>
           <ul class="bullet-list">
-            <li>Taux de réponse à vos relances post-visite en hausse directe</li>
-            <li>Leads "froids" retraités en leads "tièdes" — sans effort</li>
-            <li>Image pro renforcée : vous semblez organisé et attentif</li>
-            <li>Moins de temps perdu sur des relances inutiles ou mal calibrées</li>
+            <li>Une lecture rapide du profil vendeur et de ses motivations probables</li>
+            <li>Des arguments adaptés au contexte — pas un copier-coller générique</li>
+            <li>Les objections probables et leurs réponses structurées</li>
+            <li>Une ouverture de rendez-vous plus juste et plus naturelle</li>
+            <li>Une proposition de valeur plus claire et différenciante</li>
+            <li>Une relance post-rendez-vous déjà pensée avant de partir</li>
+          </ul>
+          <div class="gold-divider"></div>
+          <p class="prose">L'objectif n'est pas de réciter un texte. L'objectif est d'arriver <strong>plus clair, plus calme, plus crédible</strong>.</p>
+          <ul class="bullet-list" style="margin-top:12px;">
+            <li>Préparation plus rapide — 10 minutes au lieu de 45</li>
+            <li>Discours plus structuré et mieux adapté au profil en face</li>
+            <li>Moins d'improvisation inutile, plus de cohérence commerciale</li>
+            <li>Plus de confort dans les RDV sensibles ou concurrentiels</li>
           </ul>
         </div>
         <div id="ctx-info" class="tab-content">
           <div class="info-grid">
-            <div class="info-card"><div class="label">🎯 Objectif</div><div class="value">Rédiger un email de relance qui obtient une réponse</div></div>
-            <div class="info-card"><div class="label">⏱ Durée</div><div class="value">30 min + exercice · 🎬 Vidéo à venir</div></div>
+            <div class="info-card"><div class="label">🎯 Objectif</div><div class="value">Préparer un RDV mandat avec une structure claire, un argumentaire crédible et une meilleure anticipation des objections</div></div>
+            <div class="info-card"><div class="label">⏱ Durée</div><div class="value">30 min + exercice · 🎬 Vidéo en cours de production</div></div>
             <div class="info-card"><div class="label">🛠 Outils</div><div class="value">ChatGPT, Claude, Gemini... (au choix)</div></div>
-            <div class="info-card"><div class="label">📦 Livrables</div><div class="value">3 prompts (socle, pro, expert) + 4 emails prêts</div></div>
+            <div class="info-card"><div class="label">📦 Livrable</div><div class="value">1 brief vendeur réutilisable + 3 prompts + 1 simulation objections</div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. MÉTHODE -->
+    <!-- 2. MÉTHODE EXPRESS -->
     <section id="methode">
       <div class="section-card">
         <div class="accordion-header open" onclick="toggleAcc(this)">
-          <div class="acc-num">2</div>
-          <div>
-            <div class="acc-title">La méthode en 4 étapes</div>
-            <div class="acc-subtitle">La structure d'un email qui fait répondre</div>
-          </div>
+          <div class="acc-num">⚡</div>
+          <div><div class="acc-title">Méthode express — préparer un RDV mandat en 10 minutes</div><div class="acc-subtitle">5 étapes · 2 minutes chacune</div></div>
           <span class="acc-chevron">▾</span>
         </div>
         <div class="accordion-body open">
           <div class="accordion-inner">
-            <div class="method-steps">
-              <div class="method-step">
-                <div class="method-step-num">1</div>
-                <div>
-                  <div class="method-step-title">Contextualiser</div>
-                  <div class="method-step-desc">Rappeler brièvement la situation (visite, échange…) — 1 phrase max. Le client doit reconnaître immédiatement de quoi vous parlez.</div>
+            <p class="prose" style="margin-bottom:16px;">L'idée n'est pas de tout prévoir. L'idée est d'arriver avec un cadre solide.</p>
+            <ol class="step-list">
+              <li>
+                <div class="step-num-badge">1</div>
+                <div class="step-text">
+                  <strong>Rassembler les faits utiles — 2 min</strong><br>
+                  <span style="color:var(--text-dim);font-size:13px;">Type de bien · localisation · prix vendeur · état du bien · profil du propriétaire · urgence ou non</span>
                 </div>
-              </div>
-              <div class="method-step">
-                <div class="method-step-num">2</div>
-                <div>
-                  <div class="method-step-title">Apporter une valeur</div>
-                  <div class="method-step-desc">Info complémentaire, précision, ouverture, projection. Quelque chose d'utile — pas une relance commerciale déguisée.</div>
+              </li>
+              <li>
+                <div class="step-num-badge">2</div>
+                <div class="step-text">
+                  <strong>Identifier les enjeux vendeurs — 2 min</strong><br>
+                  <span style="color:var(--text-dim);font-size:13px;">Vendre vite · vendre au meilleur prix · être rassuré · déléguer · éviter les complications</span>
                 </div>
-              </div>
-              <div class="method-step">
-                <div class="method-step-num">3</div>
-                <div>
-                  <div class="method-step-title">Ouvrir une porte simple</div>
-                  <div class="method-step-desc">Une question courte, à réponse facile. L'objectif n'est pas de forcer — c'est de rendre la réponse évidente et légère.</div>
+              </li>
+              <li>
+                <div class="step-num-badge">3</div>
+                <div class="step-text">
+                  <strong>Anticiper les objections — 2 min</strong><br>
+                  <span style="color:var(--text-dim);font-size:13px;">Honoraires · exclusivité · concurrence · délai · prix</span>
                 </div>
-              </div>
-              <div class="method-step">
-                <div class="method-step-num">4</div>
-                <div>
-                  <div class="method-step-title">Rester léger</div>
-                  <div class="method-step-desc">Pas de pression, pas d'urgence artificielle. Le ton respectueux crée la confiance — et la confiance crée les offres.</div>
+              </li>
+              <li>
+                <div class="step-num-badge">4</div>
+                <div class="step-text">
+                  <strong>Préparer l'ouverture du RDV — 2 min</strong><br>
+                  <span style="color:var(--text-dim);font-size:13px;">Première question · ton à adopter · posture · angle principal</span>
                 </div>
-              </div>
+              </li>
+              <li>
+                <div class="step-num-badge">5</div>
+                <div class="step-text">
+                  <strong>Prévoir l'après-RDV — 2 min</strong><br>
+                  <span style="color:var(--text-dim);font-size:13px;">Synthèse · relance · prochain pas · engagement demandé</span>
+                </div>
+              </li>
+            </ol>
+            <div class="gold-divider"></div>
+            <div class="retain-box" style="margin-top:4px;">
+              <div class="retain-icon">💡</div>
+              <div><div class="retain-label">Le principe</div><div class="retain-text">L'IA prépare la structure. Vous ajoutez votre preuve terrain, votre connaissance locale et votre présence commerciale.</div></div>
             </div>
           </div>
         </div>
@@ -326,14 +296,11 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
     </section>
 
     <!-- 3. PROMPTS -->
-    <section id="prompt">
+    <section id="prompts">
       <div class="section-card">
         <div class="accordion-header open" onclick="toggleAcc(this)">
-          <div class="acc-num">3</div>
-          <div>
-            <div class="acc-title">Les prompts à utiliser</div>
-            <div class="acc-subtitle">Socle · Pro · Expert — selon votre situation</div>
-          </div>
+          <div class="acc-num">2</div>
+          <div><div class="acc-title">Les prompts à utiliser</div><div class="acc-subtitle">Socle · Pro · Expert</div></div>
           <span class="acc-chevron">▾</span>
         </div>
         <div class="accordion-body open">
@@ -341,111 +308,175 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
             <div class="tabs-header" style="padding:0;margin-bottom:16px;">
               <button class="tab-btn active" onclick="switchTab(this,'p-socle')">🟢 Prompt socle</button>
               <button class="tab-btn" onclick="switchTab(this,'p-pro')">🔵 Prompt pro</button>
-              <button class="tab-btn" onclick="switchTab(this,'p-expert')">⚫ Prompt expert</button>
+              <button class="tab-btn" onclick="switchTab(this,'p-expert')">🟣 Prompt expert</button>
             </div>
 
             <div id="p-socle" class="tab-content active" style="padding:0;">
-              <div class="niveau-badge niveau-socle">🟢 Niveau socle — rapide et opérationnel</div>
+              <div class="niveau-badge niveau-socle">🟢 Niveau socle — préparer un RDV sans partir de zéro</div>
               <div class="prompt-box">
-                <div class="prompt-box-label">💬 Prompt socle — Email de suivi</div>
-                <button class="copy-btn" onclick="copyById(this,'ps02')">Copier</button>
-                <pre id="ps02">Tu es un agent immobilier expérimenté. Rédige un email de suivi à un acquéreur.
+                <div class="prompt-box-label">💬 Prompt socle — Brief RDV mandat</div>
+                <button class="copy-btn" onclick="copyById(this,'prompt-socle-07')">Copier</button>
+                <pre id="prompt-socle-07">Tu es un expert en préparation de rendez-vous commerciaux pour agents immobiliers.
 
-SITUATION :
-- Prénom du client : [Prénom]
-- Bien : [type de bien + 1 détail clé]
-- Contexte : [visite / échange téléphonique / demande]
-- Délai depuis le dernier contact : [X jours]
-- Position du client : [silencieux / hésitant / intéressé]
-- Objectif : [reprendre contact / obtenir un retour / proposer une deuxième visite]
+Je veux préparer un rendez-vous de prise de mandat de manière simple, claire et efficace.
 
-CONSIGNES :
-- Ton humain, professionnel, jamais insistant
-- Maximum 100 mots
-- Rappeler le contexte en 1 phrase
-- Poser une question ouverte simple
-- Ne jamais forcer la décision
-- N'invente rien — si une info manque, ne la compense pas</pre>
+Voici les informations disponibles :
+
+TYPE DE BIEN : [appartement / maison / immeuble / local / terrain]
+LOCALISATION : [ville + quartier]
+SURFACE : [XX m²]
+ÉTAT DU BIEN : [rénové / bon état / à rafraîchir / à rénover]
+PRIX SOUHAITÉ PAR LE VENDEUR : [XXX XXX €]
+PROFIL DU PROPRIÉTAIRE : [ex. retraité / succession / séparation / mutation / investisseur / autre]
+URGENCE DE VENTE : [rapide / moyenne / faible / inconnue]
+
+Je veux que tu me génères un brief simple en 4 parties :
+
+1. Les 3 arguments les plus utiles pour rassurer ce vendeur
+2. Les 2 objections les plus probables et comment y répondre simplement
+3. Une phrase d'ouverture naturelle pour démarrer le rendez-vous
+4. 5 questions à poser pour mieux comprendre sa situation
+
+RÈGLES :
+- n'invente aucune donnée de marché
+- reste concret
+- écris comme un professionnel terrain
+- pas de jargon inutile
+- ton clair, rassurant et crédible
+- format facile à relire juste avant un rendez-vous</pre>
               </div>
             </div>
 
             <div id="p-pro" class="tab-content" style="padding:0;">
-              <div class="niveau-badge niveau-pro">🔵 Niveau pro — structure + psychologie client</div>
+              <div class="niveau-badge niveau-pro">🔵 Niveau pro — brief commercial structuré et crédible</div>
               <div class="prompt-box">
-                <div class="prompt-box-label">💬 Prompt pro — Email de suivi</div>
-                <button class="copy-btn" onclick="copyById(this,'pp02')">Copier</button>
-                <pre id="pp02">Tu es un agent immobilier expérimenté, spécialisé dans la relation client.
+                <div class="prompt-box-label">💬 Prompt pro — Brief RDV mandat complet</div>
+                <button class="copy-btn" onclick="copyById(this,'prompt-pro-07')">Copier</button>
+                <pre id="prompt-pro-07">Tu es un consultant senior en stratégie commerciale immobilière.
 
-CONTEXTE :
-- Prénom : [Prénom]
-- Bien : [type + élément clé]
-- Situation : [visite / appel / demande]
-- Délai depuis dernier contact : [X jours]
-- Position du client : [silencieux / hésitant / intéressé]
-- Objectif : [reprendre contact / obtenir retour / proposer suite / transmettre précision]
-- Élément utile à partager (si disponible) : [info sur charges, travaux, voisinage...]
+Ta mission : m'aider à préparer un rendez-vous de prise de mandat de manière sérieuse, structurée et opérationnelle.
 
-CONSIGNES :
-- Ton humain, professionnel, jamais insistant
-- Maximum 120 mots
-- Rappeler le contexte en 1 phrase
-- Apporter un élément utile OU une ouverture
-- Poser une question simple et ouverte
-- Ne jamais forcer la décision
-- Ne rien inventer si une info manque
+Je suis agent immobilier / mandataire, et je veux arriver en rendez-vous avec un brief utile, crédible et directement exploitable.
 
-FORMAT :
-- 1 phrase d'introduction personnalisée
-- 2 à 3 phrases de contenu
-- 1 question ouverte finale
+DONNÉES DU BIEN
+- Type de bien : [appartement / maison / immeuble / local / terrain]
+- Localisation : [ville + quartier précis]
+- Surface : [XX m²]
+- État général : [rénové / bon état / à rafraîchir / à rénover]
+- Prix souhaité par le vendeur : [XXX XXX €]
+- Points forts identifiés : [à compléter]
+- Points faibles ou freins : [à compléter]
 
-RÈGLES STRICTES :
-- N'invente aucune donnée non fournie
-- Si une info manque, rédige sans elle — ne compense pas</pre>
+PROFIL VENDEUR
+- Situation : [succession / séparation / retraite / mutation / investissement / autre]
+- Urgence de vente : [forte / moyenne / faible / inconnue]
+- Expérience immobilière : [première vente / déjà vendu / habitué]
+- État d'esprit perçu : [confiant / méfiant / pressé / hésitant / émotionnel]
+
+DONNÉES MARCHÉ DISPONIBLES
+- Prix moyen au m² : [si connu]
+- Délai moyen de vente : [si connu]
+- Niveau de tension du marché : [si connu]
+
+Je veux un brief complet structuré avec les parties suivantes :
+
+1. Lecture rapide du contexte vendeur
+Analyse les motivations probables, les points de tension, les besoins de rassurance et les risques commerciaux.
+
+2. Objectif prioritaire du rendez-vous
+Dis-moi ce que je dois chercher à obtenir en priorité pendant ce rendez-vous.
+
+3. Les 3 arguments les plus solides pour ce profil vendeur
+Arguments concrets, crédibles, orientés terrain, prononçables à l'oral.
+
+4. Les 3 objections les plus probables
+Pour chaque objection, une réponse en 3 temps : comprendre / répondre / rebondir.
+
+5. L'ouverture idéale du rendez-vous
+Une phrase d'entrée, une première question, le bon ton à adopter.
+
+6. Les 5 meilleures questions à poser
+Questions pour faire parler le vendeur et comprendre ses vraies motivations.
+
+7. Les erreurs à éviter
+Les 5 erreurs commerciales les plus risquées dans ce rendez-vous précis.
+
+8. Résumé express avant RDV
+Une mini fiche ultra courte relisible en 30 secondes juste avant d'entrer.
+
+RÈGLES STRICTES
+- n'invente aucune donnée de marché non fournie
+- si une donnée manque, indique-le clairement
+- chaque recommandation doit être concrète et prononçable
+- le ton doit être professionnel, terrain, crédible
+- je dois pouvoir utiliser ce brief en vrai rendez-vous</pre>
               </div>
             </div>
 
             <div id="p-expert" class="tab-content" style="padding:0;">
-              <div class="niveau-badge niveau-expert">⚫ Niveau expert — psychologie fine + séquence relance</div>
-              <p class="prose" style="margin-bottom:12px;">Pour les situations complexes : client qui a disparu après un intérêt marqué, client avec une objection précise, ou vous voulez construire une séquence de relance complète sur 2 semaines.</p>
+              <div class="niveau-badge niveau-expert">🟣 Niveau expert — obtenir un mandat exclusif sans forcer</div>
               <div class="prompt-box">
-                <div class="prompt-box-label">💬 Prompt expert — Séquence relance acquéreur</div>
-                <button class="copy-btn" onclick="copyById(this,'pe02')">Copier</button>
-                <pre id="pe02">Tu es un expert en relation client immobilier, spécialisé dans la réactivation de contacts silencieux.
+                <div class="prompt-box-label">💬 Prompt expert — Stratégie mandat exclusif</div>
+                <button class="copy-btn" onclick="copyById(this,'prompt-expert-07')">Copier</button>
+                <pre id="prompt-expert-07">Tu es un expert très haut niveau en vente immobilière, négociation commerciale et obtention de mandat exclusif.
 
-PROFIL DU CLIENT :
-- Prénom : [Prénom]
-- Bien visité : [type + localisation + 1 point fort qu'il avait apprécié]
-- Objection ou réserve exprimée (si connue) : [prix / surface / travaux / autre]
-- Délai depuis dernière interaction : [X jours]
-- Température du contact : [très froid / tiède / hésitant]
+Ta mission : m'aider à préparer un rendez-vous vendeur de manière à augmenter mes chances d'obtenir un mandat exclusif, sans agressivité, sans manipulation, et sans discours artificiel.
 
-OBJECTIF :
-Générer une séquence de 3 emails sur 14 jours pour réactiver ce contact sans le braquer.
+Je veux une stratégie commerciale fine, crédible et applicable sur le terrain.
 
-STRUCTURE ATTENDUE :
-Email 1 (J+X) : léger, chaleureux, aucune pression — reprendre le lien
-Email 2 (J+X+4) : apport de valeur — info complémentaire, précision sur l'objection s'il y en a une
-Email 3 (J+X+10) : dernier contact — ultra court, porte ouverte sans forcer
+CONTEXTE BIEN
+- Type : [appartement / maison / immeuble / local / terrain]
+- Localisation : [ville + quartier]
+- Surface : [XX m²]
+- État : [rénové / bon état / à rafraîchir / à rénover]
+- Prix vendeur souhaité : [XXX XXX €]
+- Éléments différenciants du bien : [à compléter]
+- Freins potentiels à la vente : [à compléter]
 
-CONSIGNES POUR CHAQUE EMAIL :
-- Ton progressif : chaleureux → informatif → léger et détaché
-- Ne jamais mentionner une urgence artificielle
-- Ne jamais forcer la décision
-- Question finale toujours ouverte et simple
-- 80 à 120 mots max par email
+CONTEXTE VENDEUR
+- Situation personnelle : [succession / séparation / mutation / retraite / investissement / autre]
+- Niveau d'urgence : [fort / moyen / faible]
+- Rapport au contrôle : [veut tout piloter / veut être rassuré / veut déléguer]
+- Niveau de confiance vis-à-vis des agents : [faible / moyen / bon]
+- Sensibilité probable : [honoraires / délai / prix / exclusivité / transparence]
 
-RÈGLES STRICTES :
-- N'invente aucune donnée non fournie
-- Si une info manque, travaille sans elle — ne compense pas
-- Ne déduire aucune caractéristique non fournie</pre>
-              </div>
-              <div class="retain-box" style="margin-top:14px;padding:12px 16px;">
-                <div class="retain-icon" style="font-size:16px;">💡</div>
-                <div>
-                  <div class="retain-label">Quand utiliser le niveau expert ?</div>
-                  <div class="retain-text" style="font-size:13px;">Client à fort potentiel qui a disparu · Acheteur avec une objection précise · Quand vous voulez automatiser une séquence complète plutôt qu'un email ponctuel.</div>
-                </div>
+DONNÉES MARCHÉ
+- Prix moyen au m² : [si connu]
+- Délai moyen de vente : [si connu]
+- Niveau de concurrence : [si connu]
+
+Je veux une réponse structurée en 8 blocs :
+
+1. Diagnostic commercial du rendez-vous
+Quel est l'enjeu réel ? Le niveau de difficulté ? Le type de posture à adopter ?
+
+2. Analyse légère du profil vendeur
+Ce qu'il cherche probablement à sécuriser. Sans caricature.
+
+3. Stratégie pour amener naturellement l'idée d'exclusivité
+Une logique élégante, progressive et crédible.
+
+4. 3 arguments premium pour justifier l'exclusivité
+Basés sur : cohérence de commercialisation, engagement, qualité de suivi, efficacité du plan d'action, réduction du bruit commercial.
+
+5. 3 objections fortes contre l'exclusivité
+Pour chacune : ce que l'objection cache vraiment / ce qu'il faut répondre / ce qu'il ne faut surtout pas dire.
+
+6. Script oral de transition vers la demande de mandat
+Une phrase de bascule, une formulation de proposition, une formulation de closing propre.
+
+7. Réponse à l'objection sur les honoraires
+Crédible, calme, argumentée, non défensive.
+
+8. Relance post-rendez-vous
+Un message de relance vendeur professionnel si le vendeur dit "je veux réfléchir".
+
+RÈGLES STRICTES
+- ne pas manipuler
+- ne pas inventer de données
+- ne pas faire de promesses irréalistes
+- rester haut de gamme, crédible et terrain
+- chaque formulation doit être utilisable oralement</pre>
               </div>
             </div>
           </div>
@@ -453,194 +484,262 @@ RÈGLES STRICTES :
       </div>
     </section>
 
-    <!-- 4. EXEMPLES -->
-    <section id="exemples">
+    <!-- 4. SIMULATION VENDEUR MÉFIANT -->
+    <section id="simulation">
+      <div class="section-card">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="acc-num">🎭</div>
+          <div><div class="acc-title">S'entraîner avant le vrai RDV</div><div class="acc-subtitle">Simulation vendeur méfiant — coaching objections en temps réel</div></div>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-inner">
+            <p class="prose" style="margin-bottom:16px;">Le meilleur moyen d'être plus à l'aise en rendez-vous, ce n'est pas seulement de lire un brief. C'est aussi de s'entraîner à répondre à un vendeur difficile.</p>
+            <div class="prompt-box">
+              <div class="prompt-box-label">💬 Prompt — Simulation vendeur méfiant</div>
+              <button class="copy-btn" onclick="copyById(this,'prompt-simu-07')">Copier</button>
+              <pre id="prompt-simu-07">Tu joues le rôle d'un vendeur méfiant et exigeant.
+
+Contexte :
+Je suis agent immobilier / mandataire.
+Je veux m'entraîner à répondre à des objections avant un rendez-vous de prise de mandat.
+
+Ton rôle :
+- me poser une objection à la fois
+- attendre ma réponse
+- analyser ma réponse
+- me noter sur 10
+- me dire ce qui est bon
+- me dire ce qui fragilise ma crédibilité
+- me proposer une meilleure formulation si besoin
+
+RÈGLES DE JEU
+- une seule objection à la fois
+- ton réaliste, vendeur un peu tendu mais crédible
+- difficulté progressive
+- corrige-moi comme un coach commercial exigeant
+
+Commence par ces 3 thèmes :
+1. "Vos honoraires sont trop élevés"
+2. "Je ne veux pas d'exclusivité"
+3. "Je vais voir plusieurs agences"</pre>
+            </div>
+            <div class="gold-divider"></div>
+            <ul class="bullet-list">
+              <li>Meilleure fluidité orale — vous répondez sans chercher vos mots</li>
+              <li>Moins de stress face aux objections sensibles</li>
+              <li>Plus de répartie et de naturel en situation réelle</li>
+              <li>Posture plus stable et plus crédible en RDV</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. EXEMPLE -->
+    <section id="exemple">
       <div class="section-card">
         <div class="tabs-header">
-          <button class="tab-btn active" onclick="switchTab(this,'ex-silencieux')">Client silencieux</button>
-          <button class="tab-btn" onclick="switchTab(this,'ex-hesitant')">Client hésitant</button>
-          <button class="tab-btn" onclick="switchTab(this,'ex-interesse')">Après visite</button>
-          <button class="tab-btn" onclick="switchTab(this,'ex-valeur')">Relance + valeur</button>
+          <button class="tab-btn active" onclick="switchTab(this,'ex-data')">Données saisies</button>
+          <button class="tab-btn" onclick="switchTab(this,'ex-result')">Brief généré</button>
         </div>
-        <div id="ex-silencieux" class="tab-content active">
-          <p class="prose" style="margin-bottom:6px;"><strong>Situation :</strong> visite il y a 5 jours, aucun retour depuis.</p>
-          <p class="prose" style="margin-bottom:12px;font-size:12px;">Ton : <strong style="color:var(--gold);">ultra léger</strong> — une seule question, aucune attente exprimée.</p>
-          <div class="email-preview">
-            <div class="email-header"><div class="email-dot"></div><div class="email-label">✉ Email J+5 — Client silencieux</div></div>
-            <div class="email-body">
-              Bonjour [Prénom],<br><br>
-              Je reviens vers vous suite à votre visite du [bien].<br>
-              Vous avez eu le temps d'y réfléchir ?<br>
-              Je suis disponible si vous avez des questions — aucune pression de mon côté.
-            </div>
-          </div>
+        <div id="ex-data" class="tab-content active">
+          <p class="prose" style="margin-bottom:14px;">Exemple avec un propriétaire fictif :</p>
+          <ul class="bullet-list">
+            <li>Type : Maison · 4 pièces · 95 m² · état à rafraîchir</li>
+            <li>Localisation : [ville], quartier [secteur]</li>
+            <li>Prix vendeur : 385 000 € · Urgence : rapide</li>
+            <li>Profil : retraité, vend pour rejoindre ses enfants · pressé mais attaché au bien</li>
+            <li>Prix moyen marché : 3 800 €/m² · Délai moyen : 4 mois</li>
+          </ul>
         </div>
-        <div id="ex-hesitant" class="tab-content">
-          <p class="prose" style="margin-bottom:6px;"><strong>Situation :</strong> client qui avait exprimé des doutes lors de l'échange.</p>
-          <p class="prose" style="margin-bottom:12px;font-size:12px;">Ton : <strong style="color:var(--gold);">rassurant</strong> — reconnaître le doute, ouvrir une porte sans forcer.</p>
-          <div class="email-preview">
-            <div class="email-header"><div class="email-dot"></div><div class="email-label">✉ Email — Client hésitant</div></div>
-            <div class="email-body">
-              Bonjour [Prénom],<br><br>
-              Je voulais savoir où vous en étiez depuis notre échange.<br>
-              Les doutes que vous aviez, ils sont encore là ou certaines choses se sont clarifiées ?<br>
-              On peut en reparler si vous voulez, même 10 minutes par téléphone.
-            </div>
-          </div>
-        </div>
-        <div id="ex-interesse" class="tab-content">
-          <p class="prose" style="margin-bottom:6px;"><strong>Situation :</strong> client visiblement intéressé en visite, pas de décision prise.</p>
-          <p class="prose" style="margin-bottom:12px;font-size:12px;">Ton : <strong style="color:var(--gold);">ouvert et curieux</strong> — on invite à partager, pas à décider.</p>
-          <div class="email-preview">
-            <div class="email-header"><div class="email-dot"></div><div class="email-label">✉ Email — Après visite avec intérêt</div></div>
-            <div class="email-body">
-              Bonjour [Prénom],<br><br>
-              Merci encore pour la visite.<br>
-              À froid, qu'est-ce qui vous a le plus parlé dans ce bien ?<br>
-              Ça m'aide à savoir si on continue dans cette direction ou si on explore autre chose.
-            </div>
-          </div>
-        </div>
-        <div id="ex-valeur" class="tab-content">
-          <p class="prose" style="margin-bottom:6px;"><strong>Situation :</strong> vous avez une info complémentaire utile à partager.</p>
-          <p class="prose" style="margin-bottom:12px;font-size:12px;">Ton : <strong style="color:var(--gold);">informatif</strong> — on apporte avant de demander.</p>
-          <div class="email-preview">
-            <div class="email-header"><div class="email-dot"></div><div class="email-label">✉ Email — Relance avec valeur ajoutée</div></div>
-            <div class="email-body">
-              Bonjour [Prénom],<br><br>
-              J'ai récupéré des infos sur [charges / travaux votés / voisinage] qui pourraient vous intéresser.<br>
-              Je vous les envoie si vous êtes encore dans la réflexion ?
-            </div>
+        <div id="ex-result" class="tab-content">
+          <div class="result-box">
+            <div class="result-label">✦ Extrait du brief généré par l'IA</div>
+            <p><strong>Lecture du contexte :</strong> Vendeur motivé par un projet de vie clair — rejoindre sa famille. Sa priorité est la fluidité et la rapidité, pas l'optimisation maximale du prix. Profil sensible à la rassurance, au cadre et à la lisibilité du processus. Point de tension potentiel : l'attachement émotionnel au bien peut créer un écart de perception sur le prix.</p>
+            <p><strong>Objectif prioritaire :</strong> Créer la confiance sur votre capacité à vendre vite, avec méthode, sans le surcharger. Ne pas parler de prix avant d'avoir cerné son calendrier réel.</p>
+            <p><strong>Argument clé :</strong> "Je connais les acquéreurs actifs sur ce secteur et je peux mobiliser mon réseau dès la signature — sans attendre que le bien soit visible partout."</p>
+            <p><strong>Phrase d'ouverture :</strong> "Avant de parler du bien, racontez-moi votre projet. À quel horizon aimeriez-vous que la vente soit bouclée idéalement ?"</p>
+            <p><strong>Résumé express :</strong> Retraité pressé · projet de vie ancré · priorité = rapidité + sécurité. Ne pas ouvrir sur le prix. Ouvrir sur le calendrier.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. AJUSTEMENTS -->
+    <!-- 6. AJUSTEMENTS -->
     <section id="ajustements">
       <div class="section-card">
         <div class="accordion-header" onclick="toggleAcc(this)">
-          <div class="acc-num">5</div>
-          <div>
-            <div class="acc-title">Ce qu'on ajuste et pourquoi</div>
-            <div class="acc-subtitle">3 retouches qui font la différence</div>
-          </div>
+          <div class="acc-num">4</div>
+          <div><div class="acc-title">Ce qu'on ajuste et pourquoi</div><div class="acc-subtitle">5 retouches avant le RDV</div></div>
           <span class="acc-chevron">▾</span>
         </div>
         <div class="accordion-body">
           <div class="accordion-inner">
             <table class="styled-table">
-              <thead><tr><th>Ajustement</th><th>Pourquoi c'est important</th></tr></thead>
+              <thead><tr><th>Ajustement</th><th>Pourquoi</th></tr></thead>
               <tbody>
-                <tr><td>Reprendre un détail réellement exprimé en visite</td><td>Montre que vous écoutez vraiment — pas que vous relancez en masse. Ce détail fait la différence entre un email perçu comme personnalisé et un template.</td></tr>
-                <tr><td>Choisir le bon niveau de chaleur</td><td>Un ton trop appuyé peut faire fuir un client déjà hésitant. Relisez à voix haute : est-ce que ça sonne comme une relation humaine, ou comme une relance commerciale ?</td></tr>
-                <tr><td>Soigner la dernière phrase</td><td>La question finale détermine si le client répond ou non. Une question fermée bloque ("Êtes-vous intéressé ?"). Une question ouverte et légère invite naturellement à répondre.</td></tr>
+                <tr><td>Vérifier les données réelles</td><td>L'IA structure votre préparation, mais ne remplace pas vos sources marché. Croisez avec vos outils métier.</td></tr>
+                <tr><td>Réécrire 2 arguments à votre façon</td><td>Ce que vous dites doit sonner comme vous, pas comme une machine. La crédibilité passe par l'authenticité.</td></tr>
+                <tr><td>Ajouter une preuve locale concrète</td><td>C'est souvent ce détail réel — une rue, une vente récente — qui fait basculer la crédibilité.</td></tr>
+                <tr><td>Préparer une phrase de bascule vers le mandat</td><td>Le rendez-vous peut être bon, puis se diluer si vous ne savez pas comment conclure.</td></tr>
+                <tr><td>Prévoir la relance avant même le rendez-vous</td><td>Un vendeur qui "réfléchit" n'est pas perdu si vous avez déjà prévu la suite.</td></tr>
               </tbody>
             </table>
-            <div class="retain-box" style="margin-top:16px;padding:12px 16px;">
-              <div class="retain-icon" style="font-size:16px;">🧠</div>
-              <div>
-                <div class="retain-label">Règle d'or</div>
-                <div class="retain-text" style="font-size:13px;">Relisez à voix haute avant d'envoyer. L'IA accélère la rédaction. Vous gardez le jugement terrain.</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. VARIANTES -->
+    <!-- 7. VARIANTES -->
     <section id="variantes">
       <div class="section-card">
         <div class="tabs-header">
-          <button class="tab-btn active" onclick="switchTab(this,'var-j2')">J+2 visite</button>
-          <button class="tab-btn" onclick="switchTab(this,'var-silence')">Silencieux J+10</button>
-          <button class="tab-btn" onclick="switchTab(this,'var-objection')">Après objection</button>
-          <button class="tab-btn" onclick="switchTab(this,'var-info')">Nouvelle info</button>
-          <button class="tab-btn" onclick="switchTab(this,'var-leger')">Dernier contact</button>
+          <button class="tab-btn active" onclick="switchTab(this,'var-urgence')">Vente urgente</button>
+          <button class="tab-btn" onclick="switchTab(this,'var-succession')">Succession</button>
+          <button class="tab-btn" onclick="switchTab(this,'var-mutation')">Mutation pro</button>
+          <button class="tab-btn" onclick="switchTab(this,'var-exclu')">Mandat exclusif</button>
+          <button class="tab-btn" onclick="switchTab(this,'var-relance')">Relance post-RDV</button>
         </div>
-        <div id="var-j2" class="tab-content active">
-          <p class="prose" style="margin-bottom:10px;">Relance légère 2 jours après la visite :</p>
-          <div class="prompt-box"><pre>"Ajoutez au prompt : Relance J+2. Le client venait de visiter. Ton léger et chaleureux. Demandez simplement si la visite a eu le temps de maturer dans sa réflexion. Max 80 mots."</pre></div>
+        <div id="var-urgence" class="tab-content active">
+          <p class="prose" style="margin-bottom:12px;">Ajoutez à la fin du prompt :</p>
+          <div class="prompt-box"><pre>Ajoute une stratégie spéciale "vente urgente" :
+- les arguments de rapidité crédibles
+- les actions à déclencher dès J+1 après signature
+- comment rassurer sans brader
+- les points de vigilance si le vendeur est sous pression temporelle</pre></div>
         </div>
-        <div id="var-silence" class="tab-content">
-          <p class="prose" style="margin-bottom:10px;">Client silencieux depuis 10 jours — dernier essai :</p>
-          <div class="prompt-box"><pre>"Ajoutez au prompt : Relance J+10, client silencieux. Ton très léger, sans pression. Indiquer que vous êtes disponible si besoin, sans insister. Ne pas mentionner l'urgence. Max 70 mots."</pre></div>
+        <div id="var-succession" class="tab-content">
+          <p class="prose" style="margin-bottom:12px;">Ajoutez à la fin du prompt :</p>
+          <div class="prompt-box"><pre>Le bien est vendu dans le cadre d'une succession.
+Adapte la préparation pour :
+- rassurer plusieurs héritiers si besoin
+- simplifier les échanges et éviter les tensions
+- structurer le processus avec pédagogie
+- anticiper les délais liés à la situation successorale
+
+Ton : clair, calme, rassurant.</pre></div>
         </div>
-        <div id="var-objection" class="tab-content">
-          <p class="prose" style="margin-bottom:10px;">Client qui avait une objection précise (prix, travaux, surface…) :</p>
-          <div class="prompt-box"><pre>"Ajoutez au prompt : Le client avait exprimé une réserve sur [point précis]. L'email doit reprendre ce point avec neutralité, proposer une précision ou un éclairage, sans minimiser la réserve. Ne rien inventer."</pre></div>
+        <div id="var-mutation" class="tab-content">
+          <p class="prose" style="margin-bottom:12px;">Ajoutez à la fin du prompt :</p>
+          <div class="prompt-box"><pre>Le propriétaire doit vendre à cause d'une mutation professionnelle.
+Oriente la préparation sur :
+- l'efficacité et la gestion à distance
+- la disponibilité réduite du vendeur
+- la nécessité d'un reporting régulier
+- la sécurisation du calendrier de vente</pre></div>
         </div>
-        <div id="var-info" class="tab-content">
-          <p class="prose" style="margin-bottom:10px;">Vous avez une nouvelle info utile à partager :</p>
-          <div class="prompt-box"><pre>"Ajoutez au prompt : L'email est une relance avec valeur ajoutée. Mentionner une nouvelle information : [détail]. L'info doit être présentée comme utile, sans pression commerciale."</pre></div>
+        <div id="var-exclu" class="tab-content">
+          <p class="prose" style="margin-bottom:12px;">Ajoutez à la fin du prompt :</p>
+          <div class="prompt-box"><pre>Je veux orienter ce rendez-vous vers un mandat exclusif.
+Donne-moi :
+- les meilleurs arguments et l'ordre dans lequel les amener
+- les objections prévisibles contre l'exclusivité
+- la meilleure façon de formuler ma demande
+- ce qu'il ne faut surtout pas dire</pre></div>
         </div>
-        <div id="var-leger" class="tab-content">
-          <p class="prose" style="margin-bottom:10px;">Contact ultra-léger pour ne pas disparaître du radar :</p>
-          <div class="prompt-box"><pre>"Ajoutez au prompt : Email très court (60 mots max). Ton neutre et bienveillant. Simplement se rappeler au bon souvenir du client. Aucune pression, aucune urgence. Une question très simple à la fin."</pre></div>
+        <div id="var-relance" class="tab-content">
+          <p class="prose" style="margin-bottom:12px;">Pour préparer la relance avant même de partir :</p>
+          <div class="prompt-box"><pre>Rédige-moi 3 messages de relance vendeur après rendez-vous :
+- version courte SMS (1-2 lignes)
+- version WhatsApp chaleureuse (3-4 lignes)
+- version mail professionnel (court, structuré)
+
+Contexte : le vendeur n'a pas refusé, mais il n'a pas encore signé.
+Ton : professionnel, chaleureux, sans pression.</pre></div>
         </div>
       </div>
     </section>
 
-    <!-- 7. AVANT / APRÈS -->
+    <!-- 8. AVANT / APRÈS -->
     <section id="avantapres">
       <div class="section-card">
         <div class="accordion-header" onclick="toggleAcc(this)">
-          <div class="acc-num">7</div>
-          <div>
-            <div class="acc-title">Avant / Après</div>
-            <div class="acc-subtitle">Ce qui change réellement dans le message</div>
-          </div>
+          <div class="acc-num">6</div>
+          <div><div class="acc-title">Avant / Après</div><div class="acc-subtitle">Sans préparation vs avec brief IA</div></div>
           <span class="acc-chevron">▾</span>
         </div>
         <div class="accordion-body">
           <div class="accordion-inner">
             <div class="avant-apres-grid">
               <div class="avant-box">
-                <div class="avant-label">❌ Sans méthode</div>
-                <div class="email-text">"Bonjour,<br>Je me permets de vous relancer concernant le bien.<br>Avez-vous avancé ?<br>Cordialement"</div>
-                <ul class="problem-list bad">
-                  <li>Impersonnel — qui est ce client ?</li>
-                  <li>Aucune valeur — pourquoi répondre ?</li>
-                  <li>Ton commercial — effet repoussoir</li>
-                  <li>Aucune projection — pas d'étape suivante</li>
+                <div class="box-label">❌ Sans préparation</div>
+                <ul class="bullet-list">
+                  <li>Préparation mentale floue, brief de tête</li>
+                  <li>Arguments non hiérarchisés selon le profil vendeur</li>
+                  <li>Objections subies, gérées à l'improvisation</li>
+                  <li>Rendez-vous piloté à l'instinct</li>
+                  <li>Impression de rendez-vous standard pour le vendeur</li>
                 </ul>
               </div>
               <div class="apres-box">
-                <div class="apres-label">✅ Avec la méthode IA</div>
-                <div class="email-text">"Bonjour [Prénom],<br>Je me permets de revenir vers vous suite à votre visite.<br>Avez-vous eu le temps de vous projeter davantage ?<br>Je reste disponible si vous souhaitez en reparler."</div>
-                <ul class="problem-list good">
-                  <li>On recrée du lien — prénom + référence visite</li>
-                  <li>On ouvre la discussion — question ouverte</li>
-                  <li>On facilite la réponse — ton léger</li>
-                  <li>On respecte le rythme du client</li>
+                <div class="box-label">✅ Avec brief IA</div>
+                <ul class="bullet-list">
+                  <li>Brief clair, structuré, adapté au profil</li>
+                  <li>Arguments hiérarchisés selon les vraies priorités du vendeur</li>
+                  <li>Objections déjà travaillées avant d'entrer</li>
+                  <li>Posture plus calme, meilleure capacité à cadrer</li>
+                  <li>Image plus professionnelle — agent qui a fait son travail</li>
                 </ul>
               </div>
             </div>
-            <div class="retain-box" style="margin-top:4px;padding:12px 16px;">
-              <div class="retain-icon" style="font-size:16px;">💡</div>
-              <div>
-                <div class="retain-label">À noter</div>
-                <div class="retain-text" style="font-size:13px;">Un client qui reçoit un bon email de suivi se souvient de vous quand il est prêt. Un client qui reçoit une relance agressive vous évite. La différence se joue dans 30 mots.</div>
-              </div>
+            <div class="gold-divider"></div>
+            <div class="retain-box" style="margin-top:4px;">
+              <div class="retain-icon">💡</div>
+              <div><div class="retain-label">Ce que ça change vraiment</div><div class="retain-text">Un vendeur ne choisit pas seulement un agent. Il choisit un niveau de confiance. Et ce niveau de confiance se joue souvent très tôt — dans les 5 premières minutes.</div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 8. À RETENIR -->
+    <!-- 9. ROI BUSINESS -->
+    <section id="roi">
+      <div class="section-card">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="acc-num">💰</div>
+          <div><div class="acc-title">Pourquoi ce module peut rapporter de l'argent</div><div class="acc-subtitle">Ce n'est pas du confort — c'est un levier de conversion</div></div>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-inner">
+            <p class="prose" style="margin-bottom:18px;">Ce module n'est pas "du confort". Il peut améliorer directement votre conversion en rendez-vous mandat.</p>
+            <div class="info-grid" style="grid-template-columns:1fr 1fr 1fr;">
+              <div class="info-card" style="border-color:rgba(204,145,75,0.3);">
+                <div class="label" style="color:var(--gold);">+1 mandat / mois</div>
+                <div class="value">Cela représente 12 opportunités supplémentaires sur l'année. Sur votre secteur, qu'est-ce que ça représente en honoraires ?</div>
+              </div>
+              <div class="info-card" style="border-color:rgba(204,145,75,0.3);">
+                <div class="label" style="color:var(--gold);">Moins de pertes invisibles</div>
+                <div class="value">Un meilleur rendez-vous = vous récupérez des mandats qui auraient pu partir ailleurs, sans que vous le sachiez.</div>
+              </div>
+              <div class="info-card" style="border-color:rgba(204,145,75,0.3);">
+                <div class="label" style="color:var(--gold);">Confiance accélérée</div>
+                <div class="value">Un agent mieux préparé inspire plus vite confiance. Cette confiance influence la signature, les recommandations et le bouche-à-oreille.</div>
+              </div>
+            </div>
+            <div class="gold-divider"></div>
+            <div class="retain-box" style="margin-top:4px;">
+              <div class="retain-icon">📈</div>
+              <div><div class="retain-label">À retenir</div><div class="retain-text">Une bonne préparation n'est pas administrative. C'est un levier de chiffre d'affaires.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. À RETENIR -->
     <section id="retenir">
       <div class="retain-box">
         <div class="retain-icon">⭐</div>
         <div>
           <div class="retain-label">À retenir</div>
-          <div class="retain-text">Un email de suivi ne doit pas relancer — il doit relancer l'intérêt. Le bon message n'accélère pas la décision, il facilite la réponse.</div>
+          <div class="retain-text">L'IA ne signe pas à votre place. Mais elle vous permet d'arriver plus clair, plus structuré, plus crédible et plus serein. Et très souvent, la différence entre "je vais réfléchir" et "on signe quand ?" commence exactement ici — dans la préparation.</div>
         </div>
       </div>
     </section>
 
-    <!-- 9. EXERCICE -->
+    <!-- 11. EXERCICE -->
     <section id="exercice">
       <div class="exercise-box">
         <div class="exercise-header">
@@ -648,64 +747,26 @@ RÈGLES STRICTES :
           <div class="title">Votre exercice</div>
           <div class="timer-badge">⏱ 15 min chrono</div>
         </div>
-        <div class="scenario-box">
-          <div class="scenario-label">📋 Scénario</div>
-          <ul class="bullet-list">
-            <li>Un client a visité un appartement il y a 4 jours</li>
-            <li>Il n'a pas répondu depuis la visite</li>
-            <li>Il semblait intéressé mais hésitant sur la surface</li>
-          </ul>
-          <div class="gold-divider"></div>
-          <p class="prose"><strong>Rédigez un email de suivi</strong> : ton léger · question ouverte · max 100 mots.</p>
-        </div>
         <div class="progress-row">
           <span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">Progression</span>
-          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar02" style="width:0%"></div></div>
-          <span style="font-size:11px;color:var(--gold);white-space:nowrap;" id="progressLabel02">0/5</span>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar07" style="width:0%"></div></div>
+          <span style="font-size:11px;color:var(--gold);white-space:nowrap;" id="progressLabel07">0/5</span>
         </div>
-        <ol class="step-list">
-          <li>
-            <div class="step-num-badge" id="stepBadge02-1">1</div>
-            <div class="step-text">Copiez le prompt pro ou expert dans votre outil IA préféré
-              <button class="copy-btn-static" onclick="checkStep02(1)">✓ Fait</button>
-            </div>
-          </li>
-          <li>
-            <div class="step-num-badge" id="stepBadge02-2">2</div>
-            <div class="step-text">Remplissez les champs avec les données du scénario ci-dessus
-              <button class="copy-btn-static" onclick="checkStep02(2)">✓ Fait</button>
-            </div>
-          </li>
-          <li>
-            <div class="step-num-badge" id="stepBadge02-3">3</div>
-            <div class="step-text">Relisez le résultat à voix haute — est-ce que ça sonne humain ?
-              <button class="copy-btn-static" onclick="checkStep02(3)">✓ Fait</button>
-            </div>
-          </li>
-          <li>
-            <div class="step-num-badge" id="stepBadge02-4">4</div>
-            <div class="step-text">Ajoutez 1 détail personnel que l'IA ne pouvait pas connaître
-              <button class="copy-btn-static" onclick="checkStep02(4)">✓ Fait</button>
-            </div>
-          </li>
-          <li>
-            <div class="step-num-badge" id="stepBadge02-5">5</div>
-            <div class="step-text">Envoyez l'email à un client réel ou sauvegardez-le comme modèle
-              <button class="copy-btn-static" onclick="checkStep02(5)">✓ Fait</button>
-            </div>
-          </li>
+        <ol class="step-list" id="exerciseSteps07">
+          <li><div class="step-num-badge" id="stepBadge07-1">1</div><div class="step-text">Choisissez un vrai rendez-vous vendeur à venir <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep07(1)">✓ Fait</button></div></li>
+          <li><div class="step-num-badge" id="stepBadge07-2">2</div><div class="step-text">Lancez le prompt PRO ou EXPERT selon votre objectif <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep07(2)">✓ Fait</button></div></li>
+          <li><div class="step-num-badge" id="stepBadge07-3">3</div><div class="step-text">Ajoutez 1 preuve locale que l'IA ne peut pas connaître <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep07(3)">✓ Fait</button></div></li>
+          <li><div class="step-num-badge" id="stepBadge07-4">4</div><div class="step-text">Faites la simulation "vendeur méfiant" sur 2 objections <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep07(4)">✓ Fait</button></div></li>
+          <li><div class="step-num-badge" id="stepBadge07-5">5</div><div class="step-text">Sauvegardez votre brief et votre relance post-RDV <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep07(5)">✓ Fait</button></div></li>
         </ol>
-        <div id="exerciseDone02" style="display:none;margin-top:18px;">
+        <div id="exerciseDone07" style="display:none;margin-top:20px;">
           <div class="retain-box">
             <div class="retain-icon">🎉</div>
             <div>
               <div class="retain-label">Exercice terminé</div>
-              <div class="retain-text">Votre email de suivi est prêt. Module suivant : #03 — Créer une bio agent convaincante avec l'IA.</div>
+              <div class="retain-text">Vous ne préparez plus vos rendez-vous au hasard. Vous entrez désormais avec un cadre, une logique et une vraie posture commerciale.</div>
+              <div style="margin-top:10px;font-size:12px;color:var(--text-muted);">Prochain module : Répondre à une objection avec méthode, sans se justifier.</div>
             </div>
-          </div>
-          <div class="next-box">
-            <div class="next-label">Étape suivante</div>
-            <p>Transformez cet email en 3 variantes (J+2, J+7, J+14) pour construire votre séquence de relance automatique — 1 seul prompt expert, 3 emails prêts.</p>
           </div>
         </div>
       </div>
@@ -715,47 +776,47 @@ RÈGLES STRICTES :
 </main>
 
 <script>
-function switchTab(btn,id){
-  const w=btn.closest('.section-card')||btn.closest('.accordion-inner');
-  if(!w)return;
-  w.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  w.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+function switchTab(btn,targetId){
+  const wrapper=btn.closest('.section-card, .accordion-inner');
+  wrapper.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  wrapper.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
-  const el=document.getElementById(id);
-  if(el)el.classList.add('active');
+  document.getElementById(targetId).classList.add('active');
 }
-function toggleAcc(h){
-  const b=h.nextElementSibling;
-  const o=h.classList.contains('open');
-  h.classList.toggle('open',!o);
-  b.classList.toggle('open',!o);
+function toggleAcc(header){
+  const body=header.nextElementSibling;
+  const isOpen=header.classList.contains('open');
+  header.classList.toggle('open',!isOpen);
+  body.classList.toggle('open',!isOpen);
 }
 function copyById(btn,id){
-  const el=document.getElementById(id);
-  if(!el)return;
-  navigator.clipboard.writeText(el.textContent.trim()).then(()=>{
-    btn.textContent='✓ Copié !';btn.classList.add('copied');
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Copié !';
+    btn.classList.add('copied');
     setTimeout(()=>{btn.textContent='Copier';btn.classList.remove('copied');},2000);
   });
 }
-let cs02=new Set();
-function checkStep02(n){
-  cs02.add(n);
-  const b=document.getElementById('stepBadge02-'+n);
-  b.textContent='✓';b.style.background='#2A5A2A';b.style.color='#8FD48F';
-  const p=(cs02.size/5)*100;
-  document.getElementById('progressBar02').style.width=p+'%';
-  document.getElementById('progressLabel02').textContent=cs02.size+'/5';
-  if(cs02.size===5)document.getElementById('exerciseDone02').style.display='block';
+let completedSteps07=new Set();
+function checkStep07(n){
+  completedSteps07.add(n);
+  const badge=document.getElementById('stepBadge07-'+n);
+  badge.textContent='✓';
+  badge.style.background='#2A5A2A';
+  badge.style.color='#8FD48F';
+  const pct=(completedSteps07.size/5)*100;
+  document.getElementById('progressBar07').style.width=pct+'%';
+  document.getElementById('progressLabel07').textContent=completedSteps07.size+'/5';
+  if(completedSteps07.size===5){document.getElementById('exerciseDone07').style.display='block';}
 }
 const sections=document.querySelectorAll('section[id]');
 const navLinks=document.querySelectorAll('.nav-link');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
       navLinks.forEach(l=>l.classList.remove('active'));
-      const a=document.querySelector('.nav-link[data-section="'+e.target.id+'"]');
-      if(a)a.classList.add('active');
+      const active=document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);
+      if(active) active.classList.add('active');
     }
   });
 },{threshold:0.3});

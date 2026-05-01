@@ -185,6 +185,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);m
 /* Tags & compteurs */
 .tag{display:inline-flex;align-items:center;background:rgba(204,145,75,0.08);border:1px solid rgba(204,145,75,0.2);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:600;color:#b8956a;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em}
 
+.niveau-expert{background:rgba(60,60,60,0.3);border:1px solid rgba(180,180,180,0.3);color:#c8c8c8}
 .step-check-btn{display:inline-flex;align-items:center;margin-left:10px;background:var(--dark3);border:1px solid rgba(204,145,75,0.3);border-radius:6px;color:var(--gold-light);font-size:10px;font-weight:600;font-family:'DM Sans',sans-serif;padding:3px 10px;cursor:pointer;transition:all 0.2s;vertical-align:middle}
 .step-check-btn:hover{background:var(--gold);color:var(--dark);border-color:var(--gold)}
 
@@ -234,7 +235,7 @@ section[id]{scroll-margin-top:20px}
       <div class="meta-pill"><span class="icon">⏱</span> 30 min + exercice · 🎬 Vidéo à venir</div>
       <div class="meta-pill"><span class="icon">🛠</span> ChatGPT, Claude, Gemini...</div>
       <div class="meta-pill"><span class="icon">👤</span> Agents &amp; mandataires</div>
-      <div class="meta-pill"><span class="icon">📦</span> 2 prompts · 4 variantes</div>
+      <div class="meta-pill"><span class="icon">📦</span> 3 prompts · 4 variantes métier</div>
     </div>
   </header>
 
@@ -248,12 +249,12 @@ section[id]{scroll-margin-top:20px}
     <div class="intro-card">
       <div class="i-icon">⚡</div>
       <div class="i-label">Impact terrain</div>
-      <div class="i-value">Moins de blocages, <strong>plus de crédibilité</strong>, une trace écrite qui vous protège juridiquement.</div>
+      <div class="i-value">Moins de blocages, <strong>plus de crédibilité</strong>, une trace écrite qui sécurise votre information client.</div>
     </div>
     <div class="intro-card">
       <div class="i-icon">📋</div>
       <div class="i-label">Ce que vous repartez avec</div>
-      <div class="i-value">Prompt socle + prompt pro + 4 variantes — <strong>utilisables immédiatement</strong> sur tous vos types de diagnostics.</div>
+      <div class="i-value">Prompt socle + prompt pro + prompt expert + 4 variantes — <strong>utilisables immédiatement</strong> sur tous vos types de diagnostics.</div>
     </div>
   </div>
 
@@ -282,7 +283,7 @@ section[id]{scroll-margin-top:20px}
           <ul class="bullet-list">
             <li><strong>Crédibilité renforcée</strong> — un client qui comprend son diagnostic fait confiance à l'agent qui lui explique</li>
             <li><strong>Transactions fluides</strong> — moins de blocages liés à la peur d'un diagnostic mal compris</li>
-            <li><strong>Protection juridique</strong> — un résumé envoyé par email constitue une trace écrite de l'information transmise</li>
+            <li><strong>Traçabilité renforcée</strong> — un résumé envoyé par email garde une trace claire de l'information transmise</li>
             <li><strong>Réutilisable à l'infini</strong> — le même prompt fonctionne sur tous vos types de diagnostics</li>
           </ul>
         </div>
@@ -291,7 +292,7 @@ section[id]{scroll-margin-top:20px}
             <div class="info-card"><div class="label">🎯 Objectif</div><div class="value">Produire un résumé de diagnostic lisible par n'importe quel client en moins de 5 minutes</div></div>
             <div class="info-card"><div class="label">⏱ Durée</div><div class="value">30 min + exercice · 🎬 Vidéo à venir</div></div>
             <div class="info-card"><div class="label">🛠 Outils</div><div class="value">ChatGPT, Claude, Gemini... au choix — le prompt fonctionne sur tous</div></div>
-            <div class="info-card"><div class="label">📦 Livrable</div><div class="value">2 prompts + 4 variantes + résumé utilisable immédiatement en email ou en fiche bien</div></div>
+            <div class="info-card"><div class="label">📦 Livrable</div><div class="value">3 prompts (socle · pro · expert) + 4 variantes + résumé utilisable immédiatement en email ou en fiche bien</div></div>
           </div>
         </div>
       </div>
@@ -304,7 +305,7 @@ section[id]{scroll-margin-top:20px}
           <div class="acc-num">2</div>
           <div>
             <div class="acc-title">Les prompts à utiliser</div>
-            <div class="acc-subtitle">Socle pour démarrer tout de suite — pro pour sécuriser le résultat</div>
+            <div class="acc-subtitle">Socle pour démarrer · Pro pour sécuriser · Expert pour les cas sensibles</div>
           </div>
           <span class="acc-chevron">▾</span>
         </div>
@@ -313,51 +314,153 @@ section[id]{scroll-margin-top:20px}
             <div class="tabs-header" style="padding:0;margin-bottom:18px;">
               <button class="tab-btn active" onclick="switchTab(this,'p10-socle')">🟢 Prompt socle</button>
               <button class="tab-btn" onclick="switchTab(this,'p10-pro')">🔵 Prompt renforcé (pro)</button>
+              <button class="tab-btn" onclick="switchTab(this,'p10-expert')">⚫ Prompt expert</button>
             </div>
             <div id="p10-socle" class="tab-content active" style="padding:0;">
-              <div class="niveau-badge niveau-socle">🟢 Niveau socle — testable immédiatement, aucun prérequis</div>
+              <div class="niveau-badge niveau-socle">🟢 Niveau socle — comprendre la mécanique, testable immédiatement</div>
               <div class="prompt-box">
                 <div class="prompt-box-label">💬 Prompt — Résumé diagnostic (socle)</div>
                 <button class="copy-btn" onclick="copyById(this,'p10s')">Copier</button>
-                <pre id="p10s">Tu es un agent immobilier. Aide-moi à rédiger un résumé clair d'un diagnostic immobilier pour mon client.
+                <pre id="p10s">Tu es un agent immobilier. Aide-moi à transformer un diagnostic immobilier en résumé clair pour un client non spécialiste.
 
-Informations du diagnostic :
-- Type de diagnostic : [ex. DPE / amiante / plomb / électricité / termites...]
-- Résultat principal : [ex. classe énergie F / présence amiante confinée / installation non conforme...]
-- Ce que le client doit retenir : [ex. travaux recommandés, obligations légales, délais...]
-- Mon client est : [acheteur / vendeur]
+Contexte :
+- Type de diagnostic : [DPE / amiante / plomb / électricité / gaz / termites / ERP / assainissement...]
+- Client concerné : [acheteur / vendeur / bailleur / investisseur]
+- Résultat exact du diagnostic : [copier les éléments principaux du rapport]
+- Point qui peut inquiéter le client : [ex. classe F, anomalie électrique, présence amiante, zone à risque...]
+- Ce que je veux lui faire comprendre : [résumé en langage simple]
 
-Rédige un résumé en 4 à 6 phrases, en langage simple, sans jargon technique.
-Commence par "Ce diagnostic indique que..." et termine par une action concrète à faire.</pre>
+Rédige un résumé en 5 à 7 phrases maximum.
+
+Contraintes :
+- langage simple, professionnel et rassurant
+- aucun jargon non expliqué
+- aucune invention de coût, délai, obligation ou conséquence juridique
+- si une information manque, écris [À vérifier]
+- ne remplace pas le diagnostic officiel
+- ne donne pas de conseil juridique
+
+Format attendu :
+1. Ce que dit le diagnostic
+2. Ce que cela signifie concrètement
+3. Ce que le client doit vérifier ou anticiper
+4. Prochaine étape recommandée</pre>
               </div>
             </div>
             <div id="p10-pro" class="tab-content" style="padding:0;">
-              <div class="niveau-badge niveau-pro">🔵 Niveau pro — format 4 blocs · règles anti-invention · zéro jargon non expliqué</div>
+              <div class="niveau-badge niveau-pro">🔵 Niveau pro — email prêt à envoyer · règles anti-invention · format verrouillé</div>
               <div class="prompt-box">
                 <div class="prompt-box-label">💬 Prompt — Résumé diagnostic (renforcé)</div>
                 <button class="copy-btn" onclick="copyById(this,'p10p')">Copier</button>
-                <pre id="p10p">Tu es un agent immobilier expérimenté. Rédige un résumé de diagnostic technique destiné à être envoyé par email à un client [acheteur / vendeur] non initié.
+                <pre id="p10p">Tu es un assistant rédactionnel pour un agent immobilier expérimenté.
+
+Mission :
+Transformer les informations d'un diagnostic immobilier en résumé clair, prudent et exploitable, destiné à un client non spécialiste.
+
+Important :
+Tu n'es ni diagnostiqueur, ni juriste, ni notaire, ni artisan.
+Tu aides uniquement à reformuler les informations fournies en langage compréhensible.
+
+Contexte client :
+- Type de client : [acheteur / vendeur / bailleur / investisseur]
+- Niveau du client : [primo-accédant / client anxieux / investisseur expérimenté / vendeur pressé]
+- Objectif du message : [rassurer / expliquer / préparer une négociation / garder une trace écrite]
 
 Données du diagnostic :
-- Type : [DPE / amiante / plomb / électricité / termites / assainissement / ERP...]
-- Résultat exact : [ex. classe G / présence plomb sous seuil légal / installation non conforme datant de 1978...]
-- Obligations légales connues : [ex. travaux imposés avant vente / information obligatoire / délai légal...]
-- Impact sur la transaction : [ex. décote possible / point de négociation / aucune incidence immédiate...]
+- Type : [DPE / amiante / plomb / électricité / gaz / termites / ERP / assainissement...]
+- Résultat exact : [copier les éléments du rapport]
+- Anomalies ou points d'attention mentionnés : [copier uniquement ce qui est indiqué]
+- Préconisations du rapport : [copier les préconisations exactes si elles existent]
+- Obligations explicitement connues : [à remplir uniquement si elles sont vérifiées]
+- Impact potentiel sur le projet : [vente / location / négociation / travaux / information client]
 
-Règles strictes — à respecter impérativement :
-- N'invente aucune caractéristique non fournie
-- Si une donnée manque, indique [À compléter] — ne la compense pas par une supposition
-- Ne fabrique aucun chiffre : ni coût de travaux, ni pourcentage, ni délai non mentionné
-- Ne déduis pas une obligation légale d'une autre
-- N'affirme rien sur le marché que tu ne peux pas démontrer
-- Chaque terme technique doit être suivi de sa définition entre parenthèses
-- Tu es agent immobilier, pas juriste : ne formule pas de conseil juridique
+Règles strictes :
+- N'invente aucune donnée
+- Ne déduis pas une obligation légale si elle n'est pas fournie
+- Ne transforme pas une anomalie en interdiction de vendre
+- Ne transforme pas une durée de validité du diagnostic en obligation de travaux
+- Ne chiffre aucun coût de travaux
+- Ne donne aucun délai si le délai n'est pas fourni
+- Ne garantis aucune aide financière ni éligibilité
+- Si une information manque, écris : [À vérifier]
+- Si un point relève du notaire, du diagnostiqueur ou d'un artisan, indique-le clairement
+- Ton : clair, professionnel, posé, sans dramatiser ni minimiser
 
-Format de sortie — 4 blocs obligatoires :
-1. [Ce que dit le diagnostic] — 1 phrase simple et directe
-2. [Ce que ça signifie concrètement] — 2 à 3 phrases, conséquences pratiques pour le client
-3. [Ce qui est obligatoire] — 1 à 2 points factuels, sans invention
-4. [Prochaine étape recommandée] — 1 action concrète</pre>
+Format de sortie obligatoire :
+
+Objet d'email : [Propose un objet court et professionnel]
+
+Bonjour [Prénom],
+
+1. Ce que dit le diagnostic
+[1 à 2 phrases simples]
+
+2. Ce que cela signifie concrètement
+[2 à 3 phrases adaptées au profil du client]
+
+3. Ce qui mérite votre attention
+[2 à 4 points maximum, uniquement basés sur les données fournies]
+
+4. Ce qu'il est recommandé de faire maintenant
+[1 à 2 actions concrètes : demander un avis, vérifier avec le notaire, consulter un professionnel qualifié...]
+
+Ce résumé ne remplace pas le diagnostic officiel. Il sert uniquement à vous aider à comprendre les points principaux du document.
+
+[Signature de l'agent]</pre>
+              </div>
+            </div>
+            <div id="p10-expert" class="tab-content" style="padding:0;">
+              <div class="niveau-badge niveau-expert">⚫ Niveau expert — diagnostics sensibles · dossiers à enjeu · multi-format</div>
+              <div class="prompt-box">
+                <div class="prompt-box-label">💬 Prompt — Résumé diagnostic (expert)</div>
+                <button class="copy-btn" onclick="copyById(this,'p10e')">Copier</button>
+                <pre id="p10e">Tu es un assistant de rédaction professionnelle spécialisé dans la vulgarisation de documents immobiliers techniques.
+
+Mission :
+Produire un résumé client clair, prudent et juridiquement sobre à partir d'un diagnostic immobilier, sans jamais remplacer le rapport officiel ni l'avis d'un professionnel compétent.
+
+Profil du dossier :
+- Type de bien : [maison / appartement / immeuble / local]
+- Projet : [vente / achat / location / investissement locatif]
+- Client destinataire : [acheteur / vendeur / bailleur / investisseur]
+- Niveau de sensibilité du client : [faible / moyen / élevé]
+- Diagnostic concerné : [DPE / amiante / plomb / électricité / gaz / termites / ERP / assainissement]
+- Extrait ou résumé du diagnostic : [coller ici les éléments utiles]
+- Préconisations exactes du rapport : [coller ici si disponibles]
+- Points à ne surtout pas affirmer : [ex. coût travaux, obligation non vérifiée, délai incertain...]
+
+Consignes de sécurité :
+1. Ne jamais inventer de donnée
+2. Ne jamais extrapoler une obligation légale
+3. Ne jamais affirmer qu'une vente est impossible sauf si cela est explicitement fourni
+4. Ne jamais minimiser un risque signalé dans le rapport
+5. Ne jamais dramatiser un point technique
+6. Ne jamais donner de conseil juridique
+7. Ne jamais chiffrer des travaux sans devis fourni
+8. Ne jamais garantir une aide financière
+9. Si une information est incertaine → [À confirmer par le professionnel compétent]
+10. Si une information manque → [Information non fournie]
+11. Distinguer clairement ce qui est indiqué dans le rapport, ce qui est une conséquence pratique, et ce qui doit être vérifié par un professionnel.
+
+Production attendue :
+
+A. Résumé ultra-court pour oral client
+3 phrases maximum, compréhensibles immédiatement.
+
+B. Email client prêt à envoyer
+- Objet
+- Bonjour [Prénom]
+- 4 blocs : Ce que dit le diagnostic / Ce que cela change concrètement / Les points à vérifier avant décision / La prochaine étape recommandée
+- Phrase de prudence : "Ce résumé ne remplace pas le diagnostic officiel."
+- Signature
+
+C. Version fiche bien
+Résumé neutre en 4 lignes maximum, utilisable dans un dossier commercial ou une fiche de suivi.
+
+D. Points à vérifier par l'agent avant envoi
+Liste de contrôle en 5 points maximum.
+
+Ton : professionnel, clair, rassurant, factuel. Aucun jargon inutile. Aucune promesse. Aucune dramatisation.</pre>
               </div>
             </div>
           </div>
@@ -396,7 +499,7 @@ Format de sortie — 4 blocs obligatoires :
             </div>
             <div class="result-section">
               <div class="result-section-title">3 · Ce qui est obligatoire</div>
-              <p>En tant qu'acheteur, aucune obligation immédiate de travaux. Ce bien ne peut pas être mis en location nue à partir de 2028 si la classe reste en dessous de E — à anticiper si vous envisagez un jour de le louer.</p>
+              <p>Ce bien ne pourra pas être mis en location nue à partir de 2028 s'il reste classé F ou G — à anticiper si vous envisagez un jour de le louer.</p>
             </div>
             <div class="result-section">
               <div class="result-section-title">4 · Prochaine étape recommandée</div>
@@ -469,28 +572,28 @@ Format de sortie — 4 blocs obligatoires :
           <p class="prose" style="margin-bottom:14px;">Pour un DPE classé E, F ou G — ajoutez en fin de prompt pro :</p>
           <div class="prompt-box">
             <button class="copy-btn" onclick="copyById(this,'var10-dpe-txt')">Copier</button>
-            <pre id="var10-dpe-txt">"Précise que la classe énergétique n'empêche pas la vente. Mentionne l'existence d'aides à la rénovation sans garantir l'éligibilité du client. Si la classe est F ou G, signale la contrainte de location à partir de 2028 uniquement si le client est susceptible de louer le bien. Reste factuel sur tous les chiffres."</pre>
+            <pre id="var10-dpe-txt">"Si le bien est classé F ou G, rappelle que la contrainte concerne principalement la mise en location et non la vente elle-même. Mentionne le calendrier légal uniquement si le projet du client inclut une location actuelle ou future, et uniquement avec une date vérifiée. Reste factuel : ne promets ni décote, ni aides, ni montant de travaux sans données vérifiées."</pre>
           </div>
         </div>
         <div id="var10-amiante" class="tab-content">
           <p class="prose" style="margin-bottom:14px;">Pour un diagnostic amiante avec présence confinée, non dégradée :</p>
           <div class="prompt-box">
             <button class="copy-btn" onclick="copyById(this,'var10-ami-txt')">Copier</button>
-            <pre id="var10-ami-txt">"Différencie clairement 'présence détectée' et 'danger immédiat'. Si l'amiante est confinée et en bon état de conservation, explique qu'elle ne nécessite pas de dépose immédiate selon la réglementation actuelle, mais qu'elle sera surveillée lors de travaux. Ne génère aucune alerte inutile. Ne chiffre aucun coût de dépose."</pre>
+            <pre id="var10-ami-txt">"Différencie clairement 'présence détectée' et 'danger immédiat'. Explique que la présence d'amiante n'empêche pas la vente, mais doit être portée à la connaissance de l'acquéreur. Reprends uniquement les préconisations indiquées dans le rapport : surveillance périodique, analyse complémentaire, mesure conservatoire, confinement ou retrait. Ne conclus jamais à l'absence de risque si le rapport ne le dit pas explicitement. Ne chiffre aucun coût de désamiantage."</pre>
           </div>
         </div>
         <div id="var10-elec" class="tab-content">
-          <p class="prose" style="margin-bottom:14px;">Pour un diagnostic électricité non conforme :</p>
+          <p class="prose" style="margin-bottom:14px;">Pour un diagnostic électricité avec anomalies :</p>
           <div class="prompt-box">
             <button class="copy-btn" onclick="copyById(this,'var10-elec-txt')">Copier</button>
-            <pre id="var10-elec-txt">"Explique que la non-conformité électrique n'est pas un obstacle à la vente mais engage l'acquéreur à réaliser les travaux de mise en conformité dans un délai de 3 ans après l'acte authentique. Encourage à demander un devis à un électricien certifié avant la signature. Ne chiffre pas le coût des travaux."</pre>
+            <pre id="var10-elec-txt">"Explique que la présence d'anomalies électriques n'empêche pas forcément la vente, mais qu'elle signale des points de sécurité à examiner sérieusement. Précise que le diagnostic informe l'acquéreur sur l'état de l'installation, sans transformer automatiquement l'agent en prescripteur de travaux. Encourage le client à demander l'avis d'un électricien qualifié avant la signature s'il souhaite chiffrer ou prioriser les corrections. Ne chiffre aucun coût. Ne transforme pas la durée de validité du diagnostic en obligation de travaux."</pre>
           </div>
         </div>
         <div id="var10-termites" class="tab-content">
           <p class="prose" style="margin-bottom:14px;">Pour un diagnostic termites positif :</p>
           <div class="prompt-box">
             <button class="copy-btn" onclick="copyById(this,'var10-ter-txt')">Copier</button>
-            <pre id="var10-ter-txt">"Explique que la présence de termites impose une déclaration en mairie par le propriétaire. Précise que le traitement est techniquement possible et que la vente peut se poursuivre. Renvoie vers un opérateur certifié pour le traitement. Ne chiffre pas le coût du traitement. Ne minimise pas la présence — reste factuel."</pre>
+            <pre id="var10-ter-txt">"Explique que la présence de termites doit être traitée avec sérieux et déclarée selon les obligations applicables. Précise que le diagnostic doit être transmis à la mairie par le propriétaire ou le syndic lorsque la présence est confirmée. Indique que des travaux d'éradication peuvent être demandés dans un délai fixé par la mairie. Ne minimise pas la situation, ne chiffre aucun coût, et recommande de s'appuyer sur un professionnel certifié distinct du diagnostiqueur."</pre>
           </div>
         </div>
       </div>
@@ -541,11 +644,15 @@ Format de sortie — 4 blocs obligatoires :
 
     <!-- 7. À RETENIR -->
     <section id="retenir">
+      <div class="alert-box" style="margin-bottom:16px;">
+        <div class="alert-label">⚠ Règle de sécurité</div>
+        <p>Un résumé IA ne remplace jamais le diagnostic officiel. Il sert uniquement à expliquer le document au client en langage clair. En cas de doute, renvoyez vers le diagnostiqueur, le notaire ou le professionnel compétent.</p>
+      </div>
       <div class="retain-box">
         <div class="retain-icon">⭐</div>
         <div>
           <div class="retain-label">À retenir</div>
-          <div class="retain-text">Un client qui comprend son diagnostic signe. Un client qui ne comprend pas se rétracte.</div>
+          <div class="retain-text">Un client qui comprend son diagnostic prend une décision plus sereine. Un client qui ne comprend pas transforme souvent une information technique en inquiétude.</div>
         </div>
       </div>
     </section>
@@ -565,7 +672,7 @@ Format de sortie — 4 blocs obligatoires :
         </div>
         <ol class="step-list">
           <li><div class="step-num-badge" id="s10-1">1</div><div class="step-text">Prenez un diagnostic réel ou fictif d'un de vos biens — DPE, électricité, amiante, termites...<button class="step-check-btn" onclick="checkStep10(1)">✓ Fait</button></div></li>
-          <li><div class="step-num-badge" id="s10-2">2</div><div class="step-text">Copiez le prompt socle dans votre outil IA préféré et remplissez les 4 champs<button class="step-check-btn" onclick="checkStep10(2)">✓ Fait</button></div></li>
+          <li><div class="step-num-badge" id="s10-2">2</div><div class="step-text">Copiez le prompt socle dans votre outil IA préféré et complétez les champs du contexte<button class="step-check-btn" onclick="checkStep10(2)">✓ Fait</button></div></li>
           <li><div class="step-num-badge" id="s10-3">3</div><div class="step-text">Lancez dans votre outil IA préféré — les chiffres sont-ils exacts ? Le ton est-il adapté à votre client ?<button class="step-check-btn" onclick="checkStep10(3)">✓ Fait</button></div></li>
           <li><div class="step-num-badge" id="s10-4">4</div><div class="step-text">Ajoutez 1 phrase personnalisée selon le profil de votre client (primo-accédant, investisseur, vendeur pressé...)<button class="step-check-btn" onclick="checkStep10(4)">✓ Fait</button></div></li>
           <li><div class="step-num-badge" id="s10-5">5</div><div class="step-text">Envoyez le résumé par email à un client, ou sauvegardez-le comme modèle pour ce type de diagnostic<button class="step-check-btn" onclick="checkStep10(5)">✓ Fait</button></div></li>

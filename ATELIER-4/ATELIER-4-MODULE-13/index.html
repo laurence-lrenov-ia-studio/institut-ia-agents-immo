@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module #13 — Compte-rendu hebdomadaire — Institut IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#222b32;--dark2:#2a3540;--dark3:#303e4a;--panel:#222b32;--gold:#cc914b;--gold-light:#d9a660;--gold-dim:#9a6e35;--gold-glow:rgba(204,145,75,0.18);--teal-light:#2A5466;--text:#E8E2D8;--text-dim:#9A9490;--text-muted:#5A5650;--white:#FFFFFF;--nav-w:260px;--radius:10px;--atelier:#7AB8E8;--atelier-rgb:122,184,232;--atelier-glow:rgba(122,184,232,0.12);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;display:flex;overflow-x:hidden;}
+.sidenav{width:var(--nav-w);min-height:100vh;background:var(--panel);border-right:1px solid rgba(var(--atelier-rgb),0.15);position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;padding-bottom:24px;}
+.sidenav-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(var(--atelier-rgb),0.12);}
+.studio{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.08em;color:#fff;text-transform:uppercase;}
+.subtitle{font-size:10px;color:var(--text-muted);margin-top:2px;}
+.course-badge{margin:14px 16px;background:var(--atelier-glow);border:1px solid rgba(var(--atelier-rgb),0.3);border-radius:var(--radius);padding:12px 14px;}
+.bloc-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--atelier);text-transform:uppercase;margin-bottom:4px;font-family:'Barlow Condensed',sans-serif;}
+.course-num{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--white);line-height:1;}
+.course-num span{color:var(--atelier);}
+.nav-list{list-style:none;padding:6px 0;flex:1;}
+.nav-list li{margin:1px 0;}
+.nav-list a{display:flex;align-items:center;gap:10px;padding:10px 18px;text-decoration:none;color:var(--text-dim);font-size:12.5px;border-left:3px solid transparent;transition:all 0.2s;cursor:pointer;}
+.nav-list a .step-num{width:22px;height:22px;border-radius:50%;background:var(--dark3);border:1px solid var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Barlow Condensed',sans-serif;flex-shrink:0;transition:all 0.2s;}
+.nav-list a:hover,.nav-list a.active{color:var(--atelier);border-left-color:var(--atelier);background:rgba(var(--atelier-rgb),0.06);}
+.nav-list a.active .step-num,.nav-list a:hover .step-num{background:var(--atelier);border-color:var(--atelier);color:var(--dark);}
+.nav-footer{padding:14px 18px;border-top:1px solid rgba(var(--atelier-rgb),0.12);}
+.nav-footer .author{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--gold-light);}
+.nav-footer .role{font-size:10px;color:var(--text-muted);margin-top:2px;}
+.main{margin-left:var(--nav-w);flex:1;display:flex;flex-direction:column;min-height:100vh;}
+.back-bar{background:var(--dark2);border-bottom:1px solid rgba(var(--atelier-rgb),0.1);padding:10px 52px;}
+.back-bar a{display:inline-flex;align-items:center;gap:8px;background:rgba(204,145,75,0.08);border:1px solid rgba(204,145,75,0.25);border-radius:20px;padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;color:#b8956a;text-decoration:none;text-transform:uppercase;}
+.back-bar a:hover{background:rgba(204,145,75,0.15);}
+.hero{background:linear-gradient(135deg,var(--panel) 0%,#1e2a35 60%,#1a2830 100%);border-bottom:1px solid rgba(var(--atelier-rgb),0.2);padding:44px 56px 36px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(var(--atelier-rgb),0.07) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--atelier),transparent);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--atelier-glow);border:1px solid rgba(var(--atelier-rgb),0.35);border-radius:20px;padding:5px 14px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--atelier);text-transform:uppercase;margin-bottom:18px;}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--atelier);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:800;color:var(--white);line-height:1.1;max-width:680px;margin-bottom:8px;text-transform:none;}
+.hero h1 span{color:var(--gold);}
+.hero-meta{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap;}
+.meta-pill{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-dim);}
+.meta-pill .icon{width:28px;height:28px;background:var(--dark3);border:1px solid rgba(var(--atelier-rgb),0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;}
+.content{padding:36px 56px 60px;display:flex;flex-direction:column;gap:28px;}
+.section-card{background:var(--dark2);border:1px solid rgba(var(--atelier-rgb),0.1);border-radius:14px;overflow:hidden;transition:border-color 0.3s;}
+.section-card:hover{border-color:rgba(var(--atelier-rgb),0.25);}
+.tabs-header{display:flex;border-bottom:1px solid rgba(var(--atelier-rgb),0.15);padding:0 24px;}
+.tab-btn{padding:13px 18px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--text-muted);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;text-transform:uppercase;transition:all 0.2s;}
+.tab-btn:hover{color:var(--text-dim);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-content{display:none;padding:22px 24px;}
+.tab-content.active{display:block;}
+.accordion-header{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;user-select:none;transition:background 0.2s;}
+.accordion-header:hover{background:rgba(var(--atelier-rgb),0.04);}
+.acc-num{width:34px;height:34px;border-radius:8px;background:var(--gold-glow);border:1px solid rgba(204,145,75,0.4);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:var(--gold);flex-shrink:0;}
+.acc-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--white);flex:1;text-transform:none;}
+.acc-subtitle{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.acc-chevron{font-size:18px;color:var(--gold);transition:transform 0.3s;flex-shrink:0;}
+.accordion-header.open .acc-chevron{transform:rotate(180deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.accordion-body.open{max-height:3000px;}
+.accordion-inner{padding:20px 22px 22px;border-top:1px solid rgba(var(--atelier-rgb),0.08);}
+.prompt-box{background:linear-gradient(135deg,rgba(30,61,74,0.5) 0%,rgba(26,32,48,0.8) 100%);border:1px solid rgba(204,145,75,0.3);border-left:4px solid var(--gold);border-radius:var(--radius);padding:18px 20px;margin:8px 0;position:relative;}
+.prompt-box-label{font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.prompt-box pre{font-family:'Courier New',monospace;font-size:12px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word;}
+.copy-btn{position:absolute;top:12px;right:12px;background:var(--dark3);border:1px solid rgba(204,145,75,0.3);border-radius:6px;color:var(--gold-light);font-size:10px;font-weight:700;padding:4px 10px;cursor:pointer;transition:all 0.2s;}
+.copy-btn:hover{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.copy-btn.copied{background:#2A5A2A;border-color:#4A8A4A;color:#8FD48F;}
+.niveau-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.niveau-socle{background:rgba(70,130,90,0.16);border:1px solid rgba(70,130,90,0.35);color:#9FD3A9;}
+.niveau-pro{background:rgba(80,120,180,0.16);border:1px solid rgba(80,120,180,0.35);color:#9EC3FF;}
+.niveau-expert{background:rgba(50,50,50,0.5);border:1px solid rgba(180,180,180,0.3);color:#D0D0D0;}
+.roi-box{background:rgba(204,145,75,0.05);border:1px solid rgba(204,145,75,0.18);border-radius:var(--radius);padding:14px 18px;margin:14px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.roi-item{display:flex;flex-direction:column;gap:3px;}
+.roi-label{font-size:10px;font-weight:700;letter-spacing:0.08em;color:var(--text-muted);text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;}
+.roi-value{font-size:13px;color:var(--gold-light);font-weight:500;}
+.ia-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(80,80,80,0.18);border:1px solid rgba(150,150,150,0.2);border-radius:8px;padding:8px 14px;font-size:11px;color:var(--text-dim);margin-top:12px;}
+.retain-box{background:linear-gradient(135deg,rgba(204,145,75,0.1) 0%,rgba(204,145,75,0.04) 100%);border:1px solid rgba(204,145,75,0.4);border-radius:var(--radius);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
+.retain-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.retain-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.retain-text{font-size:15px;font-weight:500;color:var(--white);line-height:1.6;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.info-card{background:var(--dark3);border:1px solid rgba(var(--atelier-rgb),0.12);border-radius:var(--radius);padding:14px 16px;}
+.info-card .label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;}
+.info-card .value{font-size:13px;color:var(--text);line-height:1.5;}
+.styled-table{width:100%;border-collapse:collapse;font-size:13px;}
+.styled-table th{background:rgba(var(--atelier-rgb),0.1);color:var(--gold-light);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(var(--atelier-rgb),0.2);}
+.styled-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);vertical-align:top;line-height:1.5;}
+.styled-table tr:last-child td{border-bottom:none;}
+.styled-table tr:hover td{background:rgba(var(--atelier-rgb),0.03);}
+.styled-table td:first-child{color:var(--gold-light);font-weight:500;}
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.bullet-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.55;color:var(--text);}
+.bullet-list li::before{content:'▸';color:var(--gold);flex-shrink:0;margin-top:1px;font-size:12px;}
+.avantapres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.avant-card{background:rgba(180,60,60,0.08);border:1px solid rgba(180,60,60,0.2);border-radius:var(--radius);padding:16px 18px;}
+.apres-card{background:rgba(60,140,80,0.08);border:1px solid rgba(60,140,80,0.2);border-radius:var(--radius);padding:16px 18px;}
+.aa-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.avant-card .aa-label{color:#E08080;}.apres-card .aa-label{color:#80C080;}
+.aa-text{font-size:13px;color:var(--text-dim);line-height:1.6;}
+.exercise-box{background:linear-gradient(135deg,rgba(30,45,61,0.8),rgba(26,32,48,0.9));border:1px solid rgba(var(--atelier-rgb),0.2);border-radius:12px;padding:24px;}
+.exercise-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.exercise-header .title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--white);}
+.timer-badge{background:var(--gold-glow);border:1px solid rgba(204,145,75,0.3);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;color:var(--gold-light);}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:12px;color:var(--text-dim);}
+.progress-bar-bg{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width 0.6s ease;}
+.step-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.step-list li{display:flex;gap:14px;align-items:flex-start;}
+.step-num-badge{width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--dark);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-text{font-size:13.5px;color:var(--text);line-height:1.55;}
+.result-box{background:var(--dark3);border-left:4px solid var(--teal-light);border-radius:var(--radius);padding:16px 18px;}
+.result-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--teal-light);text-transform:uppercase;margin-bottom:10px;font-family:'Barlow Condensed',sans-serif;}
+.result-box p{font-size:13px;line-height:1.65;color:var(--text-dim);margin-bottom:6px;}
+.result-box p:last-child{margin-bottom:0;}
+.result-box p strong{color:var(--text);}
+.prose{font-size:13.5px;line-height:1.7;color:var(--text-dim);}
+.prose strong{color:var(--text);font-weight:500;}
+.gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(204,145,75,0.3),transparent);margin:14px 0;}
+@media(max-width:900px){.sidenav{transform:translateX(-100%)}.main{margin-left:0}.content,.hero,.back-bar{padding-left:20px;padding-right:20px}.info-grid,.avantapres-grid,.roi-box{grid-template-columns:1fr}}
+html{scroll-behavior:smooth;}section[id]{scroll-margin-top:20px;}
+</style>
+</head>
+<body>
+<nav class="sidenav">
+  <div class="sidenav-logo">
+    <div class="studio">L'Rénov <span style="color:#cc914b;">IA</span> Studio</div>
+    <div class="subtitle">Institut IA · Experts Immo</div>
+  </div>
+  <div class="course-badge">
+    <div class="bloc-label">Atelier 4 · Chasseurs Immo</div>
+    <div class="course-num">Module <span>#13</span></div>
+  </div>
+  <ul class="nav-list">
+    <li><a href="#contexte" class="nav-link active" data-section="contexte"><span class="step-num">1</span>Le contexte</a></li>
+    <li><a href="#protection" class="nav-link" data-section="protection"><span class="step-num">2</span>Pourquoi ce CR protège</a></li>
+    <li><a href="#prompts" class="nav-link" data-section="prompts"><span class="step-num">3</span>Les prompts</a></li>
+    <li><a href="#exemple" class="nav-link" data-section="exemple"><span class="step-num">4</span>Exemple de résultat</a></li>
+    <li><a href="#ajustements" class="nav-link" data-section="ajustements"><span class="step-num">5</span>Ce qu'on ajuste</a></li>
+    <li><a href="#variantes" class="nav-link" data-section="variantes"><span class="step-num">6</span>Variantes métier</a></li>
+    <li><a href="#avantapres" class="nav-link" data-section="avantapres"><span class="step-num">7</span>Avant / Après</a></li>
+    <li><a href="#erreurs" class="nav-link" data-section="erreurs"><span class="step-num">8</span>Erreurs à éviter</a></li>
+    <li><a href="#retenir" class="nav-link" data-section="retenir"><span class="step-num">9</span>À retenir</a></li>
+    <li><a href="#exercice" class="nav-link" data-section="exercice"><span class="step-num">10</span>Exercice</a></li>
+  </ul>
+  <div class="nav-footer">
+    <div class="author">Laurence Borras</div>
+    <div class="role">L'Rénov IA Studio</div>
+  </div>
+</nav>
+
+<main class="main">
+<div class="back-bar">
+  <a href="https://www.skool.com/institut-ia-8547/classroom/102b581c?md=4f814b307127434493929a38e28916a4">← Retour à la formation</a>
+</div>
+<header class="hero">
+  <div class="hero-tag">Atelier 4 · Chasseurs Immo</div>
+  <h1>Compte-rendu de recherche <span>hebdomadaire</span></h1>
+  <div class="hero-meta">
+    <div class="meta-pill"><span class="icon">⏱</span> 30 min + exercice · 🎬 Vidéo à venir</div>
+    <div class="meta-pill"><span class="icon">🛠</span> ChatGPT, Claude, Gemini...</div>
+    <div class="meta-pill"><span class="icon">👤</span> Chasseurs immobiliers</div>
+    <div class="meta-pill"><span class="icon">📦</span> CR email · SMS · note interne · ajustement critères</div>
+  </div>
+</header>
+
+<div class="content">
+
+<section id="contexte">
+  <div class="section-card">
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab(this,'ctx13-prob')">Le problème</button>
+      <button class="tab-btn" onclick="switchTab(this,'ctx13-sol')">La solution IA</button>
+      <button class="tab-btn" onclick="switchTab(this,'ctx13-info')">Infos module</button>
+    </div>
+    <div id="ctx13-prob" class="tab-content active">
+      <p class="prose">En mission de chasse, le client ne voit pas ce que vous faites chaque semaine. Sans compte-rendu structuré, il doute. Le doute génère des relances, des tensions — et souvent un abandon de mission.</p>
+      <div class="gold-divider"></div>
+      <ul class="bullet-list">
+        <li>Chaque semaine sans nouvelles = baisse de confiance invisible</li>
+        <li>CR souvent rédigés à la va-vite, peu valorisants pour le chasseur</li>
+        <li>20 à 40 minutes mobilisées pour un document qui manque d'impact</li>
+        <li>Absence de traçabilité en cas de litige sur la mission</li>
+      </ul>
+    </div>
+    <div id="ctx13-sol" class="tab-content">
+      <p class="prose">L'IA transforme vos notes hebdomadaires brutes en compte-rendu professionnel, structuré, rassurant — en 5 minutes. Le client voit le travail invisible. Il relance moins, car il comprend ce qui a été fait et ce qui est prévu.</p>
+      <div class="gold-divider"></div>
+      <ul class="bullet-list">
+        <li>CR professionnel en 5 minutes chrono</li>
+        <li>Structure constante semaine après semaine — crédibilité cumulée</li>
+        <li>Trace écrite de chaque action menée</li>
+        <li>Réduit les relances client et sécurise la continuité de mission</li>
+      </ul>
+      <div class="roi-box">
+        <div class="roi-item"><div class="roi-label">⏱ Temps gagné</div><div class="roi-value">40 min → 5 min par CR</div></div>
+        <div class="roi-item"><div class="roi-label">📞 Relances client</div><div class="roi-value">Moins de relances liées au manque de visibilité</div></div>
+        <div class="roi-item"><div class="roi-label">📋 Traçabilité</div><div class="roi-value">Preuve d'activité en cas de litige</div></div>
+        <div class="roi-item"><div class="roi-label">🤝 Durée mission</div><div class="roi-value">Client informé = relation sécurisée</div></div>
+      </div>
+    </div>
+    <div id="ctx13-info" class="tab-content">
+      <div class="info-grid">
+        <div class="info-card"><div class="label">🎯 Objectif</div><div class="value">CR hebdo professionnel en 5 min chrono</div></div>
+        <div class="info-card"><div class="label">⏱ Durée</div><div class="value">30 min + exercice · 🎬 Vidéo à venir</div></div>
+        <div class="info-card"><div class="label">🛠 Outils</div><div class="value">ChatGPT, Claude, Gemini...</div></div>
+        <div class="info-card"><div class="label">📦 Livrable</div><div class="value">CR envoyable au client immédiatement</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="protection">
+  <div class="section-card">
+    <div class="accordion-header open" onclick="toggleAcc(this)">
+      <div class="acc-num">2</div>
+      <div>
+        <div class="acc-title">Pourquoi ce CR protège votre mission</div>
+        <div class="acc-subtitle">Confiance · preuve d'activité · continuité client</div>
+      </div>
+      <span class="acc-chevron">▾</span>
+    </div>
+    <div class="accordion-body open">
+      <div class="accordion-inner">
+        <ul class="bullet-list">
+          <li>Il rend visible le travail que le client ne voit pas : veille, tri, appels, relances, analyse.</li>
+          <li>Il évite l'effet "silence radio" qui fragilise la confiance après quelques semaines.</li>
+          <li>Il crée une trace régulière des actions menées pendant toute la durée de la mission.</li>
+          <li>Il permet d'ajuster les critères sans donner l'impression d'un échec ou d'un manque de résultats.</li>
+          <li>Il professionnalise la relation et réduit les relances liées au manque de visibilité.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prompts">
+  <div class="section-card">
+    <div class="accordion-header open" onclick="toggleAcc(this)">
+      <div class="acc-num">3</div>
+      <div>
+        <div class="acc-title">Les prompts à utiliser</div>
+        <div class="acc-subtitle">3 niveaux · Socle → Pro → Expert</div>
+      </div>
+      <span class="acc-chevron">▾</span>
+    </div>
+    <div class="accordion-body open">
+      <div class="accordion-inner">
+        <div class="tabs-header" style="margin:0 -22px;padding:0;">
+          <button class="tab-btn active" onclick="switchTab(this,'p13-socle')" style="padding-left:22px;">🟢 Socle</button>
+          <button class="tab-btn" onclick="switchTab(this,'p13-pro')">🔵 Pro</button>
+          <button class="tab-btn" onclick="switchTab(this,'p13-expert')">⚫ Expert</button>
+        </div>
+        <div id="p13-socle" class="tab-content active" style="padding:18px 0 0;">
+          <div class="niveau-badge niveau-socle">🟢 Socle — Démarrage rapide</div>
+          <div class="prompt-box">
+            <div class="prompt-box-label">💬 Prompt — CR Hebdomadaire · Socle</div>
+            <button class="copy-btn" onclick="copyById(this,'p13s')">Copier</button>
+            <pre id="p13s">Tu es chasseur immobilier.
+
+Rédige un compte-rendu hebdomadaire simple et professionnel à envoyer à mon client acquéreur.
+
+Informations :
+- Client : [prénom]
+- Semaine concernée : [date]
+- Zone de recherche : [ville / secteurs]
+- Critères principaux : [budget, type de bien, surface, localisation, points importants]
+
+Actions menées cette semaine :
+- [annonces analysées]
+- [biens écartés + raisons]
+- [visites réalisées]
+- [contacts agences / notaires / réseau]
+- [autres actions utiles]
+
+Prochaines étapes :
+- [ce que je vais faire la semaine prochaine]
+
+Contraintes :
+- N'invente aucune action.
+- Ne crée aucun chiffre non fourni.
+- Ne promets aucun résultat.
+- Ton professionnel, rassurant, clair.
+- Format prêt à envoyer par email.</pre>
+          </div>
+        </div>
+        <div id="p13-pro" class="tab-content" style="padding:18px 0 0;">
+          <div class="niveau-badge niveau-pro">🔵 Pro — Format structuré terrain</div>
+          <div class="prompt-box">
+            <div class="prompt-box-label">💬 Prompt — CR Hebdomadaire · Pro</div>
+            <button class="copy-btn" onclick="copyById(this,'p13p')">Copier</button>
+            <pre id="p13p">Tu es chasseur immobilier expérimenté.
+
+Ta mission : transformer mes notes brutes de la semaine en compte-rendu professionnel à envoyer à mon client acquéreur.
+
+CONTEXTE CLIENT
+- Client : [prénom]
+- Semaine concernée : [date]
+- Zone de recherche : [ville / secteurs]
+- Critères clés : [budget, type de bien, surface, extérieur, stationnement, écoles, transports, etc.]
+- Niveau d'avancement : [début de mission / recherche active / piste sérieuse identifiée / ajustement des critères]
+
+NOTES BRUTES DE LA SEMAINE
+[Colle ici toutes tes notes : annonces vues, biens analysés, biens écartés, visites, retours agences, contacts réseau, informations marché, alertes à surveiller]
+
+RÈGLES IMPORTANTES
+- N'invente aucune action.
+- Ne crée aucun chiffre non fourni.
+- Si une information manque, indique : [à compléter].
+- Ne formule aucune promesse de résultat.
+- Reste factuel, rassurant et professionnel.
+- Valorise le travail réalisé sans surjouer.
+
+FORMAT DE SORTIE ATTENDU
+
+1. OBJET EMAIL
+Court, professionnel, rassurant.
+
+2. INTRODUCTION
+2 à 3 lignes pour situer la semaine et maintenir la confiance.
+
+3. ACTIONS RÉALISÉES
+Liste claire des actions menées, avec formulation valorisante mais factuelle.
+
+4. BIENS ÉCARTÉS ET RAISONS
+Présente les biens non retenus comme un vrai travail de filtrage.
+
+5. POINT DE VIGILANCE OU SIGNAL MARCHÉ
+Un élément utile pour aider le client à comprendre la réalité du marché.
+
+6. PROCHAINES ÉTAPES
+Actions prévues, formulées de façon concrète.
+
+7. CONCLUSION
+Courte, professionnelle, avec une date ou période de prochain point si possible.</pre>
+          </div>
+        </div>
+        <div id="p13-expert" class="tab-content" style="padding:18px 0 0;">
+          <div class="niveau-badge niveau-expert">⚫ Expert — Pilotage premium de la relation client</div>
+          <div class="prompt-box">
+            <div class="prompt-box-label">💬 Prompt — CR Hebdomadaire · Expert</div>
+            <button class="copy-btn" onclick="copyById(this,'p13e')">Copier</button>
+            <pre id="p13e">Tu es chasseur immobilier senior.
+
+Ta mission : transformer mes notes brutes en compte-rendu hebdomadaire premium, professionnel et rassurant, à envoyer à mon client acquéreur.
+
+Le compte-rendu doit :
+- rendre visible le travail invisible,
+- maintenir la confiance,
+- sécuriser la relation client,
+- éviter les relances inutiles,
+- préparer les ajustements de critères si nécessaire.
+
+CONTEXTE MISSION
+- Client : [prénom]
+- Profil client : [primo-accédant / investisseur / mutation / famille / retraité / client inquiet / client pressé]
+- Zone de recherche : [ville / secteurs]
+- Budget : [budget]
+- Critères prioritaires : [critères]
+- Points non négociables : [points bloquants]
+- Semaine concernée : [date]
+- Avancement : [semaine X / début de mission / recherche active / piste sérieuse / ajustement des critères]
+
+NOTES BRUTES DE LA SEMAINE
+[Colle ici toutes tes notes : annonces analysées, biens écartés, visites, appels agences, contacts notaires, réseau, biens off-market, signaux marché, retours vendeurs, points de blocage, prochaines actions]
+
+RÈGLES IMPORTANTES
+- N'invente aucune action.
+- Ne crée aucun chiffre non fourni.
+- Ne promets jamais qu'un bien sera trouvé.
+- Ne donne pas de conseil juridique, financier ou fiscal.
+- Si une information manque, indique : [à compléter].
+- Reste factuel, professionnel, rassurant.
+- Valorise le travail réalisé sans surjouer.
+- Ne donne jamais l'impression que la mission stagne : montre ce qui a été appris, écarté ou ajusté.
+
+PRODUIS 4 LIVRABLES
+
+LIVRABLE 1 — EMAIL CLIENT COMPLET
+Structure :
+1. Objet email
+2. Introduction courte et rassurante
+3. Actions réalisées cette semaine
+4. Biens étudiés puis écartés, avec motifs
+5. Pistes intéressantes ou signaux marché
+6. Ce que cette semaine nous apprend sur la recherche
+7. Prochaines actions
+8. Conclusion professionnelle avec prochaine période de contact
+
+LIVRABLE 2 — VERSION COURTE SMS / WHATSAPP
+5 lignes maximum :
+- actions réalisées
+- point important
+- piste éventuelle
+- prochaine étape
+- date ou période du prochain contact
+
+LIVRABLE 3 — NOTE INTERNE CHASSEUR
+À ne pas envoyer au client.
+Format 4 lignes :
+- Niveau de confiance perçu du client
+- Risque relationnel éventuel
+- Ajustement à anticiper
+- Prochaine action stratégique
+
+LIVRABLE 4 — VERSION "AJUSTEMENT DE CRITÈRES"
+Si les notes montrent que les critères actuels bloquent la recherche, propose une formulation diplomate pour ouvrir la discussion avec le client sans le braquer.</pre>
+          </div>
+          <div class="ia-badge"><span>🛡</span><span>IA Responsable — Supprimer la note interne avant envoi. L'IA assiste, vous engagez.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exemple">
+  <div class="section-card">
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab(this,'ex13-data')">Notes brutes</button>
+      <button class="tab-btn" onclick="switchTab(this,'ex13-result')">CR généré</button>
+    </div>
+    <div id="ex13-data" class="tab-content active">
+      <p class="prose" style="margin-bottom:12px;">Notes brutes d'une semaine de chasse — Bordeaux, exemple fictif :</p>
+      <ul class="bullet-list">
+        <li>52 annonces passées en revue — SeLoger, LeBonCoin, PAP, réseaux sociaux</li>
+        <li>6 biens écartés : 3 hors budget, 2 trop de travaux, 1 secteur non souhaité</li>
+        <li>2 visites : appartement Pessac — trop sombre. Maison Mérignac — intéressante, CR joint</li>
+        <li>Contact notaire : bien en sortie de succession, disponible bientôt</li>
+        <li>Semaine prochaine : relance vendeur maison Mérignac, élargir réseau agences secteur Est</li>
+      </ul>
+    </div>
+    <div id="ex13-result" class="tab-content">
+      <div class="result-box">
+        <div class="result-label">✦ CR généré — niveau Pro</div>
+        <p><strong>Objet :</strong> Votre recherche — point hebdomadaire semaine du [date]</p>
+        <p><strong>Introduction :</strong> Voici le bilan de mes actions cette semaine. La semaine a été active, avec un point d'attention sur un bien hors marché à surveiller.</p>
+        <p><strong>Ce qui a été fait :</strong> 52 annonces analysées sur les principales plateformes et réseaux. 2 visites effectuées (CR détaillés joints). Contact établi avec un notaire partenaire — bien en sortie de succession identifié.</p>
+        <p><strong>Ce qui a été écarté :</strong> 6 biens écartés — 3 hors budget, 2 travaux structurels incompatibles, 1 hors secteur cible.</p>
+        <p><strong>Focus :</strong> La maison visitée à Mérignac correspond à plusieurs critères absolus de votre CDC. Je reprends contact avec le vendeur dès lundi.</p>
+        <p><strong>Prochaines étapes :</strong> Relance vendeur Mérignac · Élargissement réseau agences secteur Est · Veille bien off-market notaire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ajustements">
+  <div class="section-card">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <div class="acc-num">5</div>
+      <div>
+        <div class="acc-title">Ce qu'on ajuste avant envoi</div>
+        <div class="acc-subtitle">3 réflexes systématiques</div>
+      </div>
+      <span class="acc-chevron">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <table class="styled-table">
+          <thead><tr><th>Ajustement</th><th>Pourquoi</th></tr></thead>
+          <tbody>
+            <tr><td>Vérifier tous les chiffres mentionnés</td><td>Un chiffre erroné dans un CR professionnel nuit immédiatement à la crédibilité</td></tr>
+            <tr><td>Ajouter 1 détail terrain personnel</td><td>1 phrase que vous seul connaissez rend le CR vivant et non robotique</td></tr>
+            <tr><td>Supprimer la note interne avant envoi</td><td>Elle est pour vous — jamais pour le client</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="variantes">
+  <div class="section-card">
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab(this,'var13-invest')">Client investisseur</button>
+      <button class="tab-btn" onclick="switchTab(this,'var13-impatient')">Client inquiet / relances fréquentes</button>
+      <button class="tab-btn" onclick="switchTab(this,'var13-court')">Format court</button>
+      <button class="tab-btn" onclick="switchTab(this,'var13-criteres')">Critères trop serrés</button>
+    </div>
+    <div id="var13-invest" class="tab-content active">
+      <p class="prose" style="margin-bottom:10px;">Ajoutez au prompt Pro ou Expert :</p>
+      <div class="prompt-box"><pre>"Client investisseur. Dans le focus de la semaine, mentionne systématiquement : estimation rentabilité brute du bien le plus pertinent (si mentionnée dans mes notes), et les éléments qui impactent la revente."</pre></div>
+    </div>
+    <div id="var13-impatient" class="tab-content">
+      <p class="prose" style="margin-bottom:10px;">Ajoutez au prompt Pro ou Expert :</p>
+      <div class="prompt-box"><pre>"Client inquiet qui relance souvent et semble avoir besoin d'être rassuré sur l'avancement de la mission. Ton factuel, professionnel et proactif. Ne sur-promets rien. Termine par une prochaine étape datée ou une période claire de prochain contact."</pre></div>
+    </div>
+    <div id="var13-court" class="tab-content">
+      <p class="prose" style="margin-bottom:10px;">Pour un CR en 5 lignes (SMS ou message court) :</p>
+      <div class="prompt-box"><pre>"Version ultra-courte : 5 lignes max. 1 ligne par rubrique : actions / écarté / point fort / prochaine étape / date prochain contact. Pas d'introduction ni de conclusion."</pre></div>
+    </div>
+    <div id="var13-criteres" class="tab-content">
+      <p class="prose" style="margin-bottom:10px;">Quand le budget, le secteur ou les critères bloquent la recherche :</p>
+      <div class="prompt-box"><pre>"Les critères actuels semblent limiter fortement les opportunités. Reformule ce point de manière diplomate dans le CR : explique ce que la semaine nous apprend sur le marché, sans donner l'impression d'un échec, et propose 2 options d'ajustement réalistes à discuter avec le client."</pre></div>
+    </div>
+  </div>
+</section>
+
+<section id="avantapres">
+  <div class="section-card">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <div class="acc-num">7</div>
+      <div>
+        <div class="acc-title">Avant / Après</div>
+        <div class="acc-subtitle">L'impact d'un CR structuré sur la relation client</div>
+      </div>
+      <span class="acc-chevron">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <div class="avantapres-grid">
+          <div class="avant-card">
+            <div class="aa-label">❌ Avant — CR informel</div>
+            <div class="aa-text">"Bonjour, j'ai bien avancé cette semaine, quelques biens vus mais rien de concluant. Je continue !"<br><br>→ Le client ne sait pas ce que vous faites. Il appelle. Il doute. Il cherche en parallèle.</div>
+          </div>
+          <div class="apres-card">
+            <div class="aa-label">✅ Après — CR structuré IA</div>
+            <div class="aa-text">52 annonces analysées, 6 écartées avec motif, 2 visites documentées, 1 off-market identifié, prochaines étapes datées.<br><br>→ Le client voit la valeur de la mission. Il relance moins, car il comprend ce qui a été fait et ce qui est prévu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="erreurs">
+  <div class="section-card">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <div class="acc-num">8</div>
+      <div>
+        <div class="acc-title">Les erreurs à éviter</div>
+        <div class="acc-subtitle">Ce qui fragilise un CR client</div>
+      </div>
+      <span class="acc-chevron">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <table class="styled-table">
+          <thead><tr><th>Erreur</th><th>Pourquoi c'est risqué</th><th>À faire à la place</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Dire "rien à signaler cette semaine"</td>
+              <td>Le client peut croire que rien n'a été fait</td>
+              <td>Montrer la veille, les biens écartés et les raisons du filtrage</td>
+            </tr>
+            <tr>
+              <td>Promettre une opportunité à venir</td>
+              <td>Créer une attente non maîtrisée qui fragilise la relation</td>
+              <td>Parler de piste à surveiller ou d'action prévue</td>
+            </tr>
+            <tr>
+              <td>Envoyer un CR trop vague</td>
+              <td>Ne donne aucune preuve d'activité concrète</td>
+              <td>Structurer : actions, écartés avec motifs, apprentissages, prochaines étapes</td>
+            </tr>
+            <tr>
+              <td>Oublier les biens écartés</td>
+              <td>Le travail de filtrage devient invisible — pourtant c'est votre valeur ajoutée</td>
+              <td>Valoriser les exclusions comme une protection active du client</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="retenir">
+  <div class="retain-box">
+    <div class="retain-icon">⭐</div>
+    <div>
+      <div class="retain-label">À retenir</div>
+      <div class="retain-text">Un bon CR hebdomadaire ne sert pas seulement à informer : il maintient la confiance, prouve le travail réalisé et prépare les ajustements de mission sans tension.</div>
+    </div>
+  </div>
+</section>
+
+<section id="exercice">
+  <div class="exercise-box">
+    <div class="exercise-header">
+      <span style="font-size:20px;">🎯</span>
+      <div class="title">Votre exercice</div>
+      <div class="timer-badge">⏱ 10 min chrono</div>
+    </div>
+    <div class="progress-row">
+      <span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">Progression</span>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar13" style="width:0%"></div></div>
+      <span style="font-size:11px;color:var(--gold);white-space:nowrap;" id="progressLabel13">0/5</span>
+    </div>
+    <ol class="step-list">
+      <li><div class="step-num-badge" id="stepBadge13-1">1</div><div class="step-text">Notez en vrac les actions de votre dernière semaine de chasse <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep13(1)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge13-2">2</div><div class="step-text">Copiez le prompt Pro, collez vos notes brutes <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep13(2)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge13-3">3</div><div class="step-text">Lancez dans votre outil IA préféré — lisez le CR généré <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep13(3)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge13-4">4</div><div class="step-text">Ajoutez 1 détail terrain personnel <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep13(4)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge13-5">5</div><div class="step-text">Envoyez — notez combien de temps vous avez mobilisé <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep13(5)">✓ Fait</button></div></li>
+    </ol>
+    <div id="exerciseDone13" style="display:none;margin-top:20px;">
+      <div class="retain-box">
+        <div class="retain-icon">🎉</div>
+        <div>
+          <div class="retain-label">Exercice terminé</div>
+          <div class="retain-text">CR prêt en moins de 10 min. Prochain module : Fiche de présentation d'un bien trouvé.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+<script>
+function switchTab(btn,id){
+  const w=btn.closest('.section-card')||btn.closest('.accordion-inner');
+  if(!w)return;
+  w.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  w.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+function toggleAcc(h){const b=h.nextElementSibling;const o=h.classList.contains('open');h.classList.toggle('open',!o);b.classList.toggle('open',!o);}
+function copyById(btn,id){navigator.clipboard.writeText(document.getElementById(id).textContent.trim()).then(()=>{btn.textContent='✓ Copié !';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copier';btn.classList.remove('copied');},2000);});}
+let done13=new Set();
+function checkStep13(n){done13.add(n);const b=document.getElementById('stepBadge13-'+n);b.textContent='✓';b.style.background='#2A5A2A';b.style.color='#8FD48F';const pct=(done13.size/5)*100;document.getElementById('progressBar13').style.width=pct+'%';document.getElementById('progressLabel13').textContent=done13.size+'/5';if(done13.size===5)document.getElementById('exerciseDone13').style.display='block';}
+const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('.nav-link');
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[data-section="${e.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>

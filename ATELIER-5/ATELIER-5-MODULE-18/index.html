@@ -3,10 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module #19 — Demandes de suppression — Institut IA</title>
+<title>Module #18 — Politique de confidentialité — Institut IA</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-:root{--dark:#222b32;--dark2:#2a3540;--dark3:#303e4a;--panel:#222b32;--gold:#cc914b;--gold-light:#d9a660;--gold-dim:#9a6e35;--gold-glow:rgba(204,145,75,0.18);--teal:#1E3D4A;--teal-light:#2A5466;--text:#E8E2D8;--text-dim:#9A9490;--text-muted:#5A5650;--white:#FFFFFF;--nav-w:260px;--radius:10px;--atelier:#F0A070;--atelier-glow:rgba(200,100,25,0.2);}
+:root {
+  --dark:#222b32;--dark2:#2a3540;--dark3:#303e4a;--panel:#222b32;
+  --gold:#cc914b;--gold-light:#d9a660;--gold-dim:#9a6e35;--gold-glow:rgba(204,145,75,0.18);
+  --teal:#1E3D4A;--teal-light:#2A5466;
+  --text:#E8E2D8;--text-dim:#9A9490;--text-muted:#5A5650;--white:#FFFFFF;
+  --nav-w:260px;--radius:10px;
+  --atelier:#F0A070;--atelier-glow:rgba(200,100,25,0.2);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;display:flex;overflow-x:hidden;}
 .sidenav{width:var(--nav-w);min-height:100vh;background:var(--panel);border-right:1px solid rgba(240,160,112,0.15);position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;padding-bottom:24px;}
@@ -111,8 +118,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);m
 .result-box p{font-size:13px;line-height:1.65;color:var(--text-dim);margin-bottom:8px;}
 .result-box p:last-child{margin-bottom:0;}
 .result-box p strong{color:var(--text);}
-@media(max-width:900px){.sidenav{transform:translateX(-100%);}.main{margin-left:0;}.content,.hero{padding-left:24px;padding-right:24px;}.info-grid,.avantapres-grid{grid-template-columns:1fr;}}
-html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
+@media(max-width:900px){.sidenav{transform:translateX(-100%);}  .main{margin-left:0;}.content,.hero{padding-left:24px;padding-right:24px;}.info-grid,.avantapres-grid{grid-template-columns:1fr;}}
+html{scroll-behavior:smooth;}
+section[id]{scroll-margin-top:24px;}
 </style>
 </head>
 <body>
@@ -124,17 +132,17 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
   </div>
   <div class="course-badge">
     <div class="bloc-label">Atelier 5 · RGPD</div>
-    <div class="course-num">Module <span>#19</span></div>
+    <div class="course-num">Module <span>#18</span></div>
   </div>
-  <ul class="nav-list">
+  <ul class="nav-list" id="navList">
     <li><a href="#contexte" class="nav-link active" data-section="contexte"><span class="step-num">1</span>Le contexte</a></li>
     <li><a href="#prompts" class="nav-link" data-section="prompts"><span class="step-num">2</span>Les prompts</a></li>
     <li><a href="#exemple" class="nav-link" data-section="exemple"><span class="step-num">3</span>Exemple de résultat</a></li>
-    <li><a href="#ajustements" class="nav-link" data-section="ajustements"><span class="step-num">4</span>Ce qu'on vérifie</a></li>
-    <li><a href="#variantes" class="nav-link" data-section="variantes"><span class="step-num">5</span>Variantes métier</a></li>
-    <li><a href="#avantapres" class="nav-link" data-section="avantapres"><span class="step-num">6</span>Avant / Après</a></li>
-    <li><a href="#retenir" class="nav-link" data-section="retenir"><span class="step-num">7</span>À retenir</a></li>
-    <li><a href="#reflexe" class="nav-link" data-section="reflexe"><span class="step-num">8</span>Phrase réflexe</a></li>
+    <li><a href="#ajustements" class="nav-link" data-section="ajustements"><span class="step-num">4</span>Ce qu'on ajuste</a></li>
+    <li><a href="#preparer" class="nav-link" data-section="preparer"><span class="step-num">5</span>Infos à préparer</a></li>
+    <li><a href="#variantes" class="nav-link" data-section="variantes"><span class="step-num">6</span>Variantes métier</a></li>
+    <li><a href="#avantapres" class="nav-link" data-section="avantapres"><span class="step-num">7</span>Avant / Après</a></li>
+    <li><a href="#retenir" class="nav-link" data-section="retenir"><span class="step-num">8</span>À retenir</a></li>
     <li><a href="#exercice" class="nav-link" data-section="exercice"><span class="step-num">9</span>Exercice</a></li>
   </ul>
   <div class="nav-footer">
@@ -152,13 +160,13 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
 </div>
 
 <header class="hero">
-  <div class="hero-tag">Module #19 · Atelier 5 · RGPD</div>
-  <h1>Gérer les <span>demandes de suppression</span><br>sans panique et avec méthode</h1>
+  <div class="hero-tag">Module #18 · Atelier 5 · RGPD</div>
+  <h1>Politique de confidentialité : <span>préparer une base solide en 10 minutes</span></h1>
   <div class="hero-meta">
     <div class="meta-pill"><span class="icon">⏱</span> 30 min + exercice · 🎬 Vidéo en cours de production</div>
     <div class="meta-pill"><span class="icon">🛠</span> ChatGPT, Claude, Gemini...</div>
     <div class="meta-pill"><span class="icon">👤</span> Agents & mandataires</div>
-    <div class="meta-pill"><span class="icon">📦</span> 2 prompts clés en main</div>
+    <div class="meta-pill"><span class="icon">📦</span> 2 prompts pour créer une base à valider</div>
   </div>
 </header>
 
@@ -167,36 +175,36 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
 <section id="contexte">
   <div class="section-card">
     <div class="tabs-header">
-      <button class="tab-btn active" onclick="switchTab(this,'ctx-prob19')">Le problème</button>
-      <button class="tab-btn" onclick="switchTab(this,'ctx-sol19')">La solution IA</button>
-      <button class="tab-btn" onclick="switchTab(this,'ctx-info19')">Infos module</button>
+      <button class="tab-btn active" onclick="switchTab(this,'ctx-prob18')">Le problème</button>
+      <button class="tab-btn" onclick="switchTab(this,'ctx-sol18')">La solution IA</button>
+      <button class="tab-btn" onclick="switchTab(this,'ctx-info18')">Infos module</button>
     </div>
-    <div id="ctx-prob19" class="tab-content active">
-      <p class="prose">Un ancien prospect vous envoie un email : "Supprimez toutes mes données." Vous avez 30 jours pour répondre. Que faites-vous ? Que supprimez-vous vraiment ? Que gardez-vous légalement ?</p>
+    <div id="ctx-prob18" class="tab-content active">
+      <p class="prose">Dès qu'un site web collecte des données personnelles — même via un simple formulaire de contact — une information claire sur l'utilisation de ces données est nécessaire. Mais rédiger une politique de confidentialité lisible, complète et adaptée à son activité prend vite du temps.</p>
       <div class="gold-divider"></div>
       <ul class="bullet-list">
-        <li>Délai légal de réponse : 1 mois (extensible à 3 mois en cas de complexité)</li>
-        <li>Ne pas répondre peut constituer un manquement RGPD, même lorsque la demande paraît excessive ou mal formulée</li>
-        <li>Certaines données doivent être conservées malgré la demande (obligations légales)</li>
-        <li>Aucune procédure claire = stress et erreurs sous pression</li>
+        <li>Information obligatoire dès qu'un site collecte des données personnelles, même via un simple formulaire de contact</li>
+        <li>Les modèles gratuits en ligne sont souvent incomplets ou inadaptés à l'immobilier</li>
+        <li>Un document juridique illisible nuit à la confiance du prospect</li>
+        <li>L'absence d'information claire crée un risque de non-conformité et nuit à la confiance</li>
       </ul>
     </div>
-    <div id="ctx-sol19" class="tab-content">
-      <p class="prose">L'IA vous aide à préparer en 2 minutes une <strong>réponse email structurée</strong> et une <strong>checklist de traitement</strong> pour savoir quoi vérifier, quoi supprimer, quoi conserver, et comment le documenter.</p>
+    <div id="ctx-sol18" class="tab-content">
+      <p class="prose">L'IA permet de préparer une première version structurée de votre politique de confidentialité, adaptée à votre activité immobilière. Elle ne remplace pas un juriste ou un DPO, mais elle vous aide à obtenir une base claire, complète et beaucoup plus facile à faire relire.</p>
       <div class="gold-divider"></div>
       <ul class="bullet-list">
-        <li>Email de réponse structuré : accusé de réception + délai + actions prévues</li>
-        <li>Distinction claire : données à supprimer vs données à conserver (obligations légales)</li>
-        <li>Traçabilité : comment documenter la suppression pour se protéger</li>
-        <li>Impact terrain : réduction nette du risque, car la demande est traitée, suivie et documentée</li>
+        <li>Structure complète de travail : identité du responsable, données collectées, finalités, droits</li>
+        <li>Adapté à l'activité d'agent indépendant ou de mandataire</li>
+        <li>Ton lisible : ni trop juridique, ni trop désinvolte</li>
+        <li>Impact terrain : votre site inspire confiance, vos formulaires sont mieux encadrés</li>
       </ul>
     </div>
-    <div id="ctx-info19" class="tab-content">
+    <div id="ctx-info18" class="tab-content">
       <div class="info-grid">
-        <div class="info-card"><div class="label">🎯 Objectif</div><div class="value">Traiter une demande de suppression en moins de 30 minutes, correctement</div></div>
+        <div class="info-card"><div class="label">🎯 Objectif</div><div class="value">Préparer une politique de confidentialité structurée, à relire et valider avant publication</div></div>
         <div class="info-card"><div class="label">⏱ Durée</div><div class="value">30 min + exercice · 🎬 Vidéo en cours de production</div></div>
         <div class="info-card"><div class="label">🛠 Outils</div><div class="value">ChatGPT, Claude, Gemini...</div></div>
-        <div class="info-card"><div class="label">📦 Livrable</div><div class="value">1 email-type de réponse + checklist de traitement</div></div>
+        <div class="info-card"><div class="label">📦 Livrable</div><div class="value">1 base de politique prête à compléter, relire et faire valider</div></div>
       </div>
     </div>
   </div>
@@ -208,87 +216,108 @@ html{scroll-behavior:smooth;}section[id]{scroll-margin-top:24px;}
       <div class="acc-num">2</div>
       <div>
         <div class="acc-title">Les prompts à utiliser</div>
-        <div class="acc-subtitle">Réponse email + checklist de traitement</div>
+        <div class="acc-subtitle">Socle pour démarrer · Renforcé pour un document complet</div>
       </div>
       <span class="acc-chevron">▾</span>
     </div>
     <div class="accordion-body open">
       <div class="accordion-inner">
         <div class="tabs-header" style="padding:0;margin-bottom:16px;">
-          <button class="tab-btn active" onclick="switchTab(this,'p19-socle-tab')">🟢 Prompt socle</button>
-          <button class="tab-btn" onclick="switchTab(this,'p19-pro-tab')">🔵 Prompt renforcé</button>
+          <button class="tab-btn active" onclick="switchTab(this,'p18-socle-tab')">🟢 Prompt socle</button>
+          <button class="tab-btn" onclick="switchTab(this,'p18-pro-tab')">🔵 Prompt renforcé</button>
         </div>
-        <div id="p19-socle-tab" class="tab-content active" style="padding:0;">
-          <div class="niveau-badge niveau-socle">🟢 Niveau Socle — Email de réponse rapide</div>
+        <div id="p18-socle-tab" class="tab-content active" style="padding:0;">
+          <div class="niveau-badge niveau-socle">🟢 Niveau Socle — Démarrage immédiat</div>
           <div class="prompt-box">
-            <div class="prompt-box-label">💬 Prompt — Email de réponse à une demande de suppression</div>
-            <button class="copy-btn" onclick="copyById(this,'p19-socle')">Copier</button>
-            <pre id="p19-socle">Tu es un assistant spécialisé RGPD pour un professionnel de l'immobilier.
+            <div class="prompt-box-label">💬 Prompt — Politique de confidentialité</div>
+            <button class="copy-btn" onclick="copyById(this,'p18-socle')">Copier</button>
+            <pre id="p18-socle">Tu es assistant spécialisé en RGPD appliqué aux petites activités immobilières.
 
-Je dois répondre à une demande de suppression de données personnelles.
+Aide-moi à rédiger une première version de politique de confidentialité pour mon activité d'agent immobilier indépendant.
 
-Contexte :
-- Demandeur : [prénom nom ou "prospect / ancien client"]
-- Type de relation : [prospect / ancien client / client en cours / inconnu]
-- Date de réception de la demande : [date]
-- Canal de réception : [email / courrier / formulaire / SMS]
-- Données détenues : [email, téléphone, critères de recherche, échanges, documents, photos...]
-- Situation : [aucun mandat / mandat clôturé / mandat en cours / recherche abandonnée / autre]
-- Point à vérifier : [obligation légale, contractuelle ou contentieuse éventuelle]
+Mon profil :
+- Statut : [mandataire / agent commercial / agent immobilier / autre]
+- Réseau ou structure : [nom du réseau / indépendant / à compléter]
+- Site web : [URL ou "pas encore en ligne"]
+- Données collectées : nom, prénom, email, téléphone, projet immobilier, budget, secteur recherché
+- Canaux de collecte : formulaire de contact, email, téléphone, WhatsApp, CRM
 
-Rédige un email professionnel qui :
-1. Accuse réception de la demande
-2. Indique que la demande sera traitée dans le délai légal d'un mois
-3. Précise les données concernées par la suppression
-4. Mentionne, si nécessaire, que certaines données peuvent être conservées lorsqu'une obligation légale ou contractuelle l'impose
-5. Reste clair, calme et non défensif
-6. Ne promet pas une suppression totale si toutes les vérifications ne sont pas faites
-7. Invite à confirmer l'identité uniquement si un doute raisonnable existe
+Objectif :
+Créer une politique claire, lisible par un client non-juriste, structurée et adaptée à mon activité.
 
 Contraintes :
-- 8 à 12 lignes maximum
-- Ton professionnel, simple et rassurant
-- Ne cite pas d'article juridique si tu n'es pas certain
-- Si une information manque, indique-la entre crochets
-- Termine par une phrase confirmant qu'une confirmation écrite sera envoyée après traitement</pre>
+- Ne pas inventer d'informations manquantes
+- Mettre [À compléter] quand une information manque
+- Ne pas présenter le document comme validé juridiquement
+- Ajouter une mention finale : "Document à relire et à valider avant publication"
+
+Format attendu :
+1. Responsable du traitement
+2. Données collectées
+3. Finalités
+4. Bases légales
+5. Durées de conservation
+6. Destinataires et sous-traitants
+7. Droits des personnes
+8. Cookies si applicable
+9. Sécurité
+10. Contact et réclamation CNIL</pre>
           </div>
         </div>
-        <div id="p19-pro-tab" class="tab-content" style="padding:0;">
-          <div class="niveau-badge niveau-pro">🔵 Niveau Pro — Procédure complète + traçabilité</div>
+        <div id="p18-pro-tab" class="tab-content" style="padding:0;">
+          <div class="niveau-badge niveau-pro">🔵 Niveau Pro — Document complet et structuré</div>
           <div class="prompt-box">
-            <div class="prompt-box-label">💬 Prompt renforcé — Traitement complet d'une demande</div>
-            <button class="copy-btn" onclick="copyById(this,'p19-pro')">Copier</button>
-            <pre id="p19-pro">Tu es un assistant RGPD spécialisé dans les situations terrain des professionnels de l'immobilier.
+            <div class="prompt-box-label">💬 Prompt renforcé — Politique complète avec sections</div>
+            <button class="copy-btn" onclick="copyById(this,'p18-pro')">Copier</button>
+            <pre id="p18-pro">Tu es consultant RGPD spécialisé dans les activités immobilières indépendantes.
 
-Je reçois une demande de suppression de données personnelles. Aide-moi à la traiter correctement, sans inventer de règle juridique et sans supprimer ce qui doit être conservé.
+Je veux préparer une politique de confidentialité pour mon activité, à partir de mes informations réelles.
 
-Contexte :
-- Mon statut : [agent commercial / mandataire / agent salarié / indépendant]
-- Réseau ou structure : [IAD / Safti / agence indépendante / autre]
-- Demandeur : [prénom nom]
-- Qualité du demandeur : [prospect / ancien client / client en cours / tiers / inconnu]
-- Date de réception : [date]
-- Canal : [email / courrier / formulaire / SMS]
-- Données présentes dans le CRM : [liste]
-- Données hors CRM : [emails, téléphone, cloud, papier, photos, agenda, fichiers...]
-- Nature de la relation : [prospect sans mandat / mandat signé / compromis / vente finalisée / litige / autre]
-- Documents signés ou obligations possibles : [mandat, bon de visite, compromis, facture, réclamation, contentieux...]
+CONTEXTE PROFESSIONNEL :
+- Statut exact : [mandataire immobilier / agent commercial / agent immobilier titulaire carte T / auto-entrepreneur / autre]
+- Réseau ou agence : [nom]
+- Mon rôle dans le traitement des données : [à déterminer si je suis responsable, co-responsable ou utilisateur d'un outil du réseau]
+- Site web : [URL]
+- Formulaires utilisés : [Tally, Google Forms, formulaire WordPress, autre]
+- CRM utilisé : [nom]
+- Outils emailing : [MailerLite, Brevo, Mailchimp, aucun]
+- Outils de communication : [Gmail, Outlook, WhatsApp, téléphone, SMS]
+- Hébergeur du site : [nom + pays si connu]
+- Données collectées : [liste précise]
+- Finalités : contact, estimation, recherche acquéreur, suivi vendeur, newsletter, prospection, statistiques
+- Durées de conservation connues : [durées réelles ou "à proposer"]
+- Cookies / statistiques : [Google Analytics, Matomo, aucun, je ne sais pas]
 
-Ta mission :
-1. Me dire quelles données peuvent a priori être supprimées
-2. Me dire quelles données doivent être vérifiées avant suppression
-3. Me signaler les données qui pourraient devoir être conservées pour obligation légale, contractuelle ou preuve
-4. Rédiger un email de réponse au demandeur
-5. Créer une checklist de traitement par support : CRM, email, téléphone, cloud, papier
-6. Créer un mini-registre de suivi de la demande
-7. Lister les erreurs fréquentes à éviter
+RÈGLES ABSOLUES :
+- Ne jamais inventer un outil, un sous-traitant ou une durée
+- Si une information manque, écrire [À compléter]
+- Si un point dépend du réseau immobilier, écrire [À vérifier avec le réseau]
+- Si un point nécessite une validation juridique, écrire [À valider juriste/DPO]
+- Ne pas affirmer que le document est juridiquement conforme
+- Écrire dans un style clair, professionnel et compréhensible par un client
 
-Règles impératives :
-- N'invente aucune obligation légale
-- Ne donne pas de durée de conservation si elle dépend du contexte
-- Si une règle doit être validée par le réseau, le DPO ou un juriste, écris : [à valider]
-- Ne promets jamais une suppression totale tant que les obligations de conservation ne sont pas vérifiées
-- Réponds dans un format clair : tableau + email prêt à envoyer + checklist</pre>
+LIVRABLE ATTENDU :
+Rédige une politique de confidentialité structurée avec les sections suivantes :
+1. Identité du responsable de traitement
+2. Données personnelles collectées
+3. Moyens de collecte
+4. Finalités des traitements
+5. Bases légales associées
+6. Durées de conservation proposées
+7. Destinataires des données
+8. Sous-traitants et outils utilisés
+9. Transferts hors Union européenne si applicables ou à vérifier
+10. Cookies et mesure d'audience
+11. Sécurité des données
+12. Droits des personnes concernées
+13. Modalités d'exercice des droits
+14. Réclamation auprès de la CNIL
+15. Date de dernière mise à jour
+
+À la fin, ajoute :
+- Une checklist des informations à vérifier avant publication
+- Les zones à compléter
+- Les points à valider avec le réseau ou un DPO</pre>
           </div>
         </div>
       </div>
@@ -299,27 +328,30 @@ Règles impératives :
 <section id="exemple">
   <div class="section-card">
     <div class="tabs-header">
-      <button class="tab-btn active" onclick="switchTab(this,'ex-data19')">Situation de départ</button>
-      <button class="tab-btn" onclick="switchTab(this,'ex-result19')">Réponse générée</button>
+      <button class="tab-btn active" onclick="switchTab(this,'ex-data18')">Données saisies</button>
+      <button class="tab-btn" onclick="switchTab(this,'ex-result18')">Extrait du résultat</button>
     </div>
-    <div id="ex-data19" class="tab-content active">
-      <p class="prose" style="margin-bottom:14px;">Un mandataire reçoit cet email : <em>"Bonjour, je vous demande de supprimer toutes les données que vous détenez sur moi. Cordialement, [Prénom Nom]"</em></p>
+    <div id="ex-data18" class="tab-content active">
+      <p class="prose" style="margin-bottom:14px;">Exemple avec un mandataire IAD fictif en Nouvelle-Aquitaine :</p>
       <ul class="bullet-list">
-        <li>Relation : prospect contacté il y a 8 mois, aucun mandat signé</li>
-        <li>Données détenues : email, téléphone, critères de recherche dans le CRM</li>
-        <li>Pas d'obligation légale de conservation (aucun acte signé)</li>
-        <li>Délai de réponse : avant le [date + 1 mois]</li>
+        <li>Nom : [Prénom Nom], mandataire IAD France</li>
+        <li>Site : site vitrine WordPress avec formulaire de contact</li>
+        <li>Données collectées : nom, email, téléphone, type de projet, budget</li>
+        <li>Outils : Hektor CRM, Mailchimp, Google Analytics</li>
+        <li>Durée : 3 ans après la fin de la relation</li>
       </ul>
     </div>
-    <div id="ex-result19" class="tab-content">
+    <div id="ex-result18" class="tab-content">
       <div class="result-box">
-        <div class="result-label">✦ Email de réponse généré par l'IA</div>
-        <p><strong>Objet : Traitement de votre demande de suppression de données</strong></p>
-        <p>Bonjour [Prénom],</p>
-        <p>J'ai bien reçu votre demande de suppression de vos données personnelles, datée du [date]. Je vous confirme qu'elle sera traitée dans un délai maximum d'un mois, conformément au RGPD.</p>
-        <p>Dans votre cas, les données suivantes seront supprimées de mon CRM : votre adresse email, votre numéro de téléphone et vos critères de recherche. Aucune obligation légale ne justifie leur conservation.</p>
-        <p>Je vous adresserai une confirmation écrite une fois la suppression effectuée. Si vous souhaitez introduire une réclamation, vous pouvez contacter la CNIL à l'adresse <em>www.cnil.fr</em>.</p>
-        <p>Cordialement,<br>[Prénom Nom] — Mandataire immobilier</p>
+        <div class="result-label">✦ Extrait — Section "Vos droits" générée par l'IA</div>
+        <p><strong>6. Vos droits</strong></p>
+        <p>Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles :</p>
+        <p>• <strong>Droit d'accès</strong> : obtenir une copie des données que nous détenons sur vous.<br>
+        • <strong>Droit de rectification</strong> : corriger des données inexactes ou incomplètes.<br>
+        • <strong>Droit à l'effacement</strong> : demander la suppression de vos données, sous réserve de nos obligations légales.<br>
+        • <strong>Droit d'opposition</strong> : vous opposer au traitement de vos données à des fins commerciales.<br>
+        • <strong>Droit à la portabilité</strong> : recevoir vos données dans un format structuré et lisible.</p>
+        <p>Pour exercer ces droits, contactez-nous à : contact@[agence].fr. En cas de désaccord, vous pouvez introduire une réclamation auprès de la CNIL : <em>www.cnil.fr</em></p>
       </div>
     </div>
   </div>
@@ -330,8 +362,8 @@ Règles impératives :
     <div class="accordion-header" onclick="toggleAcc(this)">
       <div class="acc-num">4</div>
       <div>
-        <div class="acc-title">Ce qu'on vérifie avant de traiter</div>
-        <div class="acc-subtitle">4 points critiques à ne pas rater</div>
+        <div class="acc-title">Ce qu'on ajuste avant de faire valider</div>
+        <div class="acc-subtitle">4 points à vérifier impérativement</div>
       </div>
       <span class="acc-chevron">▾</span>
     </div>
@@ -340,12 +372,36 @@ Règles impératives :
         <table class="styled-table">
           <thead><tr><th>Ajustement</th><th>Pourquoi</th></tr></thead>
           <tbody>
-            <tr><td>Vérifier les obligations de conservation</td><td>Certaines données ne peuvent pas toujours être supprimées immédiatement : pièces comptables, documents contractuels, preuves en cas de litige, obligations du réseau ou de l'agence. En cas de doute, validez avec votre référent, DPO ou juriste.</td></tr>
-            <tr><td>Documenter la demande</td><td>Notez la date de réception, l'identité du demandeur, les supports vérifiés, les données supprimées, les données conservées et la date de clôture. C'est votre preuve de traitement.</td></tr>
-            <tr><td>Vérifier tous les supports</td><td>CRM, boîte email, téléphone, fichiers PDF, cloud, papier, agenda, photos, exports, anciennes listes. Une demande de suppression ne concerne pas seulement le CRM.</td></tr>
-            <tr><td>Ne pas demander une pièce d'identité par réflexe</td><td>Une vérification d'identité peut être demandée en cas de doute raisonnable, mais elle doit rester proportionnée. Ne collectez pas plus que nécessaire.</td></tr>
+            <tr><td>Lister tous vos outils numériques</td><td>Google Analytics, Mailchimp, Hektor... chaque outil doit apparaître comme sous-traitant dans votre politique</td></tr>
+            <tr><td>Vérifier la date de mise à jour</td><td>Ajoutez toujours une mention "Dernière mise à jour : [date]" en bas de document — utile pour tracer les révisions et rassurer le lecteur</td></tr>
+            <tr><td>Adapter à votre réseau</td><td>Si vous êtes mandataire (IAD, Safti...), vérifiez que votre réseau n'impose pas sa propre politique — dans ce cas, vous devez la référencer</td></tr>
+            <tr><td>Vérifier votre rôle exact dans le traitement</td><td>Selon votre organisation, vous pouvez être responsable de traitement, co-responsable ou agir dans un cadre défini par le réseau — ce point conditionne toute la politique</td></tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="preparer">
+  <div class="section-card">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <div class="acc-num">5</div>
+      <div>
+        <div class="acc-title">Les informations à préparer avant de lancer l'IA</div>
+        <div class="acc-subtitle">Pour éviter une politique trop vague ou incomplète</div>
+      </div>
+      <span class="acc-chevron">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <ul class="bullet-list">
+          <li>Votre statut exact : mandataire, agent commercial, indépendant, agence — et votre réseau si applicable</li>
+          <li>Les outils réellement utilisés : CRM, formulaire, emailing, agenda, WhatsApp, hébergeur du site</li>
+          <li>Les données réellement collectées : contact, budget, secteur, projet, documents</li>
+          <li>Les finalités : estimation, suivi vendeur, recherche acquéreur, newsletter, prospection</li>
+          <li>Les durées de conservation appliquées — ou à faire valider si vous n'en avez pas défini</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -354,26 +410,26 @@ Règles impératives :
 <section id="variantes">
   <div class="section-card">
     <div class="tabs-header">
-      <button class="tab-btn active" onclick="switchTab(this,'var-refus19')">Refus partiel</button>
-      <button class="tab-btn" onclick="switchTab(this,'var-verifid19')">Vérification identité</button>
-      <button class="tab-btn" onclick="switchTab(this,'var-registre19')">Registre interne</button>
+      <button class="tab-btn active" onclick="switchTab(this,'var-site18')">Site web</button>
+      <button class="tab-btn" onclick="switchTab(this,'var-papier18')">Version papier</button>
+      <button class="tab-btn" onclick="switchTab(this,'var-maj18')">Mise à jour</button>
     </div>
-    <div id="var-refus19" class="tab-content active">
-      <p class="prose" style="margin-bottom:12px;">Quand certaines données ne peuvent pas être supprimées (mandat en cours, obligation comptable) :</p>
+    <div id="var-site18" class="tab-content active">
+      <p class="prose" style="margin-bottom:12px;">Pour intégrer directement dans une page de site WordPress ou Wix :</p>
       <div class="prompt-box">
-        <pre>"Je dois informer le demandeur que certaines données sont conservées pour obligation légale. Rédige un paragraphe expliquant clairement et simplement pourquoi, en mentionnant la base légale applicable, sans être défensif."</pre>
+        <pre>"Format final : HTML sémantique avec balises h2, h3 et paragraphes p. Sans CSS. Prêt à coller dans un éditeur de page web."</pre>
       </div>
     </div>
-    <div id="var-verifid19" class="tab-content">
-      <p class="prose" style="margin-bottom:12px;">Quand vous avez un doute raisonnable sur l'auteur de la demande :</p>
+    <div id="var-papier18" class="tab-content">
+      <p class="prose" style="margin-bottom:12px;">Pour un document PDF à remettre en RDV ou à annexer à un mandat :</p>
       <div class="prompt-box">
-        <pre>"Rédige un email demandant une confirmation d'identité uniquement parce qu'il existe un doute raisonnable sur l'auteur de la demande. Le message doit rester proportionné : demander l'élément strictement nécessaire, expliquer que la demande sera traitée dès confirmation, et préciser que les éléments transmis ne seront utilisés que pour vérifier l'identité."</pre>
+        <pre>"Format : document structuré avec titres numérotés. Ton sobre et formel. Ajouter un espace signature en bas : 'Lu et approuvé — Date : ___ — Signature :'"</pre>
       </div>
     </div>
-    <div id="var-registre19" class="tab-content">
-      <p class="prose" style="margin-bottom:12px;">Pour créer votre registre de traitement des demandes RGPD :</p>
+    <div id="var-maj18" class="tab-content">
+      <p class="prose" style="margin-bottom:12px;">Quand vous devez mettre à jour une politique existante :</p>
       <div class="prompt-box">
-        <pre>"Crée un modèle de tableau de suivi des demandes d'exercice de droits RGPD avec les colonnes : Date de réception / Nom du demandeur / Type de droit (suppression, accès, rectification) / Actions entreprises / Date de clôture / Observations."</pre>
+        <pre>"Voici ma politique de confidentialité actuelle : [coller le texte]. J'ai ajouté un nouvel outil : [nom de l'outil, finalité]. Mets à jour uniquement les sections concernées et indique les modifications apportées."</pre>
       </div>
     </div>
   </div>
@@ -385,7 +441,7 @@ Règles impératives :
       <div class="acc-num">6</div>
       <div>
         <div class="acc-title">Avant / Après</div>
-        <div class="acc-subtitle">Ce que ça change dans votre pratique quotidienne</div>
+        <div class="acc-subtitle">Ce que ça change pour vos prospects</div>
       </div>
       <span class="acc-chevron">▾</span>
     </div>
@@ -394,11 +450,11 @@ Règles impératives :
         <div class="avantapres-grid">
           <div class="avant-card">
             <div class="card-label">✗ Avant</div>
-            <div class="card-text">Vous recevez la demande, vous ne savez pas quoi faire exactement. Vous supprimez tout (y compris ce que vous deviez garder) ou vous ignorez (en espérant que ça passe). Dans les deux cas, vous êtes exposé.</div>
+            <div class="card-text">Pas de politique de confidentialité sur le site. Ou un texte copié d'un autre secteur, truffé de [brackets] non remplis. Le prospect clique sur "Politique de confidentialité" et tombe sur une erreur 404 ou un texte générique.<br><br>→ Manque de transparence. Perte de confiance possible. Image moins professionnelle.</div>
           </div>
           <div class="apres-card">
             <div class="card-label">✓ Après</div>
-            <div class="card-text">En 20 minutes, l'email de réponse est envoyé, la checklist est traitée, et la demande est documentée. Vous avez une trace claire de ce qui a été fait et pourquoi.</div>
+            <div class="card-text">Une page dédiée, claire, à jour. Le prospect comprend ce que vous faites de ses données. Cela réduit les hésitations à remplir un formulaire — et augmente le taux de contact entrant.<br><br>→ Transparence visible. Message rassurant. Professionnalisme perçu dès la première visite.</div>
           </div>
         </div>
       </div>
@@ -411,17 +467,7 @@ Règles impératives :
     <div class="retain-icon">⭐</div>
     <div>
       <div class="retain-label">À retenir</div>
-      <div class="retain-text">Une demande de suppression ne se traite pas au feeling : on accuse réception, on vérifie, on supprime ce qui peut l'être, on conserve ce qui doit l'être, puis on documente.</div>
-    </div>
-  </div>
-</section>
-
-<section id="reflexe">
-  <div class="retain-box">
-    <div class="retain-icon">🧭</div>
-    <div>
-      <div class="retain-label">Phrase réflexe</div>
-      <div class="retain-text">Je ne supprime pas dans la panique. Je vérifie d'abord ce que je détiens, pourquoi je le détiens, et si j'ai encore une raison légitime ou obligatoire de le conserver.</div>
+      <div class="retain-text">Une politique de confidentialité n'est pas seulement une obligation d'information — c'est aussi une page qui construit la confiance avant le premier contact.</div>
     </div>
   </div>
 </section>
@@ -435,22 +481,22 @@ Règles impératives :
     </div>
     <div class="progress-row">
       <span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">Progression</span>
-      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar19" style="width:0%"></div></div>
-      <span style="font-size:11px;color:var(--gold);white-space:nowrap;" id="progressLabel19">0/5</span>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar18" style="width:0%"></div></div>
+      <span style="font-size:11px;color:var(--gold);white-space:nowrap;" id="progressLabel18">0/5</span>
     </div>
     <ol class="step-list">
-      <li><div class="step-num-badge" id="stepBadge19-1">1</div><div class="step-text">Imaginez recevoir aujourd'hui une demande de suppression d'un prospect <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep19(1)">✓ Fait</button></div></li>
-      <li><div class="step-num-badge" id="stepBadge19-2">2</div><div class="step-text">Lancez le prompt socle dans votre outil IA préféré avec les données fictives <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep19(2)">✓ Fait</button></div></li>
-      <li><div class="step-num-badge" id="stepBadge19-3">3</div><div class="step-text">Relisez l'email généré et vérifiez qu'il mentionne bien le délai et les données concernées <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep19(3)">✓ Fait</button></div></li>
-      <li><div class="step-num-badge" id="stepBadge19-4">4</div><div class="step-text">Créez un fichier "Registre RGPD" avec la variante registre interne <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep19(4)">✓ Fait</button></div></li>
-      <li><div class="step-num-badge" id="stepBadge19-5">5</div><div class="step-text">Enregistrez l'email-type dans vos modèles (Gmail, Outlook...) pour la prochaine fois <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep19(5)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge18-1">1</div><div class="step-text">Listez tous les outils numériques que vous utilisez (CRM, emailing, site...) <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep18(1)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge18-2">2</div><div class="step-text">Lancez le prompt socle avec vos vraies informations dans votre outil IA préféré <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep18(2)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge18-3">3</div><div class="step-text">Remplacez tous les crochets et vérifiez chaque section <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep18(3)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge18-4">4</div><div class="step-text">Ajoutez la date de mise à jour en bas du document <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep18(4)">✓ Fait</button></div></li>
+      <li><div class="step-num-badge" id="stepBadge18-5">5</div><div class="step-text">Relisez, complétez les informations manquantes, puis faites valider avant publication sur votre site <button class="copy-btn" style="position:static;margin-left:10px;font-size:10px;padding:3px 10px;" onclick="checkStep18(5)">✓ Fait</button></div></li>
     </ol>
-    <div id="exerciseDone19" style="display:none;margin-top:20px;">
+    <div id="exerciseDone18" style="display:none;margin-top:20px;">
       <div class="retain-box">
         <div class="retain-icon">🎉</div>
         <div>
           <div class="retain-label">Exercice terminé</div>
-          <div class="retain-text">Votre procédure est en place. Dernier module de l'Atelier 5 : Expliquer le RGPD à un client en 2 minutes.</div>
+          <div class="retain-text">Votre base de politique de confidentialité est prête à être relue, complétée et validée. Prochain module : Gérer les demandes de suppression de données.</div>
         </div>
       </div>
     </div>
@@ -464,11 +510,11 @@ Règles impératives :
 function switchTab(btn,targetId){const wrapper=btn.closest('.tabs-header').parentElement;wrapper.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));wrapper.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));btn.classList.add('active');document.getElementById(targetId).classList.add('active');}
 function toggleAcc(header){const body=header.nextElementSibling;const isOpen=header.classList.contains('open');header.classList.toggle('open',!isOpen);body.classList.toggle('open',!isOpen);}
 function copyById(btn,id){const t=document.getElementById(id).textContent;navigator.clipboard.writeText(t).then(()=>{btn.textContent='✓ Copié !';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copier';btn.classList.remove('copied');},2000);});}
-let completed19=new Set();
-function checkStep19(n){completed19.add(n);const badge=document.getElementById('stepBadge19-'+n);badge.textContent='✓';badge.style.background='#2A5A2A';badge.style.color='#8FD48F';const pct=(completed19.size/5)*100;document.getElementById('progressBar19').style.width=pct+'%';document.getElementById('progressLabel19').textContent=completed19.size+'/5';if(completed19.size===5)document.getElementById('exerciseDone19').style.display='block';}
-const sections19=document.querySelectorAll('section[id]');const navLinks19=document.querySelectorAll('.nav-link');
-const observer19=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){navLinks19.forEach(l=>l.classList.remove('active'));const active=document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);if(active)active.classList.add('active');}});},{threshold:0.3});
-sections19.forEach(s=>observer19.observe(s));
+let completed18=new Set();
+function checkStep18(n){completed18.add(n);const badge=document.getElementById('stepBadge18-'+n);badge.textContent='✓';badge.style.background='#2A5A2A';badge.style.color='#8FD48F';const pct=(completed18.size/5)*100;document.getElementById('progressBar18').style.width=pct+'%';document.getElementById('progressLabel18').textContent=completed18.size+'/5';if(completed18.size===5)document.getElementById('exerciseDone18').style.display='block';}
+const sections18=document.querySelectorAll('section[id]');const navLinks18=document.querySelectorAll('.nav-link');
+const observer18=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){navLinks18.forEach(l=>l.classList.remove('active'));const active=document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);if(active)active.classList.add('active');}});},{threshold:0.3});
+sections18.forEach(s=>observer18.observe(s));
 </script>
 </body>
 </html>
